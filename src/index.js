@@ -8,8 +8,6 @@ const dialogue = `
   Where are ou?
   Hello, world!
   That's it!
-  sjkhdaophfopa
-  hdksaophkspodh
   ===
 `
 class Dialogue extends React.Component {
