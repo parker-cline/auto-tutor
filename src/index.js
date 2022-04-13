@@ -1,33 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import YarnBound from 'yarn-bound';
+import { dialogue } from './dialogue.js'
 
-const dialogue = ` 
-title: Start
----
-<<set $shapes_like_you to true>>
-Sphere: Hello, I am Blue Sphere.
-Cube: Hi there Sphere! I'm Red Cube.
-Sphere: And who is this then?
-
--> I'm Capsule, but my friends call me "Tic Tac". No idea why...
-    <<set $name to "Tic Tac">>
--> The name's Triquandle.
-    <<set $name to "Triquandle">>
--> Pyramid. Why; who wants to know?
-    <<set $name to "Pyramid">>
-    <<set $shapes_like_you to false>>
-
-<<if $shapes_like_you>>
-    Sphere: Nice to meet you {$name}!
-    Cube: Yeah, likewise!
-<<else>>
-    Sphere: No need to be so rude...
-    Cube: Yeah, maybe you should be called Grumpy {$name}.
-    Sphere: Ha! Totally.
-<<endif>>
-===
-`
+console.log(dialogue);
 class Dialogue extends React.Component {
     constructor(props) {
         super(props);
