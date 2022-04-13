@@ -46,6 +46,12 @@ class Dialogue extends React.Component {
         this.setState({ runner: this.state.runner });
         console.log(this.state.runner);
     }
+
+    advanceDialogueWithOption(option) {
+        this.state.runner.advance(option)
+        this.setState({ runner: this.state.runner });
+        console.log(this.state.runner);
+    }
     
     render() {
         if (this.state.runner.currentResult.text) {
@@ -59,7 +65,7 @@ class Dialogue extends React.Component {
         else if (this.state.runner.currentResult.options) {
             console.log(this.state.runner.currentResult.options);
             const listItems = this.state.runner.currentResult.options.map((dialogueChoice, index) =>
-                <li key={index}>{dialogueChoice.text}</li>
+                <li key={index} onClick={() => this.advanceDialogueWithOption(index)}>{dialogueChoice.text}</li>
             );
             return (
                 <div>
