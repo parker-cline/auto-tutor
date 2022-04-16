@@ -31,9 +31,10 @@ class Dialogue extends React.Component {
     
     render() {
         if (this.state.runner.currentResult.text) {
+            console.log(this.state.runner.currentResult.markup);
             return (
                 <div>
-                    <h1>{this.state.runner.currentResult.text}</h1>
+                    <h1>{this.state.runner.currentResult.markup[0].properties.name}: {this.state.runner.currentResult.text}</h1>
                     <button onClick={() => this.advanceDialogue()}>Next</button>
                 </div>
             );
