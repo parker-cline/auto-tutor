@@ -61,6 +61,8 @@ class Dialogue extends React.Component {
         }
     }
 }
+
+/*
 class Prompt extends React.Component {
     constructor(props) {
         super(props);
@@ -90,12 +92,12 @@ class Prompt extends React.Component {
         );
     }
 }
+*/
 class DialogueTree extends React.Component {
     render() {
         return (
             <div className="dialogue">
                 <Dialogue />
-                <Prompt />
             </div>
         );
     }
