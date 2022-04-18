@@ -34,7 +34,7 @@ class Dialogue extends React.Component {
             console.log(this.state.runner.currentResult.markup);
             return (
                 <div>
-                    <h1>{this.state.runner.currentResult.markup[0].properties.name}: {this.state.runner.currentResult.text}</h1>
+                    <h3>{this.state.runner.currentResult.markup[0].properties.name}: {this.state.runner.currentResult.text}</h3>
                     <button onClick={() => this.advanceDialogue()}>Next</button>
                 </div>
             );
@@ -94,7 +94,6 @@ class DialogueTree extends React.Component {
     render() {
         return (
             <div className="dialogue">
-                <h1>Hello!</h1>
                 <Dialogue />
                 <Prompt />
             </div>
