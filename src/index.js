@@ -14,29 +14,24 @@ class Dialogue extends React.Component {
         }
     }
 
-    advanceDialogue() {
-        this.state.runner.advance()
-        this.setState({ runner: this.state.runner });
-    }
-
-    advanceDialogueWithOption(option) {
+    advanceDialogue(option=null) {
         this.state.runner.advance(option)
         this.setState({ runner: this.state.runner });
     }
     
     render() {
-        const currRunner = this.state.runner;
-        if (currRunner.currentResult.text) {
+        const currPage = this.state.runner.currentResult;
+        if (currPage.text) {
             return (
                 <div>
-                    <h3>{currRunner.currentResult.markup[0].properties.name}: {currRunner.currentResult.text}</h3>
+                    <h3>{currPage.markup[0].properties.name}: {currPage.text}</h3>
                     <button onClick={() => this.advanceDialogue()}>Next</button>
                 </div>
             );
         }
-        else if (currRunner.currentResult.options) {
-            const listItems = currRunner.currentResult.options.map((dialogueChoice, index) =>
-                <li key={index} onClick={() => this.advanceDialogueWithOption(index)}>{dialogueChoice.text}</li>
+        else if (currPage.options) {
+            const listItems = currPage.options.map((dialogueChoice, index) =>
+                <li key={index} onClick={() => this.advanceDialogue(index)}>{dialogueChoice.text}</li>
             );
             return (
                 <div>
