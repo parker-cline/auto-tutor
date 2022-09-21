@@ -16,7 +16,7 @@ Ace: Oho!
 -> Say that again?
 Ace: You seem confused.
 Ace: ...
-Ace: Wait, are you [red]new[/red] around here? In that case: 
+Ace: Wait, are you [green]new[/green] around here? In that case: 
 Ace: In that case... *clears throat* 
 Ace: WELCOME! *grabs a noise maker and makes a funny sound.*
 Ace: I always have a noise maker on hand at any given point in time to welcome newcomers to Europia.

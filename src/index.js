@@ -23,7 +23,7 @@ class Dialogue extends React.Component {
                 const tagDetails = currPage.markup[1];
                 const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
                 return reactStringReplace(currPage.text, slicedString, (match, i) => (
-                    <span key={i} style={{ color: 'red' }}>{match}</span>
+                    <span key={i} style={{ color: tagDetails.name }}>{match}</span>
                 ))
             } else {
                 return currPage.text
