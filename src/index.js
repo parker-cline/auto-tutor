@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import YarnBound from 'yarn-bound';
 import { dialogue } from './dialogue.js';
 import reactStringReplace from 'react-string-replace';
+import 'animate.css';
 
 class Dialogue extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Dialogue extends React.Component {
                 const tagDetails = currPage.markup[1];
                 const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
                 return reactStringReplace(currPage.text, slicedString, (match, i) => (
-                    <span key={i} style={{ color: tagDetails.name }}>{match}</span>
+                    <span key={i} class="animate__animated animate__pulse" style={{ color: tagDetails.name, display: 'inline-block' }}>{match}</span>
                 ))
             } else {
                 return currPage.text
