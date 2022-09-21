@@ -3,7 +3,7 @@ title: Start
 position: 102,-89.5
 ---
 Lisa: Now that we've gotten our bearings, let's ask around! Maybe someone can help us find what we're looking for.
-OBJECTIVE: Ask the locals about the Transpodulator.
+OBJECTIVE: Ask the locals about the [red]Transpodulator.[/red]
 -> Move to the grocery store
     Lisa: Let's go then!
     <<jump Grocery>>
