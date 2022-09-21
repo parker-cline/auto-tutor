@@ -12,27 +12,34 @@ class Dialogue extends React.Component {
                 dialogue
             }),
             dialogueText: '',
-            dialogueOptions: [],
+            dialogueOptions: []
+        }
+    }
+
+    setDialogueText() {
+        const currPage = this.state.runner.currentResult;
+        if (currPage.text) {
+            if (currPage.markup.length > 1) {
+                const tagDetails = currPage.markup[1];
+                const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
+                return reactStringReplace(currPage.text, slicedString, (match, i) => (
+                    <span key={i} style={{ color: 'red' }}>{match}</span>
+                ))
+            } else {
+                return currPage.text
+            }
         }
     }
 
     advanceDialogue(option=null) {
         this.state.runner.advance(option);
         this.setState({ runner: this.state.runner });
-        const currPage = this.state.runner.currentResult;
-        if (currPage.text) {
-            if (currPage.markup.length > 1) {
-                const tagDetails = currPage.markup[1];
-                const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
-                this.setState({
-                    dialogueText: reactStringReplace(currPage.text, slicedString, (match, i) => (
-                        <span key={i} style={{ color: 'red' }}>{match}</span>
-                    ))
-                });
-            } else {
-                this.setState({ dialogueText: currPage.text });
-            }
-        }
+        this.setState({ dialogueText: this.setDialogueText() });
+    }
+
+    componentDidMount() {
+        this.setState({ runner: this.state.runner });
+        this.setState({ dialogueText: this.setDialogueText() });
     }
     
     render() {
