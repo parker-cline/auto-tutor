@@ -1,4 +1,4 @@
-# Dialogue Engine for Exploring Europia
+# Dialogue Engine for Exploring Irilia
 
 This React app guides the user through a dialogue sequence written with the [Yarn Spinner](https://yarnspinner.dev/) language. The dialogue file is *dialogue.yarn*. The dialogue file is an interactive math lesson that teaches users what variables are in algebra. 
 
