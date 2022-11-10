@@ -23,18 +23,21 @@ function Dialogue() {
         if (!currPage.text) {
             return null;
         }
+        const speaker = currPage.markup[0].properties.name;
         if (currPage.markup.length > 1) {
             const tagDetails = currPage.markup[1];
             const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
-            return reactStringReplace(currPage.text, slicedString, (match, i) => (
+            return reactStringReplace(speaker + ": " + currPage.text, slicedString, (match, i) => (
                 <span key={i} className="animate__animated animate__pulse" style={{ color: tagDetails.name, display: 'inline-block' }}>{match}</span>
-            ))
+            ));
         } else {
-            return currPage.text
+            return (
+                <span>{speaker}: {currPage.text}</span>
+            );
         }
     }
 
-    const [runner, setRunner] = useState(new YarnBound({ dialogue }));
+    const [runner] = useState(new YarnBound({ dialogue }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
     
     if (dialogueText) {
@@ -48,10 +51,10 @@ function Dialogue() {
     }
 }
 
-function DialogueText({ currPage, dialogueText, advanceDialogue }) {
+function DialogueText({ dialogueText, advanceDialogue }) {
     return (
         <div>
-            <h3>{currPage.markup[0].properties.name}: {dialogueText}</h3>
+            <h3>{dialogueText}</h3>
             <button onClick={() => advanceDialogue()}>Next</button>
         </div>
     );
