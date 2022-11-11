@@ -39,23 +39,31 @@ function Dialogue() {
 
     const [runner] = useState(new YarnBound({ dialogue }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
-    
+    const [historyVisibility, setHistoryVisibility] = useState(false);
+
+    const handleHistoryVisibility = () => {
+        setHistoryVisibility(!historyVisibility);
+    }
+
     if (dialogueText) {
         return (
             <>
                 <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
-                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} />
+                { historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} /> }
             </>
         );
     } else {
         return (
             <>
                 <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
-                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} />
+                {historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} />}
             </>
         );
     }
 }
+
 
 function DialogueText({ dialogueText, advanceDialogue }) {
     return (
@@ -79,10 +87,18 @@ function DialogueList({ currPage, advanceDialogue }) {
     );
 }
 
+function HistoryVisibilityButton({ historyVisibility, handleHistoryVisibility }) {
+    const buttonText = historyVisibility ? "Hide History" : "Show History";
+    return (
+        <button onClick={handleHistoryVisibility} >{buttonText}</button>
+    );
+}
+
 function History({ historyItems, generateDialogue }) {
     const listItems = historyItems.map((historyItem, index) =>
         <li key={index}>{generateDialogue(historyItem)}</li>
     );
+    console.log(historyItems);
     return (
         <>
             <h1>History</h1>
@@ -98,4 +114,3 @@ const root = createRoot(container);
 root.render(
     <Dialogue />
 );
-
