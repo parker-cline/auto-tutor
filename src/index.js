@@ -40,16 +40,17 @@ function Dialogue() {
     const [runner] = useState(new YarnBound({ dialogue }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
     const [historyVisibility, setHistoryVisibility] = useState(false);
-
+    const [buttonText, setButtonText] = useState('Show History');
     const handleHistoryVisibility = () => {
         setHistoryVisibility(!historyVisibility);
+        setButtonText(historyVisibility ? 'Show History' : 'Hide History');
     }
 
     if (dialogueText) {
         return (
             <>
                 <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
-                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} />
+                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
                 { historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} /> }
             </>
         );
@@ -57,7 +58,7 @@ function Dialogue() {
         return (
             <>
                 <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
-                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} />
+                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
                 {historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} />}
             </>
         );
@@ -87,8 +88,8 @@ function DialogueList({ currPage, advanceDialogue }) {
     );
 }
 
-function HistoryVisibilityButton({ historyVisibility, handleHistoryVisibility }) {
-    const buttonText = historyVisibility ? "Hide History" : "Show History";
+function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
+    
     return (
         <button onClick={handleHistoryVisibility} >{buttonText}</button>
     );
