@@ -42,21 +42,27 @@ function Dialogue() {
     
     if (dialogueText) {
         return (
-            <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
+            <>
+                <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
+                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+            </>
         );
     } else {
         return (
-            <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
+            <>
+                <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
+                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+            </>
         );
     }
 }
 
 function DialogueText({ dialogueText, advanceDialogue }) {
     return (
-        <div>
+        <>
             <h3>{dialogueText}</h3>
             <button onClick={() => advanceDialogue()}>Next</button>
-        </div>
+        </>
     );
 }
 
@@ -66,19 +72,22 @@ function DialogueList({ currPage, advanceDialogue }) {
         <li key={index} onClick={() => advanceDialogue(index)}>{dialogueChoice.text}</li>
     );
     return (
-        <div>
+        <>
             <h1>Choose an option.</h1>
             <ul>{listItems}</ul>
-        </div>
+        </>
     );
 }
 
-
-function DialogueTree() {
+function History({ historyItems, generateDialogue }) {
+    const listItems = historyItems.map((historyItem, index) =>
+        <li key={index}>{generateDialogue(historyItem)}</li>
+    );
     return (
-        <div>
-            <Dialogue />
-        </div>
+        <>
+            <h1>History</h1>
+            <ul>{listItems}</ul>
+        </>
     );
 }
 
@@ -87,6 +96,6 @@ function DialogueTree() {
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <DialogueTree />
+    <Dialogue />
 );
 
