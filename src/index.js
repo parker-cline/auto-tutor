@@ -39,27 +39,19 @@ function Dialogue() {
 
     const [runner] = useState(new YarnBound({ dialogue }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
-    const [historyVisibility, setHistoryVisibility] = useState(false);
-    const [buttonText, setButtonText] = useState('Show History');
-    const handleHistoryVisibility = () => {
-        setHistoryVisibility(!historyVisibility);
-        setButtonText(historyVisibility ? 'Show History' : 'Hide History');
-    }
 
     if (dialogueText) {
         return (
             <>
                 <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
-                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
-                { historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} /> }
+                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
             </>
         );
     } else {
         return (
             <>
                 <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
-                <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
-                {historyVisibility && <History historyItems={runner.history} generateDialogue={generateDialogue} />}
+                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
             </>
         );
     }
@@ -88,25 +80,33 @@ function DialogueList({ currPage, advanceDialogue }) {
     );
 }
 
+function History({ historyItems, generateDialogue }) {
+
+    const [historyVisibility, setHistoryVisibility] = useState(false);
+    const [buttonText, setButtonText] = useState('Show History');
+    const handleHistoryVisibility = () => {
+        setHistoryVisibility(!historyVisibility);
+        setButtonText(historyVisibility ? 'Show History' : 'Hide History');
+    }
+
+    const listItems = historyItems.map((historyItem, index) =>
+        <li key={index}>{historyItem.text ? generateDialogue(historyItem) : 'You: ' + historyItem.options[historyItem.selected].text}</li>
+    );
+
+    return (
+        <>
+            <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
+            {historyVisibility && <ul>{listItems}</ul>}
+        </>
+    );
+}
+
 function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
-    
     return (
         <button onClick={handleHistoryVisibility} >{buttonText}</button>
     );
 }
 
-function History({ historyItems, generateDialogue }) {
-    const listItems = historyItems.map((historyItem, index) => 
-        <li key={index}>{historyItem.text ? generateDialogue(historyItem) : 'You: ' + historyItem.options[historyItem.selected].text}</li>
-    );
-    console.log(historyItems);
-    return (
-        <>
-            <h1>History</h1>
-            <ul>{listItems}</ul>
-        </>
-    );
-}
 
 // ========================================
 
