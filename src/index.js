@@ -76,7 +76,7 @@ function DialogueText({ dialogueText, advanceDialogue }) {
 
 
 function DialogueList({ currPage, advanceDialogue }) {
-    const listItems = currPage.options.map((dialogueChoice, index) =>
+    const listItems = currPage.options.map((dialogueChoice, index) => 
         <li key={index} onClick={() => advanceDialogue(index)}>{dialogueChoice.text}</li>
     );
     return (
@@ -95,9 +95,18 @@ function HistoryVisibilityButton({ historyVisibility, handleHistoryVisibility })
 }
 
 function History({ historyItems, generateDialogue }) {
-    const listItems = historyItems.map((historyItem, index) =>
-        <li key={index}>{generateDialogue(historyItem)}</li>
-    );
+    const listItems = historyItems.map((historyItem, index) => {
+        if (historyItem.text) {
+            return (
+                <li key={index}>{generateDialogue(historyItem)}</li>
+            );
+        } else {
+            const selectedIndex = historyItem.selected;
+            return (
+                <li key={index}>You: {historyItem.options[selectedIndex].text}</li>
+            );
+        }
+    });
     console.log(historyItems);
     return (
         <>
