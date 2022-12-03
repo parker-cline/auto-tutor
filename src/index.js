@@ -5,6 +5,7 @@ import YarnBound from 'yarn-bound';
 import { dialogue } from './lessons/lesson2.js';
 import reactStringReplace from 'react-string-replace';
 import 'animate.css';
+import './index.css'
 /*
 import useSound from 'use-sound';
 import trumpetSound from './assets/sounds/trumpets.mp3';
@@ -28,7 +29,7 @@ function Dialogue() {
             const tagDetails = currPage.markup[1];
             const slicedString = currPage.text.slice(tagDetails.position, tagDetails.position + tagDetails.length);
             return reactStringReplace(speaker + ": " + currPage.text, slicedString, (match, i) => (
-                <span key={i} className="animate__animated animate__pulse" style={{ color: tagDetails.name, display: 'inline-block' }}>{match}</span>
+                <span key={i} className={tagDetails.name}>{match}</span>
             ));
         } else {
             return (
