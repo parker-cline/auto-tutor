@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
+import {
+    createBrowserRouter,
+    RouterProvider
+} from "react-router-dom";
 import { createRoot } from 'react-dom/client';
 import YarnBound from 'yarn-bound';
-import { dialogue } from './lessons/lesson_1.js';
+import { dialogue as dialogue1 } from './lessons/lesson_1.js';
+import { dialogue as dialogue2 } from './lessons/lesson_2.js';
 import reactStringReplace from 'react-string-replace';
 import 'animate.css';
 import './index.css'
@@ -36,22 +41,26 @@ function Dialogue({ dialogueItem }) {
             );
         }
     }
-    
+
     const [runner] = useState(new YarnBound({ dialogue: dialogueItem }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
 
     if (dialogueText) {
         return (
             <>
+                <Root />
+                <h1>Dialogue</h1>
                 <DialogueText currPage={runner.currentResult} dialogueText={dialogueText} advanceDialogue={advanceDialogue} />
-                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+                <History historyItems={runner.history} generateDialogue={generateDialogue} />
             </>
         );
     } else {
         return (
             <>
+                <Root />
+                <h1>Dialogue</h1>
                 <DialogueList currPage={runner.currentResult} advanceDialogue={advanceDialogue} />
-                <History historyItems={runner.history} generateDialogue={generateDialogue}/>
+                <History historyItems={runner.history} generateDialogue={generateDialogue} />
             </>
         );
     }
@@ -69,7 +78,7 @@ function DialogueText({ dialogueText, advanceDialogue }) {
 
 
 function DialogueList({ currPage, advanceDialogue }) {
-    const listItems = currPage.options.map((dialogueChoice, index) => 
+    const listItems = currPage.options.map((dialogueChoice, index) =>
         <li key={index} onClick={() => advanceDialogue(index)}>{dialogueChoice.text}</li>
     );
     return (
@@ -95,7 +104,7 @@ function History({ historyItems, generateDialogue }) {
 
     return (
         <>
-            <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText}/>
+            <HistoryVisibilityButton handleHistoryVisibility={handleHistoryVisibility} buttonText={buttonText} />
             {historyVisibility && <ul>{listItems}</ul>}
         </>
     );
@@ -107,11 +116,38 @@ function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
     );
 }
 
+function Root() {
+    return (
+        <>
+            <h1>Choose a lesson.</h1>
+            <a href="/lesson1">Lesson 1</a>
+            <br></br>
+            <a href="/lesson2">Lesson 2</a>
+        </>
+    );
+}
 
 // ========================================
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+    },
+    {
+        path: "/lesson1",
+        element: <Dialogue dialogueItem={dialogue1} />,
+    },
+    {
+        path: "/lesson2",
+        element: <Dialogue dialogueItem={dialogue2} />,
+    }
+]);
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <Dialogue dialogueItem={dialogue} />
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
 );
