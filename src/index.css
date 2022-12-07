@@ -5,3 +5,10 @@
 .red {
     color: red;
 }
+
+.link-button {
+    cursor: pointer;
+    color: blue;
+    margin: 2%;
+    text-decoration: underline;
+}
