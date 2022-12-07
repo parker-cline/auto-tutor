@@ -8,6 +8,8 @@ import { dialogue as dialogue2 } from "./lessons/lesson_2.js";
 import reactStringReplace from "react-string-replace";
 import "animate.css";
 import "./index.css";
+// note: may later want to refactor this code using https://reactjs.org/docs/hooks-effect.html
+
 /*
 import useSound from 'use-sound';
 import trumpetSound from './assets/sounds/trumpets.mp3';
@@ -58,6 +60,7 @@ function Dialogue({ dialogueItem }) {
   if (dialogueText) {
     return (
       <>
+        <Root />
         <h1>Dialogue</h1>
         <DialogueText
           currPage={runner.currentResult}
@@ -73,6 +76,7 @@ function Dialogue({ dialogueItem }) {
   } else {
     return (
       <>
+        <Root />
         <h1>Dialogue</h1>
         <DialogueList
           currPage={runner.currentResult}
@@ -148,7 +152,8 @@ function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
 function Root() {
   return (
     <>
-      <h1>Choose a lesson.</h1>
+      <h1>Exploring Irilia</h1>
+      <h2>Choose a lesson.</h2>
       <a href="/lesson1">Lesson 1</a>
       <br />
       <a href="/lesson2">Lesson 2</a>
@@ -161,7 +166,7 @@ function Root() {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Root/>
   },
   {
     path: "/lesson1",
