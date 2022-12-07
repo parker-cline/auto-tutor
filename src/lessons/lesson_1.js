@@ -2,7 +2,7 @@ const dialogue = `
 title: Start
 position: 102,-89.5
 ---
-Narrator: Ahhh... A gentle breeze blows in from the sea.
+Narrator: Ahhh... A gentle breeze blows in from the sea. [img_sunset][/img_sunset]
 Narrator: You have arrived on the beach of Irilia! Welcome to your new vacation.
 Narrator: The water sparkles in the bright sun. 
 Narrator: The sand is pure white... well, almost pure white. 
@@ -18,7 +18,7 @@ Unknown: Oho!
     Unknown: Oho! Oho! Oho! It means "hi." It's a greeting.
 -> What does that mean? 
     Unknown: Sorry, I didn't mean to scare you. "Oho" means hi. I'm just so excited to meet you!
-Cauley: I'm Cauley! You have just arrived on Irilia, right?
+Cauley: I'm Cauley! You have just arrived on Irilia, right? [img_alien][/img_alien]
 -> Yes, I have.
     Cauley: I'm so glad you're here! I say hi to people who come to Irilia Beach. I can answer any questions you have.
 Cauley: The weather here is beautiful! It's always sunny and warm. It's a great place to be on vacation.
