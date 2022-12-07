@@ -4,14 +4,14 @@ position: 102,-89.5
 ---
 Narrator: Ahhh... A gentle breeze blows in from the sea. [img_sunset][/img_sunset]
 Narrator: You have arrived on the beach of Irilia! Welcome to your new vacation.
-Narrator: The water sparkles in the bright sun. 
+Narrator: The water sparkles in the bright sun. [img_waves][/img_waves]
 Narrator: The sand is pure white... well, almost pure white. 
 Narrator: Look closely. Do you see the [purple]purple crystals[/purple] shining in the sand?
 -> That's weird.
 -> I wonder what they are.
 -> Cool!
 Narrator: There are some things that are like what we know on Earth. There are other things that are different.
-Narrator: The purple crystals are one of those things.
+Narrator: The purple crystals are one of those things.[img_crystals][/img_crystals]
 Narrator: ...oh, someone is coming! They are here to say hi.
 Unknown: Oho!
 -> Oho?
@@ -25,9 +25,9 @@ Cauley: The weather here is beautiful! It's always sunny and warm. It's a great 
 Cauley: But there's also a lot to see here. There are many places to explore. 
 Cauley: Why did you decide to come to Irilia?
 -> To relax! My life on Earth is stressful. I want to chill out for a while.
-    <<set $object to "beach chairs">>
-    Cauley: You have come to the right place! The beach is a perfect place to relax. Listen to the seagulls cawing, the waves crashing, and the wind blowing...
-    Cauley: With the right beach chairs, you can relax in style.
+    <<set $object to "beach mats">>
+    Cauley: You have come to the right place! The beach is a perfect place to relax. Listen to the seagulls cawing, the waves crashing, and the wind blowing... [img_waves][/img_waves]
+    Cauley: With the right beach mats, you can relax in style.
     Cauley: And... I [i]have[/i] actually fallen asleep here many ti--
     Narrator: *Cauley falls asleep*
     -> Wake up!
@@ -48,7 +48,7 @@ Cauley: Why did you decide to come to Irilia?
     
 Cauley: This beach is special! You've seen those purple crystals, right?
 -> Yes!
-    <<if $object is "beach chairs">>
+    <<if $object is "beach mats">>
     Cauley: They make the beach so beautiful and colorful! They are so pretty that I can't help but fall asleep.
     <<endif>>
     <<if $object is "magic broomsticks">>
@@ -57,12 +57,12 @@ Cauley: This beach is special! You've seen those purple crystals, right?
     <<if $object is "Caja fruits">>
     Cauley: They make the beach so beautiful and colorful! Maybe you'll discover what they do? 
     <<endif>>
-    Cauley: These crystals are called Xtrapa. I have heard stories that they are magical... but I don't know if that's true.
+    Cauley: These crystals are called Xtrapa. I have heard stories that they are magical... but I don't know if that's true.[img_crystals2][/img_crystals2]
     -> Maybe they are magic because they make you feel happy. I feel happy too!
         Cauley: You make a good point!
     -> Maybe they can grant us three wishes.
         Cauley: *laughs* I don't think that's how it works. But maybe they do?
-Cauley: Here, have a crystal! *hands you an Xtrapa crystal*
+Cauley: Here, have a crystal! *hands you an Xtrapa crystal* [img_crystals3][/img_crystals3]
 -> Thanks!
     Cauley: No problem!
 Cauley: And one more thing as a welcome gift. 
@@ -72,8 +72,8 @@ Cauley: I would love to hang out with you more! But...
     Cauley: I would go get some, but my house is all the way at the top of the mountain.
     Cauley: I can't go all the way up there just to get some {$object}.
     Cauley: I wish I had some {$object}...
-Narrator: So the [purple]crystal in your hand[/purple] starts shaking and starts to glow--
-Narrator: An energy that that you have never felt before flows, such that you feel a rush--like you can do anything.
+Narrator: Suddenly, the [purple]crystal in your hand[/purple] starts shaking and starts to glow--
+Narrator: An energy that that you have never felt before flows, such that you feel a rush--like you can do anything. [img_shining][/img_shining]
 Narrator: And then...
 Narrator: The crystal stops shaking. But it still shines, as fireflies do in the dark.
 Cauley: Unbelievable! *takes a closer look at the crystal*
@@ -95,7 +95,7 @@ Cauley: And why does it glow?
 Cauley: Go on! Say it!
 -> I wish I had some {$object}!
     Narrator: [purple]The crystal shakes[/purple] again.
-    Narrator: A magic energy moves out of the crystal into the sky, turning it as purple as the crystal you hold. 
+    Narrator: A magic energy moves out of the crystal into the sky, turning it as purple as the crystal you hold. [img_shining3][/img_shining3]
     Narrator: A happy sound like the chimes of a bell fills the air. For a moment, everything is right with the world, and you feel as if anything is possible.
     Narrator: And then...
     Narrator: The crystal stops shaking. Yet again it still shines, as fireflies do in the dark. And the sky remains purple.
@@ -128,7 +128,7 @@ title: Idea
     Cauley: Even though we haven't solved the problem, I don't think we should give up now. Try stuff out and see if it works.
     <<jump Idea>>
 -> Maybe we should ask for how many {$object} we need. I wish we had 2 {$object}! One for each of us.
-    Narrator: [purple]The crystal shakes again[/purple] and shines like the moon.
+    Narrator: [purple]The crystal shakes again[/purple] and shines like the moon. [img_shining3][/img_shining3]
     Narrator: The sky turns a deep purple, and [purple]an inspiring melody plays.[/purple] 
     Narrator: You are filled with determination.
     Narrator: And then...
@@ -140,20 +140,20 @@ Cauley: YES!
 Cauley: Hey, want to hang out?
 -> Sure!
 Cauley: Great! In that case...
-<<if $object is "beach chairs">>
+<<if $object is "beach mats">>
 Cauley: I'm ready to sleep. It's a beautiful day, and the waves are crashing on the beach. 
 Cauley: Don't wake me up this time.
-Narrator: Cauley takes a nap on the beach and follows asleep. You do that too!
+Narrator: Cauley takes a nap on the beach and follows asleep. You do that too! [img_sleeping][/img_sleeping]
 <<endif>>
 <<if $object is "magic broomsticks">>
-Cauley: I'm ready to play! I'm going to fly around the beach and you try to catch me. Here, have a broomstick.
+Cauley: I'm ready to play! I'm going to fly around the beach and you try to catch me. Here, have a broomstick. 
 Narrator: You board the broomstick.
-Cauley: Catch me if you can! *Cauley flies away*
+Cauley: Catch me if you can! *Cauley flies away* [img_broomstick][/img_broomstick]
 <<endif>>
 <<if $object is "Caja fruits">>
 Cauley: This Caja fruit is like strawberry, blueberry, mango, apple...
 Cauley: banana, pear, pineapple, peach...
-Cauley: and... it's just everything, all in one! Here, try it! *Cauley hands you a Caja fruit.*
+Cauley: and... it's just everything, all in one! Here, try it! *Cauley hands you a Caja fruit.* [img_fruit][/img_fruit]
 Narrator: You eat it. It tastes absolutely delicious! 
 Cauley: We can eat some more later. I'm going to go play in the water.
 <<endif>>

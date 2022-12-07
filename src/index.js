@@ -14,6 +14,13 @@ import CartoonAlien from "./assets/images/cartoon_alien.png";
 import FlowerSeaside from "./assets/images/flower_seaside_town.png";
 import PurpleCrystals from "./assets/images/purple_crystals.png";
 import PurpleCrystals2 from "./assets/images/purple_crystals2.png";
+import PurpleCrystals3 from "./assets/images/purple_crystals3.png";
+import ShiningCrystal from "./assets/images/shining_crystal1.png";
+import ShiningCrystal2 from "./assets/images/shining_crystal2.png";
+import ShiningCrystal3 from "./assets/images/shining_crystal3.png";
+import SleepingAlien from "./assets/images/sleeping_alien.png";
+import CajaFruit from "./assets/images/caja_fruit.png";
+import MagicBroomstick from "./assets/images/magic_broomstick.png";
 import QuaintSeaside from "./assets/images/quaint_seaside_town.png";
 import SunsetWaves from "./assets/images/sunset_waves.png";
 
@@ -87,7 +94,7 @@ function Dialogue({ dialogueItem }) {
             <>
                 <Root />
                 <h1>Dialogue</h1>
-                <ImageDisplayer img_string={imageName}/>
+                <ImageDisplayer img_string={imageName} />
                 <DialogueText
                     currPage={runner.currentResult}
                     dialogueText={dialogueText}
@@ -187,10 +194,18 @@ function ImageDisplayer({ img_string }) {
         "img_flower": FlowerSeaside,
         "img_crystals": PurpleCrystals,
         "img_crystals2": PurpleCrystals2,
+        "img_crystals3": PurpleCrystals3,
         "img_quaint": QuaintSeaside,
         "img_waves": SunsetWaves,
+        "img_shining": ShiningCrystal,
+        "img_shining2": ShiningCrystal2,
+        "img_shining3": ShiningCrystal3,
+        "img_sleeping": SleepingAlien,
+        "img_fruit": CajaFruit,
+        "img_broomstick": MagicBroomstick
+
     }
-    return <img src={mappings[img_string]} style={{width: "50%", height: "50%"}} alt={img_string} />
+    return <img src={mappings[img_string]} style={{ width: "25%", height: "25%" }} alt={img_string} />
 }
 function Root() {
     return (
