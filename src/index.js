@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import YarnBound from 'yarn-bound';
-import { dialogue } from './lessons/lesson2.js';
+import { dialogue } from './lessons/lesson_1.js';
 import reactStringReplace from 'react-string-replace';
 import 'animate.css';
 import './index.css'
@@ -13,8 +13,7 @@ import crystalLoopSound from './assets/sounds/crystalloop.wav';
 import crystalGlassSound from './assets/sounds/crystalglass.wav';
 */
 
-function Dialogue() {
-
+function Dialogue({ dialogueItem }) {
     const advanceDialogue = (option = null) => {
         runner.advance(option);
         setDialogueText(generateDialogue(runner.currentResult));
@@ -37,8 +36,8 @@ function Dialogue() {
             );
         }
     }
-
-    const [runner] = useState(new YarnBound({ dialogue }));
+    
+    const [runner] = useState(new YarnBound({ dialogue: dialogueItem }));
     const [dialogueText, setDialogueText] = useState(generateDialogue(runner.currentResult));
 
     if (dialogueText) {
@@ -114,5 +113,5 @@ function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <Dialogue />
+    <Dialogue dialogueItem={dialogue} />
 );
