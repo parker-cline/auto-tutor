@@ -38,12 +38,15 @@ Cauley: Why did you decide to come to Irilia?
     Cauley: You have come to the right place! This beach is the perfect place to play fun games.
     Cauley: There is one game where you fly around on a magic broomstick. 
     -> Didn't I read about that in some book?
-        Cauley: Yes, but here it's actually real! And everyone can play--no matter who they are!
-    Cauley: You can't play Magic Broomstick on Earth.
+        Cauley: Yes, but here it's actually real! ...Really! Really!
+        Cauley: And everyone can play--no matter who they are!
+    Cauley: You can't play "Magic Broomstick" on Earth.
 -> To discover new things! Europia is different from my home planet.
     <<set $object to "Caja fruits">>
     Cauley: Oh, that's great! You can discover a lot of things here. Irilia is very interesting because there are things here you won't find on other planets in the galaxy. For example...
     Cauley: Caja fruit! It's so sweet that it's almost like candy. You can't find that on Earth!
+    Cauley: The strange thing about it is that it looks like an orange on the inside, but it's blue on the outside.
+    Cauley: Doesn't *seem* like the most delicious thing, but... you have to open your mind a bit!
     Cauley: And there are many other things that are different from Earth. For example...
     
 Cauley: This beach is special! You've seen those purple crystals, right?
@@ -57,12 +60,12 @@ Cauley: This beach is special! You've seen those purple crystals, right?
     <<if $object is "Caja fruits">>
     Cauley: They make the beach so beautiful and colorful! Maybe you'll discover what they do? 
     <<endif>>
-    Cauley: These crystals are called Xtrapa. I have heard stories that they are magical... but I don't know if that's true.[img_crystals2][/img_crystals2]
+    Cauley: These crystals... I have heard stories that they are magical... but I don't know if that's true.[img_crystals2][/img_crystals2]
     -> Maybe they are magic because they make you feel happy. I feel happy too!
         Cauley: You make a good point!
     -> Maybe they can grant us three wishes.
         Cauley: *laughs* I don't think that's how it works. But maybe they do?
-Cauley: Here, have a crystal! *hands you an Xtrapa crystal* [img_crystals3][/img_crystals3]
+Cauley: Here, have a crystal! *hands you a purple crystal* [img_crystals3][/img_crystals3]
 -> Thanks!
     Cauley: No problem!
 Cauley: And one more thing as a welcome gift. 
@@ -75,16 +78,16 @@ Cauley: I would love to hang out with you more! But...
 Narrator: Suddenly, the [purple]crystal in your hand[/purple] starts shaking and starts to glow--
 Narrator: An energy that that you have never felt before flows, such that you feel a rush--like you can do anything. [img_shining][/img_shining]
 Narrator: And then...
-Narrator: The crystal stops shaking. But it still shines, as fireflies do in the dark.
+Narrator: The crystal stops shaking. But now it shines, as fireflies do in the dark.
 Cauley: Unbelievable! *takes a closer look at the crystal*
 -> Cauley, what happened?
     Cauley: I have no idea, but... 
 -> That. Was. Awesome!
 Cauley: It certainly *is* magic! I've never seen anything before like that in my life, oho!
 Cauley: But... why did it shake?
-Cauley: And why does it glow?
+Cauley: And why does it glow now?
 -> Was it what you said? Maybe it's magic because you asked for those {$object}.
-    Cauley: I think you're right. Let me try this again. Actually... you say it this time.
+    Cauley: I think you're right. Let me try this again. Actually... you say it this time. Will it still work?
 -> No idea, but I want to find out!
     Cauley: I want to find out too! 
     Cauley: I know that the crystal shook after I said those words again. Let's try it again... you try it this time! Will it still work?
@@ -95,12 +98,17 @@ Cauley: And why does it glow?
 Cauley: Go on! Say it!
 -> I wish I had some {$object}!
     Narrator: [purple]The crystal shakes[/purple] again.
-    Narrator: A magic energy moves out of the crystal into the sky, turning it as purple as the crystal you hold. [img_shining3][/img_shining3]
-    Narrator: A happy sound like the chimes of a bell fills the air. For a moment, everything is right with the world, and you feel as if anything is possible.
+    Narrator: A joyful sound like the chimes of a bell fills the air. For a moment, everything is right with the world, and you feel as if anything is possible.
     Narrator: And then...
-    Narrator: The crystal stops shaking. Yet again it still shines, as fireflies do in the dark. And the sky remains purple.
-    Cauley: The sky is purple?! That's amazing! It must mean...
-    Cauley: Is our wish granted?
+    Narrator: The crystal stops shaking. Yet again it still shines, as fireflies do in the dark. [img_shining2][/img_shining2]
+    Cauley: Those chimes... 
+    Cauley: WOWEE WOW WOW!
+    Cauley: Oho, did you hear that? What a happy noise! I think we're doing something right because that noise was so happy. 
+    Cauley: Imagine what we can do! We can make so many fun sounds! 
+    Cauley: Maybe next we can have the crystal play, oh, I don't know, Twinkle Twinkle Little Star or something?
+    Cauley: *daydreams about the possibilities...*
+    Cauley: ...
+    Cauley: Wait, is our wish granted?
     -> We don't have the {$object} though.
         Cauley: You're right. But I think we can get them now. If the crystal likes to hear our wish, then...
         Cauley: Any ideas?
@@ -114,7 +122,7 @@ title: Idea
         Cauley: Good thinking!
     -> I don't know what to do.
         Cauley: I don't know either. We don't know what to do, but... we made some progress already!
-        Cauley: The crystal glowed when we wished for {$object}. And the sky turned purple. That's a good sign, right?
+        Cauley: The crystal glowed when we wished for {$object}. And the fun sound played. That's a good sign, right?
         Cauley: One step at a time.
     -> Aw... 
         Cauley: I know. But we can't give up! If we put effort into it, we can succeed.
@@ -124,7 +132,7 @@ title: Idea
     Cauley: Any other ideas?
     <<jump Idea>>
 -> Maybe we should just give up.
-    Cauley: The sky turned pink. That is progress! 
+    Cauley: The happy sound played. That is progress! 
     Cauley: Even though we haven't solved the problem, I don't think we should give up now. Try stuff out and see if it works.
     <<jump Idea>>
 -> Maybe we should ask for how many {$object} we need. I wish we had 2 {$object}! One for each of us.
@@ -137,25 +145,40 @@ title: Idea
 Cauley: YES!
 -> We did it!
     Cauley: OHO!
+    Cauley: ...why did that work?
+    -> We tried different things!
+        Cauley: Yes, we did! 
+    -> We didn't give up!
+        Cauley: That's the right idea!
+    Cauley: We didn't solve the problem the first time. But we learned from our failure. We did not give up.
+    Cauley: Remember when the crystal first glowed when I said "I wish I had {$object}? Because it glowed, we knew we were on the right track.
+    Cauley: That's why we said similar things in our next few attempts. Educated guesses!
+    Cauley: And thinking about how we can solve problems like this later...
+        -> We were specific. We told the crystal what we wanted, and how many!
+            Cauley: Yes, I see!
+Cauley: So the crystal only turns into {$object} if we know what we want, and we figure out how many we need.
+Cauley: If we want to use the purple crystals later, we need to remember that.
 Cauley: Hey, want to hang out?
 -> Sure!
 Cauley: Great! In that case...
 <<if $object is "beach mats">>
 Cauley: I'm ready to sleep. It's a beautiful day, and the waves are crashing on the beach. 
-Cauley: Don't wake me up this time.
-Narrator: Cauley takes a nap on the beach and follows asleep. You do that too! [img_sleeping][/img_sleeping]
+Cauley: ...by the way, don't wake me up this time! Oho!
+Narrator: Cauley takes a nap on the beach and falls asleep. You do that too! [img_sleeping][/img_sleeping]
 <<endif>>
 <<if $object is "magic broomsticks">>
-Cauley: I'm ready to play! I'm going to fly around the beach and you try to catch me. Here, have a broomstick. 
+Cauley: I'm ready to play! I'm going to fly around the beach, and you try to catch me. Here, have a broomstick. 
 Narrator: You board the broomstick.
 Cauley: Catch me if you can! *Cauley flies away* [img_broomstick][/img_broomstick]
 <<endif>>
 <<if $object is "Caja fruits">>
 Cauley: This Caja fruit is like strawberry, blueberry, mango, apple...
 Cauley: banana, pear, pineapple, peach...
+Cauley: dates, watermelons....
 Cauley: and... it's just everything, all in one! Here, try it! *Cauley hands you a Caja fruit.* [img_fruit][/img_fruit]
-Narrator: You eat it. It tastes absolutely delicious! 
-Cauley: We can eat some more later. I'm going to go play in the water.
+Cauley: You wanted something new, right? This fruit is new but you should
+Narrator: You eat it. It tastes absolutely delicious--bursting with flavor, like a burst of sunshine in your mouth!
+Narrator: Sweet and tart--all this from a blue orange! Who knows what else you'll find.
 <<endif>>
 
 ===
