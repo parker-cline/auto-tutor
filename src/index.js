@@ -9,23 +9,26 @@ import reactStringReplace from "react-string-replace";
 import "animate.css";
 import "./index.css";
 
-import BeachSunset from "./assets/images/beach_sunset.png";
-import CartoonAlien from "./assets/images/cartoon_alien.png";
-import FlowerSeaside from "./assets/images/flower_seaside_town.png";
-import PurpleCrystals from "./assets/images/purple_crystals.png";
-import PurpleCrystals2 from "./assets/images/purple_crystals2.png";
-import PurpleCrystals3 from "./assets/images/purple_crystals3.png";
-import ShiningCrystal from "./assets/images/shining_crystal1.png";
-import ShiningCrystal2 from "./assets/images/shining_crystal2.png";
-import ShiningCrystal3 from "./assets/images/shining_crystal3.png";
-import SleepingAlien from "./assets/images/sleeping_alien.png";
-import CajaFruit from "./assets/images/caja_fruit.png";
-import MagicBroomstick from "./assets/images/magic_broomstick.png";
-import QuaintSeaside from "./assets/images/quaint_seaside_town.png";
-import SunsetWaves from "./assets/images/sunset_waves.png";
+import BeachSunset from "./assets/images/lesson1/beach_sunset.png";
+import CartoonAlien from "./assets/images/lesson1/cartoon_alien.png";
+import PurpleCrystals from "./assets/images/lesson1/purple_crystals.png";
+import PurpleCrystals2 from "./assets/images/lesson1/purple_crystals2.png";
+import PurpleCrystals3 from "./assets/images/lesson1/purple_crystals3.png";
+import ShiningCrystal from "./assets/images/lesson1/shining_crystal1.png";
+import ShiningCrystal2 from "./assets/images/lesson1/shining_crystal2.png";
+import ShiningCrystal3 from "./assets/images/lesson1/shining_crystal3.png";
+import SleepingAlien from "./assets/images/lesson1/sleeping_alien.png";
+import CajaFruit from "./assets/images/lesson1/caja_fruit.png";
+import MagicBroomstick from "./assets/images/lesson1/magic_broomstick.png";
+import SunsetWaves from "./assets/images/lesson1/sunset_waves.png";
+
+import FlowerSeaside from "./assets/images/lesson2/flower_seaside_town.png";
+import QuaintSeaside from "./assets/images/lesson2/quaint_seaside_town.png";
 
 // note: may later want to refactor this code using https://reactjs.org/docs/hooks-effect.html
 // bug: can't highlight entire text with a square bracket tag
+// bug: putting [] at start of text doesn't work for some reason
+// and multiple [] don't work either
 
 /*
 import useSound from 'use-sound';
