@@ -26,9 +26,12 @@ import FlowerSeaside from "./assets/images/lesson2/flower_seaside_town.png";
 import QuaintSeaside from "./assets/images/lesson2/quaint_seaside_town.png";
 
 // note: may later want to refactor this code using https://reactjs.org/docs/hooks-effect.html
-// bug: can't highlight entire text with a square bracket tag
-// bug: putting [] at start of text doesn't work for some reason
-// and multiple [] don't work either
+// bug: can't highlight *entire* text with a square bracket tag
+// bug: putting [tags] at start of text doesn't work for some reason
+// and multiple [tags] don't work either
+// i've done a lot of refactoring, but i'm not sure if it's the best way to do it. some articles to read for next semester:
+// https://www.freecodecamp.org/news/separation-of-concerns-react-container-and-presentational-components/#whatarecontainerandpresentationalcomponents
+// https://reactjs.org/docs/lifting-state-up.html [consider how you can change the state of a prop after passing it down to the child component]
 
 /*
 import useSound from 'use-sound';
@@ -91,41 +94,26 @@ function Dialogue({ dialogueItem }) {
         generateDialogue(runner.currentResult)
     );
     const [imageName, setImageName] = useState(getImageName(runner.currentResult));
-
-    if (dialogueText) {
-        return (
-            <>
-                <Root />
-                <h1>Dialogue</h1>
-                <ImageDisplayer img_string={imageName} />
-                <DialogueText
-                    currPage={runner.currentResult}
-                    dialogueText={dialogueText}
-                    advanceDialogue={advanceDialogue}
-                />
-                <History
-                    historyItems={runner.history}
-                    generateDialogue={generateDialogue}
-                />
-            </>
-        );
-    } else {
-        return (
-            <>
-                <Root />
-                <h1>Dialogue</h1>
-                <ImageDisplayer img_string={imageName} />
-                <DialogueList
-                    currPage={runner.currentResult}
-                    advanceDialogue={advanceDialogue}
-                />
-                <History
-                    historyItems={runner.history}
-                    generateDialogue={generateDialogue}
-                />
-            </>
-        );
-    }
+    return (
+        <>
+            <Root />
+            <h1>Dialogue</h1>
+            <ImageDisplayer img_string={imageName} />
+            {dialogueText && <DialogueText
+                currPage={runner.currentResult}
+                dialogueText={dialogueText}
+                advanceDialogue={advanceDialogue}
+            />}
+            {!dialogueText && <DialogueList
+                currPage={runner.currentResult}
+                advanceDialogue={advanceDialogue}
+            />}
+            <History
+                historyItems={runner.history}
+                generateDialogue={generateDialogue}
+            />
+        </>
+    );
 }
 
 function DialogueText({ dialogueText, advanceDialogue }) {
