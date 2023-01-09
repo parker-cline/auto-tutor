@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
+import Helmet from "react-helmet";
 import "animate.css";
 import "./index.css";
 /*
@@ -75,7 +76,6 @@ function Dialogue({ dialogueItem }) {
     const [imageName, setImageName] = useState(getImageName(runner.currentResult));
     return (
         <div tabIndex={0} onKeyDown={handleKeyDown}>
-            <h1>Example</h1>
             <ImageDisplayer img_string={imageName} />
             {dialogueText && <DialogueText
                 currPage={runner.currentResult}
@@ -199,6 +199,13 @@ function DrawingCanvas() {
 
     return (
         <>
+            <Helmet>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous" />
+                <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+                <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+                    onload="renderMathInElement(document.body);"></script>   
+            </Helmet>
+
             <h1>Canvas</h1>
             <canvas className="canvas"
                 onMouseDown={startDraw}
@@ -213,6 +220,10 @@ function DrawingCanvas() {
 function App() {
     return (
         <>
+            <h1>Antoine stands on a balcony and throws a ball to his dog, who is at ground level.</h1>
+            <h2>The ball's height (in meters above the ground) \(x\) seconds after Antoine threw it, is modeled by:</h2>
+            <h2>$$h(x)=-2x^2+4x+15$$</h2>
+            <h1>At what time does the ball reach the ground?</h1>
             <Dialogue dialogueItem={dialogue1} />
             <DrawingCanvas />
         </>
