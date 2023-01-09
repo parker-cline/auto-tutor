@@ -1,38 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
-import { dialogue as dialogue2 } from "./lessons/lesson_2.js";
 import reactStringReplace from "react-string-replace";
 import "animate.css";
 import "./index.css";
-
-import BeachSunset from "./assets/images/lesson1/beach_sunset.png";
-import CartoonAlien from "./assets/images/lesson1/cartoon_alien.png";
-import PurpleCrystals from "./assets/images/lesson1/purple_crystals.png";
-import PurpleCrystals2 from "./assets/images/lesson1/purple_crystals2.png";
-import PurpleCrystals3 from "./assets/images/lesson1/purple_crystals3.png";
-import ShiningCrystal from "./assets/images/lesson1/shining_crystal1.png";
-import ShiningCrystal2 from "./assets/images/lesson1/shining_crystal2.png";
-import ShiningCrystal3 from "./assets/images/lesson1/shining_crystal3.png";
-import SleepingAlien from "./assets/images/lesson1/sleeping_alien.png";
-import CajaFruit from "./assets/images/lesson1/caja_fruit.png";
-import MagicBroomstick from "./assets/images/lesson1/magic_broomstick.png";
-import SunsetWaves from "./assets/images/lesson1/sunset_waves.png";
-
-import FlowerSeaside from "./assets/images/lesson2/flower_seaside_town.png";
-import QuaintSeaside from "./assets/images/lesson2/quaint_seaside_town.png";
-
-// note: may later want to refactor this code using https://reactjs.org/docs/hooks-effect.html
-// bug: can't highlight *entire* text with a square bracket tag
-// bug: putting [tags] at start of text doesn't work for some reason
-// and multiple [tags] don't work either
-// i've done a lot of refactoring, but i'm not sure if it's the best way to do it. some articles to read for next semester:
-// https://www.freecodecamp.org/news/separation-of-concerns-react-container-and-presentational-components/#whatarecontainerandpresentationalcomponents
-// https://reactjs.org/docs/lifting-state-up.html [consider how you can change the state of a prop after passing it down to the child component]
-
 /*
 import useSound from 'use-sound';
 import trumpetSound from './assets/sounds/trumpets.mp3';
@@ -89,15 +62,20 @@ function Dialogue({ dialogueItem }) {
         return null;
     };
 
+    const handleKeyDown = event => {
+        if (event.key === 'r' && dialogueText) {
+            advanceDialogue();
+        }
+    };
+
     const [runner] = useState(new YarnBound({ dialogue: dialogueItem }));
     const [dialogueText, setDialogueText] = useState(
         generateDialogue(runner.currentResult)
     );
     const [imageName, setImageName] = useState(getImageName(runner.currentResult));
     return (
-        <>
-            <Root />
-            <h1>Dialogue</h1>
+        <div tabIndex={0} onKeyDown={handleKeyDown}>
+            <h1>Example</h1>
             <ImageDisplayer img_string={imageName} />
             {dialogueText && <DialogueText
                 currPage={runner.currentResult}
@@ -112,7 +90,7 @@ function Dialogue({ dialogueItem }) {
                 historyItems={runner.history}
                 generateDialogue={generateDialogue}
             />
-        </>
+        </div>
     );
 }
 
@@ -178,61 +156,73 @@ function ImageDisplayer({ img_string }) {
     if (!img_string) {
         return null;
     }
-
-    const mappings = {
-        "img_sunset": BeachSunset,
-        "img_alien": CartoonAlien,
-        "img_flower": FlowerSeaside,
-        "img_crystals": PurpleCrystals,
-        "img_crystals2": PurpleCrystals2,
-        "img_crystals3": PurpleCrystals3,
-        "img_quaint": QuaintSeaside,
-        "img_waves": SunsetWaves,
-        "img_shining": ShiningCrystal,
-        "img_shining2": ShiningCrystal2,
-        "img_shining3": ShiningCrystal3,
-        "img_sleeping": SleepingAlien,
-        "img_fruit": CajaFruit,
-        "img_broomstick": MagicBroomstick
-
-    }
-    return <img src={mappings[img_string]} style={{ width: "25%", height: "25%" }} alt={img_string} />
+    console.log(img_string);
+    return <img src={require('./assets/images/' + img_string)} style={{ width: "40%", height: "40%" }} alt={img_string}/>
 }
-function Root() {
+
+function DrawingCanvas() {
+    const [drawing, setDrawing] = useState(false);
+    const canvasRef = useRef(null);
+    const ctxRef = useRef(null);
+
+    const startDraw = ({ nativeEvent }) => {
+        const { offsetX, offsetY } = nativeEvent;
+        ctxRef.current.beginPath();
+        ctxRef.current.moveTo(offsetX, offsetY);
+        setDrawing(true);
+    };
+    const stopDraw = () => {
+        ctxRef.current.closePath();
+        setDrawing(false);
+    };
+    const draw = ({ nativeEvent }) => {
+        if (!drawing) return;
+        const { offsetX, offsetY } = nativeEvent;
+        ctxRef.current.lineTo(offsetX, offsetY);
+        ctxRef.current.stroke();
+    };
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        // For supporting computers with higher screen densities, we double the screen density
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight / 1.5;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight / 1.5}px`;
+        // Setting the context to enable us draw
+        const ctx = canvas.getContext('2d');
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 5;
+        ctxRef.current = ctx;
+    }, []);
+
     return (
         <>
-            <h1>Exploring Irilia</h1>
-            <h2>Choose a lesson.</h2>
-            <nav>
-                <a href="/lesson1">Lesson 1</a>
-                <br />
-                <a href="/lesson2">Lesson 2</a>
-            </nav>
+            <h1>Canvas</h1>
+            <canvas className="canvas"
+                onMouseDown={startDraw}
+                onMouseUp={stopDraw}
+                onMouseMove={draw}
+                ref={canvasRef}
+            />
         </>
     );
 }
 
-// ========================================
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root />
-    },
-    {
-        path: "/lesson1",
-        element: <Dialogue dialogueItem={dialogue1} />,
-    },
-    {
-        path: "/lesson2",
-        element: <Dialogue dialogueItem={dialogue2} />,
-    },
-]);
+function App() {
+    return (
+        <>
+            <Dialogue dialogueItem={dialogue1} />
+            <DrawingCanvas />
+        </>
+    )
+}
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <App />
     </React.StrictMode>
 );

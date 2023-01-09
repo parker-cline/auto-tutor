@@ -12,3 +12,19 @@
     margin: 2%;
     text-decoration: underline;
 }
+
+.canvas {
+    border: 1px solid black;
+    image-rendering: -moz-crisp-edges;
+    /* Firefox */
+    image-rendering: -webkit-crisp-edges;
+    /* Webkit (Safari) */
+    image-rendering: pixelated;
+    /* Chrome */
+}
+
+body {
+    background-color: beige;
+    font-family: Work Sans, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
