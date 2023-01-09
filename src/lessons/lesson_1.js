@@ -141,7 +141,7 @@ Tutor: I'll draw out a picture I made. Looks similar? [img_highquality.png][/img
     -> I've never seen x^2 functions before.
         Tutor: "x" functions are linear. They're like a straight line. "x^2" functions are quadratic. They're like a curve. We call them "parabolas."
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-Tutor: On a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this.
+Tutor: On a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this. [img_timedtest.gif][/img_timedtest.gif]
 Tutor: We just drew a picture.... this is a great start! I wonder what we could do next...
 -> Let's try graphing.
     Tutor: Aha! If we graph the function, we can see the exact path the ball is taking.
