@@ -221,8 +221,8 @@ function App() {
     return (
         <>
             <h1>Antoine stands on a balcony and throws a ball to his dog, who is at ground level.</h1>
-            <h2>The ball's height (in meters above the ground) \(x\) seconds after Antoine threw it, is modeled by:</h2>
-            <h2>$$h(x)=-2x^2+4x+15$$</h2>
+            <h2>The ball's height (in meters above the ground) x seconds after Antoine threw it, is modeled by:</h2>
+            <h2>h(x)=-2x^2+4x+15</h2>
             <h1>At what time does the ball reach the ground?</h1>
             <Dialogue dialogueItem={dialogue1} />
             <DrawingCanvas />
