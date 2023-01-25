@@ -1,0 +1,46 @@
+#drawing-canvas {
+    width: 100%;
+    height: auto;
+    border: 4px solid green;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.chat-message {
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 7px;
+    overflow-wrap: break-word;
+    margin: 10px;
+    width: 65%;
+    display: inline-block;
+    font-family: 'Work Sans';
+    position: relative;
+}
+
+.chat-message.right {
+    float: right;
+    background-color: #c8e1f9;
+}
+
+.lesson-column {
+    max-height: 600px;
+    min-height: 600px;
+}
+
+.navbar {
+    font-family: 'Work Sans';
+}
+
+.bi-bookmark-plus {
+    color: green;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 140%;
+}
+
+.chat-message > h6 {
+    padding-right: 25px;
+}

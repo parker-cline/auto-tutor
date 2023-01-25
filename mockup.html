@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Example</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Lessons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bookmarks</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+    <div class="container p-3">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card lesson-column">
+                    <img class="card-img-top"
+                        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYRFRgRERYYERERFhURERERGBoRERERGBgaGRkYGRgcJC8lHB4rIRgYJjomKy8xNTU1GiQ7RD0zPy40ODEBDAwMEA8QHxISHzQhJCs0NDQxNDE0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQxNDE/NDQ2MTo1NDQxNDE/P//AABEIAMIBAwMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAQIFBgQDB//EAEEQAAIBAwIDBgUCAwYDCQEAAAECAwAEERIhBTFBEyJRcYGRBhRhofAywSNC4QcVUmKx0TNygiQlNERTkqOywxb/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/xAAmEQEBAQACAgEEAAcAAAAAAAAAARECIQMxYQQSQVETFDJxgaHB/9oADAMBAAIRAxEAPwD6XqH4KZYfgp0EftXnci1D8FAYfgqRoWggGH4KWrf08K9BUevpQIsPwUyw/BTNM0REN+YoDj8FQuLhIkMkjrHGv6nkYIg8ydqhZ3ccy9pC6SoTjXGyuufDKnGaL29dQ/BQW3Hr0pj/AGpnmPWgizD8FMMPwVJqKCAYfgoDD8FSXlQKCOofgpOw28/CpdfShunnQoLD8FAYfgqRoFBEMPwUah+CpLXJf8RhtwGnlSENyMjqmfLJ3q8eHLlc4zaOnUPwUmbb+lQtrpJVDxOsiNyeNg6n1FercqcuNly9BavzFCt+YqVJagQYfgo1b/0pij+tAi1DN+YqRpPyPlQJWGB5DpQGH4KEPhvjY/Q1IU7gjrH4KKlRRUcDasv/APz73jyS3zyqutktbaGUxRxQq2lJCUPfdsask7ZAx0GoArO/EPE5WkHD7I4upV1yzEaksrcn/iN4sc4VfE58M3jpD+D7l2S4gkkNx8lcPapcNu8iKqsA5H6nXVpJ64q9glRwdDK+hij6GDaJF5q2OTDI2Nc3COFpaQpbxZ0oD3m3Z3O7O56sxJJ8/Csp8ZSSWD/M2T4nvFeKW2CGTtCiFvmURdw6KNzyI05+t91fdXnHr3XBIba4SERSiK7uSQTbIuDLpGCDIAVAHi3jiqr+z3ionWZfmGuED6raO5kSS+SBcKzShcHBYjGRtkeIq34Rwm2ezjgTTc2rKsgZwGEzZ1mRs82LZJz126VZwWqRnuIkfdx3EVNs8thypszEv6dBFBFU/FGvg2LVbUx4GGuHkDasb91FxjP+au+wEuhfmCnbb9p2AYRczjTry3LHPrmpiMy0CXXE5IrsB1tYYJLK3cgxya9XaTaDszKwCb5xT4ZFHHxSRLQKsZtQ17HEFESXAk/hEhdg5Uvt4b15XvDU4pfyRXAzBwyOJQi9x5JrhS+Wde8ECgDAI3z9aUvDF4RLDLaMyW13cx21zasS6a5MhJYye8rKRuMnIPTFa+Gm0015PKgdULKHcMUQsA7hQCxVeZxnfHKs38RF+Hu3Eom1wkIt/bMwAdBhEmiLbCRcgaeTDbnT+FIjcn+9JWVpLpSIEQhktrUHuxg/4yRlj/i22xWc61MadlFPFQlUlSFOliCFYjUFbGxI64PSqmw4ddI6vPemZBnVClvFCjEgjc95hjIOx6URYX15HbRNPMwSONSzsegHgOpPIDqSKxEfby3tje3BeIXEsyQWh2ENt8uzAuOsj91j4YA6baP4m+HzfCIdu8AhftNKokiO4xoLK2x04OAcjvHas9xjhVyt1Yo9/JI7yz6HMMKNCVgLMygLhsjbfxrXHGpjfYFRcDbzrwsLd41CSStcOMkyuqIxBOwwqgbeVe7jl51hmmVp6ayXxLw24kn1RRzyx6FB7PiBso9QJyOyC8+W+d81b/DcMiQ6JYjAUY6Fa4N67Kd9RdhkbkjH0q50uLC5cojuiGR0VmSNf1SMASFH1J29aoeD8CSNTd8QCSXbr2k8k2DHAvPQgbKqijbI54O/KtGzBQSxwBkknAAA5knpVDxT4cF5JruZnktNKGO1T+HFqA3Z3U5kydxyx9a9Pg5SSy37Zfdnu/DNcXwiEea6ubZeysZCix7aEkkRWEkqJsFU7DPXH0rVMRjIxg7g52x458KyE3CobS8torQFBdCZLq21M8b24QnWyMTybbPXJHjVVxuNrZ5LK2eRuHaUkv40XtHsInY5WNs5CsuSU3KqCRzr1eTwcfNznKWzrZv6nXfybkb3h97HcoJYW1xsWVXwVDaWKkjPMZBweRrpArxsgnZp2BXsdC9lowU7PHd046YxXjxK2klTRDO1q+oN2iIkpKjOVKuCMHIPjsPrXzeck52TqfKusCniqO04Vdo6s9+8sasC8bW0Ca16rqUZXPiKvMb1nFeUU6SatDK+hyj6GDaHX9Stjkw8K576ZXWSBJlinETPq2Z4VYELIVJ5A77+FZr4rmbh0gurTDz3WpZbTBYXOhSwmCruGUczyIIHOurh/wAPQz2bK0zzG9CzXF3GwSSd8hsAkEBBjToxsMjnXung4cOM8tty5nXfyzrk+C7Fe2kntgy2YiW3DuWJvbhX1Ncd4/8AMNXXUfIbPFUfDPhaC3KPG05MeNAad2QYGMaAQuPpjFXgFcvqvJx589422fM7J6GKKdFedp5Ta9J7PTr0to150a8d3VjfGcZxWO4T8IXUIeR+IMs1w3azmGGMq0h/zuCzAdBhQOgFbTNDGkuErPw2fEYSMXEF6ue8txCbWTR10vGWGfNa9+GWEhuJby4ADnNvaoG1CG1Q51ZA2Z27x8AFFXOr8xTU001UcN4QbaaRomC2k3fNqRtHckjU8bZ7qMOa45jI61bdfSmD+YpZ39KWoZoNJjTJqCh4pwWUzfOWUqwXBQRTJKpkt7lFyV1hSCrLk4YdNq8rTgU8kyXPEJlma3Oq3t4FMVtHJuO0OolnbB2zjHrWjzSBq/cuqviPCjcTRPIwNtb/AMUQAf8AEuAcIznkVUZIH+I56VC04Qbe4aWBwlvPra4tiCU7YjaSM/yk/wAw5Hnzq3zQTuPWmpptRQxozUCU1V8Q4U01xbXIYKLRp2ZCMl+1i0DB6Y51aKaYNIaR5+lJunnUs7+lRc8vOhUjQKCaAaCLoGBVgGVgVZWGVYHYgg8xVAfhGFSewkuLVDv2dtOyR5PghBA9MVoA35ijV+Yrpw8vPh/TTFXwvgEVoWeJSZpBh55naeVttss3TYbDHKp8G4WLWLRq7SR2Mk8zbNNM36nI6eAHQACrLNDnb+lXl5ufKd3d/wCJiu4VwlbUyCIsIpGDpBt2cDnOvRtkBiQdPIEbc6sRTzSU1jlyvK7btUCkxPhnY7Z5/SmDQTWRScE4a4dry7C/NzALpU6ltoAcrCjdfFmHM+VSsOFPazOYSos5gztAcgwXGRlo9saHGSV2wRkc6uSaGO3pXe+flbf1ZmfhMC8qBSU7DyoBrgqVFGaKKjmmSPGligr9KIeRQDRp+lAFAg31ozv6UADwoAGeXSgZI8RSLUFR4Uyo8KAyKQIp4HhQFHhQANIncetPR9PtSI3HrQBIp5FJlHhXMOIQGTsBLEZ//R7RO2/9mdX2oOpTQDzoUDFID6UDzvUXPLzqWBnlSYDbbrRKZNJWFGkVBZU1dnqTWOaZGsf9POrONvpXoDRmgAeFGkeFQBNJztTIpOoxyoJZpKRRpHhQqjwoECKef3pBRRpH+tAyaGOxpFaGUYPlQNTsKAaSr9KAooJZoqOkU6BVlxwCS8Z5r6SaPLslrbW8piSCJW0o5KHvSMBqydhkDHQais78QcTldxw6yOLqRQ80/NLK3OO+fF2zhV9dqvHViXwfdSOk0Ushna0uZbVbg41TRrpKlsbahq0n/l8c1ewSrICUcOFZkYowYK6nDKcciDsR0rm4Tw1LWFLeEYRBjJ3Z2JyzserEkk+dZH4veTh7m4sm0PfK6TW4Uvh1Qk3iKAcMg/V0O3Wrm1fdXvHr4vA7W1wkSxy9nd3OoMbWNN5NIwQZBlVA8X8arv7PuKG4SUNcGdQ5NuszpJeJb/pBmC8stkgEbZ8qtuGcItmtI7dVS5tcK6FwHWZs6u0bxJYknPiasLazSM/w40jyoB7NFj2zy7o5U2ZifCbzorrGXAkcM0aE951TGogdQNQz516uQoLE4CgliTgADcknoKxXHLe8W9tJBNBlnuYYCYHAjV4y+HAfvkiMAEY33rW2KyqgFwySSb5aJTGhGdtmZjy+tMhY9oJFdVkRg6OAyOhDKynkQRsRVL8S3UZtpD8yIERxHPJGQ7gBgXiXB7sjDYdRnlWY45M1hJJBYOyQSIJrtI0Mg4aHYBpo8Hu6l1HR006uWK1dtwO1kto4VjjmtlxJHq74diD39X8zHUcnrmvbPBx8P2+TlbZu9e/8s7qo+B+GaGkuVHy8U6qIrNXMhRAciSQkn+IfAcgSOfLXkbj1rg4fwW3tmLwQRxOy6C6IFYpkErnwyAfQVwyS8RLd2KzVcnSXmmZividMfPFef6jyTy87yn+yTovje6eGzkeNjGxMaPKu7Qxu6o7jHIhWO/TnVT8UcEsbXhzmNY49CF7Wdcdu9yADGyyDvMzMF3B5Z6Vc/GN40No+gK0kxS2j1jUgeZwmWBBBADE4I3xVRH/ZvaIiCPtI7mPBS6R27RZBvr0E6ee+AB+9c5mNz01tjraNDICJCiGQeEmkavvmvXlkk4A3J8BiszwvVxKyMdw5jnikeB5oTpK3Nu/dlTGOoVscuYqo+fn4hJ/c8+mKSLLcRljcAXEC6dKxAd4a9SlthpGR1xU+1MbqKRZArowdHUMjoQysp3BBGxFSccvOuO9EsaKtpHEzLpRUkdoY0jAxtpVuWFGNts77VWtJxM4/h2A35drcH/8AOpiY9uPQ3EzJbQM0MUmprm6QgSIi6cIng75Pe6BTWe+I+CWsCJbWkQHEZHQ2zoSbhCGBaZ356QAck7H/AE3RBx4HHMdD61l4/gW2JZ5mlnuHOp7l5XSTV0I0EAYwMbHGBXu+m8/Djn3WyT8Se78/CWNRnGMncnA6am+g9CcVC4mWNS7uERBqd3IVFUdSTsKyljaSXkE1pNIfmeH3GmC75ya1XXDKfFtLaWHUZrns7uTikotbhVjjsWD36KwZbi5RiEVQD/w8rrOeuB0zU/ldtu9T3/b8Gtvzxv8AmKTjavK8lZFZ0QyuoysaFVdz4AuQB6mqeLi907Kp4fJGjMA8jzwAIuRltIYk4G+BXiz9Li+xWf8AiTjbQ4trUB76ZGkVW3SCFQS80ngowQB1OBV5cM4RjGodwrFEY6VZ8d0FugJxvWD4dBxC2S4lks45ri5DvcXJuVU6Ap0oihTpVV2C56e14xqRrPhi7a4tIJ5DmSWJHcgBQWK7nA5VaYrJfAdxcG2t0eBEtxAuicTapHGnukxads+Grb610/FN5LE6dlPJCGVspFZNf6iD+osP08wMfSpZ3iY0hFJhsd8bHest8O8YdpOymnlndwOzSSwksghXLMS2CDkY5kcvrV5xx2W2nZf1CCYrjnkI2KYYzHD7N+LK149xNbxszJw9IHKCNEbSJ3X+dmKnZttO3UEW3w7xOV3ks7zT83baWLptHcwN+iVQf0nIIYdCPrgdHwkoFlaBeXy1ufUxqT9ya4D3uL93+Th5D+bXGVz7Gru9K0+KKW9FZZeNwX0N2YXtNDdnryI9eO7qxvpzjOKyHCfhG7hDu3EGSadu1naOCNw8h/zuNRA5AYAHQCtrmhj+1WXF1noLfiELLmeC8j1AOJYzazBOpVo8qSN9ite/CeHubiW8uV0ysTb20eQ4htEY4OR/M575/wCkdCKu80lNNNU/COEG1kk7JsWkvfS2I2t5ye+Yz/Kjc9PQ8sZNW+d/SmDS6+n71NR5zQI5RnUO0ba0LDJR9JXUvgcMR61C+L9m/YBTNobs+0yI9eNtWATiugmgmrxuXRXcE4WtrGUyZJJCXuJnHfmlP6mP06AcgK5OE8Le0lZIcGxl1OIicG1mzuIx/gfOdP8AKQcc6vBQDXX+Nyu7d0wZpE7j1p5/akeY9a4jj4zw5LuF7eTOmQAal2ZGBBVlPRlYAjyqkFhxQjsTd24jA0/MrC/zhXx0k6A3+b1rUMaeaurqrsuGfK23y9phXRW7N5ssGmbJ1yY3bLHJxVafhGMQJGjNHdxO08d+o/j/ADTbvI3+JWOcodiMDoK0inamDTabXha6wiCYq0uhe0MYIQvgaioO4Gc869XPLzqWai55edRKreKx3WpXtHjwq4e3uEOhznOoSL3kbG2NxtXCb3iR7q2luh6SNcl089KpqrRGgGu/HzTjxkvGXP2Yyht5rKExxkz8Q4hMxebSRHHIwy8hz+lEQbDqcbb7ek3wyIEjeyOi7tVOl3/80GOqRJz/ADajk5/lbBGMVpwaM1u/Vc/x7935THlbyM6KzoY3ZVZkYhjGxGSpKnBwdsivRztTJpOdq8177VLNct+rNDIqDLtHIqjllijAD3xXVmkpqCq+GLZobS3ikUq8cESMp5q4Rcg+Rq1z+/7UA7n86Us7+/7UDLedRlUMrKwyrKVYeKkYI9qZP7UMdjQYzg/FX4dF8lc29zO1vlbaW2iMyXMGSYxqXZXAwpBxjAq1+GLCVWmvLpQl1eMrGIHULeBBpjizyLAZJI6mr9DsKFq2rp5oooqBYoYVHT9T7mmU8+nU0RLFJRS0+fuaQXz9zQSApY39KFTz9zS079eXiaCRoIpMvn7mhl8/c0EqQpafP3NAXz9zQA/2oI3HrQF8+nU0iu459epoiTCnioMvn7mno8/c0UKNqYpKvn7mgL5+5oHjek45edLR5+5pOvLnz8TRKmRQBSK/U+9CrkZyfeimBRjekE8/c0aPP3NAyKTjagp5+5pMu3X3NBPFJRS0efuaFXz96AA5/nSmedRC+fuaCu/X3P0oJN/tQw2PlSKefuaTLt19zQSUbD0oAqKrsOfuaAvn70E8UVHT5+9FFHWspb/CjTIZr6Wb52RmYvBO6JbZY6UiVSFCqNO5Byc1q81R/ENjdXRWCGVbW1dD8xKgLXTHONCdFBHNs5/ewlQ+D7+SaKVJnEzW1xLbLcAY+YRNOHPTPe0nG2V61oBWJPD5ODLC0E7zWayxwTWs6p3UlfTrjZVBDBmzjrk1PiHGZ+GvJA6vc/NMW4XI3f8A+0yMB8s7dArNqUn+XIztgWzb0ua11zIyI7qhkZFZ1jXAaRgMhATtk8vWs3wji1180trdiAtLbtclLcOHtMMAEk1EhgdWAw6g9KuOFWT29uIi5mnCszzSlnDztuWO+Qmo/pHIVneB/Cl1A7yyXzdrOwknMMMZMjA8jJICdI3AUBQM7AUmJMbI0yKCf9a4OKX7w6dFvLchtWowmMaMYxkMy5znp4VIjvAqq+ITcGAx2a5nmYRLJkKLdWzqlJJz3QDjAJyRXrwviTT6tVvPbFMDFyqJrzndCrMDjG/mKsE5+tPVPyz/AMIXry8PglJM0xg/nbeR11KNTnxKjJNV39ncUqLdJcMHnW9lMhUlk7Ro42fST01E10/2bN/3bbf8rj/5JKhwS27V+JRlnQPeSJriYpImYo+8rDkRWr+Wv21TVCKZX1aGV9DFH0kNokABKtjk2CDg+IrE8Q4/dW2nhszKLy5ZYrW/yixvEzaTK6Z7sqjbSNmbGM9ddwnhqWkSwRAhU5s27u5/U7nqxO5NZsxMdi5pDNNTVDMvEizaGslTU2jWs7voz3dWCBnGM0Rfb5qLDl51WcMjvFcm6e3dNJAW3jdGDZGDqZjtjO2K5/jFLl7ZkslLSyMqNhkjdYmyGKM5ADY2znbJI3FM7MUPxHePxCK6MLMlhZQz6pEOn526WNjoDDcxIQM/4jtuOWt4J/4aDG38CH/6LWP4hc3MFjNbf3abe3S2mj1pcwyiNDGwLsoOpsZLHG53q9+GeNiRIoGguIXEKaWliIikVUG6yLlcHGRkg7itWdNfhoRRXFxjV2D6TKrhcqbVVe42YHCKwKknlv0J5Vjra9uEKtJ/e5VWDFWtbdlYA5KkIC2Dy2rMmpI3xrLce1Xt0vDgzLbJF8zfFCUaVWbTHBqByoJDM2OYxvWmjk1qr4ZdQDBXBVxkZwyncHfkazfAzm/4lnOoGyVc9I+xYjH01aqQc7wtwd1aNi/C5pFieFyWNhI5wrxsd+yLHBU8iQRzrXjNZr+0Js2LxgZeZ4IUHUu8qYA+uxPpWl/3O/rSlIZo6+/7UZoz+/7VEM0NyoJpMdqATlQKFOw8qAaB70UZoorxuUZkZY3EbsrBJCofs3I2bSdmwelUB4lxCHuy2aXeNhLaTrErDOxMcu6nlyJFaWhqsoyrW11xCSI3US2dpBItwYe0Wee4kTdFYp3VQNuRuTj2d/wf+8biQXSultbIIrbcoz3DqHe5Q/5BpVTuMhvrWpoFX7jVZwL5hVaO70s8T6EuEIAuo8Aq5QfofoR4gkbVZZ39KkKiefpUSmxoJoamagQNEbDI8/3pikKKoPgiwe1s4oJhokTtAy5BwDK7Ly/ykUcLgNo17PPhI3uJLoMCG/gCJMsQOX6W257Vfig8x61dNZbhXB1u45bm/jDvxAL/AAXz/wBntFP8GMb5VwDrJGDqboRXbwiK5tXFs5N1aFSYbpmHbxaeUcwONfgrgedXjU6aaip2pg0LyoFRBneoueXnUqTdPOgrviSJns7lEBZnt50VVGWZ2jYBQBzJJAxXTwtCkESsNLLFGrKdiGCKCCPOuo0CrqkDRkUxS61EBNZjjME1tc/P28bXKSRC3u7eMjte4xaOVAca2GWUrnl9tQaTcqsqsrDFNxG4imnhe0tLRjNFDPpE9xc4wjugzoVASQM5JPtqlNOktLQgfz0p5/f9qQ6/nSmefv8AtUQE0mO1M0NQJDtTU0LyoFA80UUUVHFNh+ZqOD4/amwPj9qIeKAKMHx+1RAPj9qCQHn70sb+njQAfH7UsHPPp4URIjz96CPP3pEHx+1BB8ftRRjz96YHn70sHx+1AB8ftQAHn060Ebj160AHx+1Ig5G/j0oiTDz96NPn70mB8ftTwfH7UUlG3X3oA/M0lBxz+1MA+P2oDG/X3occvPxowc8/tScHbfr4URIigD8zSIPj9qAD4/aimB+ZpY3/AKmgA+P2owfH7UDI8/c1Fxt196ZB8ftScHHP7UDx+ZNCj8yaeD4/aoqD4/agYH5k0Y39+p+lAB8ftRg+Pj0ogI/Mmmw2/rUSD4/amwOOf2oBRt/U0wPzNRUHHP7UwD4/ainp/M06WD4/aigXWmTRkUmageaSn6U80A0CBozvy6UA0tW/pQSJ+lBNItQWoGD9KAfpSDUBhQMH9qRO428aA37Uidx60DY/Snn6UmanqoEp25UA/ShW2oDUDzvyqLHlt1p5pOeXnQSJ+lFBNANAgafpQpFGd6AJ+lJztyoLUOdqFP0pKfpUs0lNAZ+lGf3/AGoBpZ39/wBqAY/ShuR2pk0mO1AIdhtTB+lJTsKAaB5op5ooF1oalimRQOgUsUAUAKXX0pgUsb+lAzTNRYUyKBikKAKAKBD/AGpnmPWgCkRuPWgZp1FhUsUCXlQKSjamBQHWk3Tzp43qLry86FTNApEUAUDFFICjFAzSblQRScbUEqS0YpbAZPIbk+FAncKCzHAFc/z6eJ9jVfd3HaNt+kch+9VVxJKH0qMqcYbTkDO25z0P2rn91t6TWlN+nifY0Nfp4n2NZOV3G6hiwd+j6SuBg45eQ/0q04O2ZW1/owDlxpU9w9G2BzjlV2i4W/THM+xoF+nifY15GNGCZwMKNtSKS2rfUw6hd6ikMOCdX6S3M4LBT0GOq/ertO3R8+nifY0qqaKz99Ta0WKbUUV1bGKBRRQIUY39KKKAamRRRQAFAFFFAqZ5+9FFAHlRiiioEo2oA/PSiigeKiw5edFFUqRFAoopFAFLFFFSgIpNyoooiQFct/8Ao9RRRUvoU1OiiuDFBpUUUQUjRRVodFFFFf/Z"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title. A function can also be plotted here with function-plot library.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div id="chat-box" class="lesson-column border overflow-y-auto">
+                    <div class="chat-message p-2">
+                        <i class="bi bi-bookmark-plus bookmark-icon"></i>
+                        <h4>Let's get started.</h4>
+                        <h6>What is the first step you would take to solve this problem? I can put a bunch of text here, as much as I want, and the chat box fits it all in nicely.
+                        </h6>
+                    </div>
+                    <div class="chat-message p-2">
+                        <i class="bi bi-bookmark-plus bookmark-icon"></i>
+                        <h6>I can also add a second chat box for more information to split my explanation into chunks if I wanted, and both chunks will be displayed to the user with one click. The user can scroll to get more information.
+                        </h6>
+                    </div>
+                    <div class="p-3 chat-message right">
+                        <h4>You picked A. Graph the function.</h4>
+                    </div>
+                    <div class="p-3 chat-message">
+                        <i class="bi bi-bookmark-plus bookmark-icon"></i>
+                        <h6>Once a user clicks a option, new text appears. The user can scroll up and down to read more. Here's how the user would pick an option:</h6>
+                    </div>
+                    <div class="p-3 chat-message right">
+                        <h2>Choose an option.</h2>
+                        <ul>
+                            <li style="color: blue; text-decoration: underline;">A. Do something</li>
+                            <li style="color: blue; text-decoration: underline;">B. Do something else</li>
+                            <li style="color: blue; text-decoration: underline;">C. Do something else</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 chat-message">
+                        <i class="bi bi-bookmark-plus bookmark-icon"></i>
+                        <h6>More text.</h6>
+                    </div>
+                    <div class="p-3 chat-message">
+                        <i class="bi bi-bookmark-plus bookmark-icon"></i>
+                        <h6>More text.</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <canvas id="drawing-canvas" height="140">Not supported.</canvas>
+            </div>
+            <br>
+            <div class="canvas-editor">
+                <button type="button" class="btn btn-success col-sm-3"><i class="bi bi-trash"></i> Clear</button>
+                <button type="button" class="btn btn-success col-sm-3"><i class="bi bi-arrow-counterclockwise"></i> Undo</button>
+                <button type="button" class="btn btn-success col-sm-3"><i class="bi bi-paint-bucket"></i> Change Color</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+</html>
