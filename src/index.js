@@ -5,160 +5,14 @@ import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
 import Helmet from "react-helmet";
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
+
 import "animate.css";
 import "./index.css";
-/*
-import useSound from 'use-sound';
-import trumpetSound from './assets/sounds/trumpets.mp3';
-import crystalLoopSound from './assets/sounds/crystalloop.wav';
-import crystalGlassSound from './assets/sounds/crystalglass.wav';
-*/
-
-function Dialogue({ dialogueItem }) {
-    const advanceDialogue = (option = null) => {
-        runner.advance(option);
-        setDialogueText(generateDialogue(runner.currentResult));
-        setImageName(getImageName(runner.currentResult));
-    };
-
-    const generateDialogue = (currPage) => {
-        if (!currPage.text) {
-            return null;
-        }
-        const speaker = currPage.markup[0].properties.name;
-        if (currPage.markup.length > 1) {
-            const tagDetails = currPage.markup[1];
-            const slicedString = currPage.text.slice(
-                tagDetails.position,
-                tagDetails.position + tagDetails.length
-            );
-            return reactStringReplace(
-                speaker + ": " + currPage.text,
-                slicedString,
-                (match, i) => (
-                    <span key={i} className={tagDetails.name}>
-                        {match}
-                    </span>
-                )
-            );
-        } else {
-            return (
-                <span>
-                    {speaker}: {currPage.text}
-                </span>
-            );
-        }
-    };
-
-    const getImageName = (currPage) => {
-        if (!currPage.text) {
-            return null;
-        }
-        if (currPage.markup.length > 1) {
-            const tagDetails = currPage.markup[1];
-            if (tagDetails.name.startsWith("img", 0)) {
-                return tagDetails.name;
-            }
-        }
-        return null;
-    };
-
-    const handleKeyDown = event => {
-        if (event.key === 'r' && dialogueText) {
-            advanceDialogue();
-        }
-    };
-
-    const [runner] = useState(new YarnBound({ dialogue: dialogueItem }));
-    const [dialogueText, setDialogueText] = useState(
-        generateDialogue(runner.currentResult)
-    );
-    const [imageName, setImageName] = useState(getImageName(runner.currentResult));
-    return (
-        <div tabIndex={0} onKeyDown={handleKeyDown}>
-            <ImageDisplayer img_string={imageName} />
-            {dialogueText && <DialogueText
-                currPage={runner.currentResult}
-                dialogueText={dialogueText}
-                advanceDialogue={advanceDialogue}
-            />}
-            {!dialogueText && <DialogueList
-                currPage={runner.currentResult}
-                advanceDialogue={advanceDialogue}
-            />}
-            <History
-                historyItems={runner.history}
-                generateDialogue={generateDialogue}
-            />
-        </div>
-    );
-}
-
-function DialogueText({ dialogueText, advanceDialogue }) {
-    return (
-        <>
-            <h3>{dialogueText}</h3>
-            <button onClick={() => advanceDialogue()}>Next</button>
-        </>
-    );
-}
-
-function DialogueList({ currPage, advanceDialogue }) {
-    const listItems = currPage.options.map((dialogueChoice, index) => (
-        <li
-            key={index}
-            onClick={() => advanceDialogue(index)}
-            className="link-button"
-        >
-            {dialogueChoice.text}
-        </li>
-    ));
-    return (
-        <>
-            <h2>Choose an option.</h2>
-            <ul>{listItems}</ul>
-        </>
-    );
-}
-
-function History({ historyItems, generateDialogue }) {
-    const [historyVisibility, setHistoryVisibility] = useState(false);
-    const [buttonText, setButtonText] = useState("Show History");
-    const handleHistoryVisibility = () => {
-        setHistoryVisibility(!historyVisibility);
-        setButtonText(historyVisibility ? "Show History" : "Hide History");
-    };
-
-    const listItems = historyItems.map((historyItem, index) => (
-        <li key={index}>
-            {historyItem.text
-                ? generateDialogue(historyItem)
-                : "You: " + historyItem.options[historyItem.selected].text}
-        </li>
-    ));
-
-    return (
-        <>
-            <HistoryVisibilityButton
-                handleHistoryVisibility={handleHistoryVisibility}
-                buttonText={buttonText}
-            />
-            {historyVisibility && <ul>{listItems}</ul>}
-        </>
-    );
-}
-
-function HistoryVisibilityButton({ buttonText, handleHistoryVisibility }) {
-    return <button onClick={handleHistoryVisibility}>{buttonText}</button>;
-}
-
-function ImageDisplayer({ img_string }) {
-    if (!img_string) {
-        return null;
-    }
-    console.log(img_string);
-    return <img src={require('./assets/images/' + img_string)} style={{ width: "40%", height: "40%" }} alt={img_string}/>
-}
 
 function DrawingCanvas() {
     const [drawing, setDrawing] = useState(false);
@@ -198,21 +52,145 @@ function DrawingCanvas() {
     }, []);
 
     return (
-        <>
-            <Helmet>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous" />
-                <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
-                <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
-                    onload="renderMathInElement(document.body);"></script>   
-            </Helmet>
-
-            <h1>Canvas</h1>
-            <canvas className="canvas"
+        <div className="col-sm-12">
+            <canvas id="drawing-canvas"
                 onMouseDown={startDraw}
                 onMouseUp={stopDraw}
                 onMouseMove={draw}
                 ref={canvasRef}
+                height="140"
             />
+        </div>
+    );
+}
+
+function ImageCard({ imgSrc, captionName }) {
+    return (
+        <div className="col-sm-6">
+            <div className="card lesson-column">
+                <img className="card-img-top" src={imgSrc} alt="Placeholder" />
+                <div className="card-body">
+                    <p className="card-text">{captionName}</p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function CanvasEditor() {
+    return (
+        <>
+            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-trash"></i> Clear</button>
+            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-arrow-counterclockwise"></i> Undo</button>
+            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-paint-bucket"></i> Change Color</button>
+        </>
+    );
+}
+
+function NavBar() {
+    return (
+        <nav className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">Lesson</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Home</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/lessons">Lessons</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/bookmarks">Bookmarks</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    );
+}
+
+function ChatBox({ chatMessages }) {
+    return (
+        <div className="col-sm-6">
+            <div id="chat-box" className="lesson-column border overflow-y-auto">{chatMessages}</div>
+        </div>
+    );
+}
+
+function Dialogue({ dialogueItem }) {
+
+    const generateDialogueText = (currPage, index) => {
+        return (
+            <div key={index} className="chat-message p-2">
+                <i className="bi bi-bookmark-plus bookmark-icon"></i>
+                <h6>{currPage.text}</h6>
+            </div>
+        );
+    };
+
+    const generateDialogueOptions = (currPage, index) => {
+        const listItems = currPage.options.map((dialogueChoice, index) => (
+            <li key={index} onClick={() => selectChoice(index)}>
+                {dialogueChoice.text}
+            </li>
+        ));
+        return (
+            <div key={index} className="p-3 chat-message right">
+                <h2>Choose an option.</h2>
+                <ul>
+                    {listItems}
+                </ul>
+            </div>
+        );
+    }
+
+    const generateDialogueOptionSelected = (currPage, index) => {
+        console.log(currPage.options[currPage.selected].text);
+        return (
+            <div key={index} className="p-3 chat-message right">
+                <h2>{currPage.options[currPage.selected].text}</h2>
+            </div>
+        );
+    }
+
+    const fastForward = (runner) => {
+        while (!runner.currentResult.options) {
+            runner.advance();
+        }
+    }
+
+    const selectChoice = (idx) => {
+        runner.advance(idx);
+        fastForward(runner);
+        setRunnerHistory(generateDialogueElements(runner.history));
+    }
+
+    const initializeHistory = (runner) => {
+        fastForward(runner);
+        return generateDialogueElements(runner.history);
+    }
+
+    const generateDialogueElements = (historyItems) => {
+        const listItems = historyItems.map((historyItem, index) => (
+            historyItem.options ? generateDialogueOptionSelected(historyItem, index) : generateDialogueText(historyItem, index)
+        ));
+        listItems.push(generateDialogueOptions(runner.currentResult));
+        return listItems;
+    }
+
+    const runner = new YarnBound({ dialogue: dialogueItem });
+    const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
+    const imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/440px-Image_created_with_a_mobile_phone.png";
+
+    return (
+        <>
+            <ImageCard imgSrc={imgSrc} captionName="test" />
+            <ChatBox chatMessages={runnerHistory} />
         </>
     );
 }
@@ -220,14 +198,16 @@ function DrawingCanvas() {
 function App() {
     return (
         <>
-            <h1>Antoine stands on a balcony and throws a ball to his dog, who is at ground level.</h1>
-            <h2>The ball's height (in meters above the ground) x seconds after Antoine threw it, is modeled by:</h2>
-            <h2>h(x)=-2x^2+4x+15</h2>
-            <h1>At what time does the ball reach the ground?</h1>
-            <Dialogue dialogueItem={dialogue1} />
-            <DrawingCanvas />
+            <NavBar />
+            <div className="container p-3">
+                <div className="row">
+                    <Dialogue dialogueItem={dialogue1} />
+                    <DrawingCanvas />
+                    <CanvasEditor />
+                </div>
+            </div>
         </>
-    )
+    );
 }
 
 const container = document.getElementById("root");
