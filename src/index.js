@@ -4,12 +4,12 @@ import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
-import Helmet from "react-helmet";
+
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-
+import "@fontsource/work-sans";
 
 import "animate.css";
 import "./index.css";
@@ -150,7 +150,6 @@ function Dialogue({ dialogueItem }) {
     }
 
     const generateDialogueOptionSelected = (currPage, index) => {
-        console.log(currPage.options[currPage.selected].text);
         return (
             <div key={index} className="p-3 chat-message right">
                 <h2>{currPage.options[currPage.selected].text}</h2>
@@ -160,11 +159,15 @@ function Dialogue({ dialogueItem }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
+            if (runner.currentResult.text === "End of example.") {
+                return;
+            }
             runner.advance();
         }
     }
 
     const selectChoice = (idx) => {
+        console.log(runner.currentResult);
         runner.advance(idx);
         fastForward(runner);
         setRunnerHistory(generateDialogueElements(runner.history));
@@ -179,7 +182,11 @@ function Dialogue({ dialogueItem }) {
         const listItems = historyItems.map((historyItem, index) => (
             historyItem.options ? generateDialogueOptionSelected(historyItem, index) : generateDialogueText(historyItem, index)
         ));
-        listItems.push(generateDialogueOptions(runner.currentResult));
+        if (runner.currentResult.text !== "End of example.") {
+            listItems.push(generateDialogueOptions(runner.currentResult));
+        } else {
+            listItems.push(generateDialogueText(runner.currentResult))
+        }
         return listItems;
     }
 

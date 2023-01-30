@@ -234,6 +234,7 @@ Tutor: I'll go ahead and post what I did on the screen here. Make sure you got i
 Tutor: By the way: we just graphed a function. Do you know what a function is?
 -> Yes
     Tutor: Great! Just making sure.
+    <<set $learned_about_functions to "true">>
 -> No
     Tutor: Ooh, this is a great time to tell you!
     <<jump FunctionsOverview>>
