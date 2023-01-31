@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "@fontsource/work-sans";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "animate.css";
 import "./index.css";
 
@@ -36,6 +36,11 @@ function DrawingCanvas() {
         ctxRef.current.stroke();
     };
 
+    const handleClearCanvas = () => {
+        const canvas = canvasRef.current;
+        ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     useEffect(() => {
         const canvas = canvasRef.current;
         // For supporting computers with higher screen densities, we double the screen density
@@ -52,15 +57,18 @@ function DrawingCanvas() {
     }, []);
 
     return (
-        <div className="col-sm-12">
-            <canvas id="drawing-canvas"
-                onMouseDown={startDraw}
-                onMouseUp={stopDraw}
-                onMouseMove={draw}
-                ref={canvasRef}
-                height="140"
-            />
-        </div>
+        <>
+            <div className="col-sm-12">
+                <canvas id="drawing-canvas"
+                    onMouseDown={startDraw}
+                    onMouseUp={stopDraw}
+                    onMouseMove={draw}
+                    ref={canvasRef}
+                    height="140"
+                />
+            </div>
+            <CanvasEditor handleClearCanvas={handleClearCanvas} />
+        </>
     );
 }
 
@@ -77,12 +85,10 @@ function ImageCard({ imgSrc, captionName }) {
     );
 }
 
-function CanvasEditor() {
+function CanvasEditor({ handleClearCanvas }) {
     return (
         <>
-            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-trash"></i> Clear</button>
-            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-arrow-counterclockwise"></i> Undo</button>
-            <button type="button" className="btn btn-success col-sm-3"><i className="bi bi-paint-bucket"></i> Change Color</button>
+            <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
         </>
     );
 }
@@ -210,7 +216,6 @@ function App() {
                 <div className="row">
                     <Dialogue dialogueItem={dialogue1} />
                     <DrawingCanvas />
-                    <CanvasEditor />
                 </div>
             </div>
         </>
