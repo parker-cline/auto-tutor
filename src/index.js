@@ -41,6 +41,10 @@ function DrawingCanvas() {
         ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    const handleChangeColor  = (colorName) => {
+        ctxRef.current.strokeStyle = colorName;
+    }
+
     useEffect(() => {
         const canvas = canvasRef.current;
         // For supporting computers with higher screen densities, we double the screen density
@@ -67,7 +71,7 @@ function DrawingCanvas() {
                     height="140"
                 />
             </div>
-            <CanvasEditor handleClearCanvas={handleClearCanvas} />
+            <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor}/>
         </>
     );
 }
@@ -85,10 +89,12 @@ function ImageCard({ imgSrc, captionName }) {
     );
 }
 
-function CanvasEditor({ handleClearCanvas }) {
+function CanvasEditor({ handleClearCanvas, handleChangeColor }) {
     return (
         <>
             <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
+            <button type="button" className="btn btn-success col-sm-3" onClick={() => handleChangeColor('red')}><i className="bi bi-trash"></i>Change to Red</button>
+            <button type="button" className="btn btn-success col-sm-3" onClick={() => handleChangeColor('blue')}><i className="bi bi-trash"></i>Change to Blue</button>
         </>
     );
 }
