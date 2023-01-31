@@ -288,7 +288,7 @@ Tutor: What are we looking for?
         Tutor: Right! The function itself models the height of the ball -- how high or low it is.
     -> The number of seconds.
         Tutor: Well, x is the number of seconds. We might want something different here.
-    Narrator: This is the end of the example.
+    Narrator: End of example.
 
 ===
 title: CoordinatePlaneOverview
@@ -312,7 +312,7 @@ Tutor: Order matters. "We all walk before we climb." This may help you remember!
 Tutor: Okay, let's try another problem. Go ahead and draw this picture on the whiteboard. Click "Next" when you're done. [img_graphtodraw.png][/img_graphtodraw.png]
 Tutor: All set? Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that, and click "Next" when you're done or if you're stumped.
 Tutor: Awesome! Now, choose the picture that best matches your answer.
-Narrator: This is the end of the example. 
+Narrator: End of example.
 ===
 `
 
