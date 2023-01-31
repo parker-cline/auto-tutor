@@ -93,8 +93,8 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor }) {
     return (
         <>
             <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
-            <button type="button" className="btn btn-success col-sm-3" onClick={() => handleChangeColor('red')}><i className="bi bi-trash"></i>Change to Red</button>
-            <button type="button" className="btn btn-success col-sm-3" onClick={() => handleChangeColor('blue')}><i className="bi bi-trash"></i>Change to Blue</button>
+            <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
+            <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
         </>
     );
 }
