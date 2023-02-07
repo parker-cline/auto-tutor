@@ -1,9 +1,13 @@
-import React, { useRef, useEffect } from "react";
-import { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+import { addStyles, EditableMathField } from 'react18-mathquill'
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,6 +17,8 @@ import "@fontsource/work-sans";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "animate.css";
 import "./index.css";
+
+addStyles()
 
 function DrawingCanvas() {
     const [drawing, setDrawing] = useState(false);
@@ -214,7 +220,7 @@ function Dialogue({ dialogueItem }) {
     );
 }
 
-function App() {
+function Lesson() {
     return (
         <>
             <NavBar />
@@ -228,10 +234,39 @@ function App() {
     );
 }
 
+function Customize() {
+    const [latex, setLatex] = useState('\\frac{1}{\\sqrt{2}}\\cdot 2')
+
+    return (
+        <div>
+            <NavBar />
+            <h1>Enter your equation</h1>
+            <EditableMathField
+                latex={latex}
+                onChange={(mathField) => {
+                    setLatex(mathField.latex())
+                }}
+            />
+        </div>
+    )
+}
+
+const router = createBrowserRouter([
+    {
+        path: "/lesson",
+        element: <Lesson />,
+    },
+    {
+        path: "/",
+        element: <Customize />,
+    },
+]);
+
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <React.StrictMode>
-        <App />
+        <RouterProvider router={router} />
     </React.StrictMode>
 );
