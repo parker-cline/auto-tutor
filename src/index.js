@@ -239,9 +239,10 @@ function Lesson() {
 
 
 function Customize() {
-    const [a, setA] = useState(1);
-    const [b, setB] = useState(1);
-    const [c, setC] = useState(1);
+    const [a, setA] = useState('1');
+    const [b, setB] = useState('1');
+    const [c, setC] = useState('1');
+    const [functionType, setFunctionType] = useState('quadratic');
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
 
@@ -251,7 +252,7 @@ function Customize() {
             functionPlot({
                 target: '#graph',
                 data: [{
-                    fn: `${a}x^2 + ${b}x + ${c}`,
+                    fn: functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`,
                 }],
                 grid: true,
                 yAxis: { domain: xBounds },
@@ -260,21 +261,38 @@ function Customize() {
         } catch {
             document.getElementById('error').innerHTML = 'Invalid function.';
         }
-    }, [a, b, c, xBounds, yBounds])
+    }, [a, b, c, xBounds, yBounds, functionType])
+
+
+    const isValidEquation = (type, coeffs) => {
+        if (type === 'quadratic') {
+            return isValidQuadraticEquation(coeffs[0], coeffs[1], coeffs[2])
+        }
+        if (type === 'linear') {
+            return isValidLinearEquation(coeffs[0], coeffs[1])
+        }
+        return false
+    }
 
     const isValidLinearEquation = (a, b) => {
-        return (b > 0 && -1*b/a > 0)
+        return (b > 0 && -1 * b / a > 0)
     }
 
     const isValidQuadraticEquation = (a, b, c) => {
-        const first_root = (-1*b + Math.sqrt(b*b - 4*a*c))/(2*a)
-        const second_root = (-1*b - Math.sqrt(b*b - 4*a*c))/(2*a)
+        const first_root = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+        const second_root = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         return (first_root > 0 || second_root > 0) && (c > 0)
     }
 
     return (
         <>
             <NavBar />
+
+            <input type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
+            <label htmlFor="quadratic">Quadratic</label>
+            <input type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
+            <label htmlFor="linear">Linear</label>
+
             <h1>Enter the equation you want to plot.</h1>
             <StaticMathField>{'y ='}</StaticMathField>
             <EditableMathField
@@ -283,26 +301,29 @@ function Customize() {
                     setA(mathField.latex())
                 }}
             />
-            <StaticMathField>{'x^2 +'}</StaticMathField>
+            <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
             <EditableMathField
                 latex={b}
                 onChange={(mathField) => {
                     setB(mathField.latex())
                 }}
             />
-            <StaticMathField>{'x +'}</StaticMathField>
-            <EditableMathField
-                latex={c}
-                onChange={(mathField) => {
-                    setC(mathField.latex())
-                }}
-            />
+            {functionType === 'quadratic' &&
+                <>
+                    <StaticMathField>{'x +'}</StaticMathField>
+                    <EditableMathField
+                        latex={c}
+                        onChange={(mathField) => {
+                            setC(mathField.latex())
+                        }}
+                    />
+                </>}
             <div id="graph"></div>
             <div id="error"></div>
-            <button className="btn btn-primary" disabled={!isValidQuadraticEquation(a, b, c)}>Start Lesson</button>
+            <button className="btn btn-primary" disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
         </>
     )
-    
+
 }
 
 const router = createBrowserRouter([
