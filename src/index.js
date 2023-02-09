@@ -3,12 +3,15 @@ import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
+import { parseTex, evaluateTex } from 'tex-math-parser'
+import { compile, evaluate } from 'mathjs';
+
 import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import { addStyles, EditableMathField } from 'react18-mathquill'
-
+import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill';
+import functionPlot from 'function-plot';
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
@@ -47,7 +50,7 @@ function DrawingCanvas() {
         ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    const handleChangeColor  = (colorName) => {
+    const handleChangeColor = (colorName) => {
         ctxRef.current.strokeStyle = colorName;
     }
 
@@ -77,7 +80,7 @@ function DrawingCanvas() {
                     height="140"
                 />
             </div>
-            <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor}/>
+            <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor} />
         </>
     );
 }
@@ -234,21 +237,72 @@ function Lesson() {
     );
 }
 
+
 function Customize() {
-    const [latex, setLatex] = useState('\\frac{1}{\\sqrt{2}}\\cdot 2')
+    const [a, setA] = useState(1);
+    const [b, setB] = useState(1);
+    const [c, setC] = useState(1);
+    const [xBounds, setXBounds] = useState([-5, 5])
+    const [yBounds, setYBounds] = useState([-5, 5])
+
+    useEffect(() => {
+        document.getElementById('error').innerHTML = '';
+        try {
+            functionPlot({
+                target: '#graph',
+                data: [{
+                    fn: `${a}x^2 + ${b}x + ${c}`,
+                }],
+                grid: true,
+                yAxis: { domain: xBounds },
+                xAxis: { domain: yBounds },
+            });
+        } catch {
+            document.getElementById('error').innerHTML = 'Invalid function.';
+        }
+    }, [a, b, c, xBounds, yBounds])
+
+    const isValidLinearEquation = (a, b) => {
+        return (b > 0 && -1*b/a > 0)
+    }
+
+    const isValidQuadraticEquation = (a, b, c) => {
+        const first_root = (-1*b + Math.sqrt(b*b - 4*a*c))/(2*a)
+        const second_root = (-1*b - Math.sqrt(b*b - 4*a*c))/(2*a)
+        return (first_root > 0 || second_root > 0) && (c > 0)
+    }
 
     return (
-        <div>
+        <>
             <NavBar />
-            <h1>Enter your equation</h1>
+            <h1>Enter the equation you want to plot.</h1>
+            <StaticMathField>{'y ='}</StaticMathField>
             <EditableMathField
-                latex={latex}
+                latex={a}
                 onChange={(mathField) => {
-                    setLatex(mathField.latex())
+                    setA(mathField.latex())
                 }}
             />
-        </div>
+            <StaticMathField>{'x^2 +'}</StaticMathField>
+            <EditableMathField
+                latex={b}
+                onChange={(mathField) => {
+                    setB(mathField.latex())
+                }}
+            />
+            <StaticMathField>{'x +'}</StaticMathField>
+            <EditableMathField
+                latex={c}
+                onChange={(mathField) => {
+                    setC(mathField.latex())
+                }}
+            />
+            <div id="graph"></div>
+            <div id="error"></div>
+            <button className="btn btn-primary" disabled={!isValidQuadraticEquation(a, b, c)}>Start Lesson</button>
+        </>
     )
+    
 }
 
 const router = createBrowserRouter([
