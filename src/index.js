@@ -123,7 +123,7 @@ function NavBar() {
                             <a className="nav-link" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/lessons">Lessons</a>
+                            <a className="nav-link active" aria-current="page" href="/lesson">Lesson</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/bookmarks">Bookmarks</a>
