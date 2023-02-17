@@ -132,7 +132,7 @@ title: Drawing
 ---
 <<set $drawing to "true">>
 Tutor: Someone on a balcony is throwing a ball to a dog on the ground floor... You have a whiteboard. Why don't you draw out a rough sketch of what that looks like on the whiteboard? Click Next when you're done.
-Tutor: I'll draw out a picture I made. Looks similar? [img_highquality.png][/img_highquality.png]
+Tutor: I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img_drawpicture.png]
 -> Yes!
     Tutor: Great!
 -> My ball followed a different path. Mine was like a straight line.
