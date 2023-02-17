@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import reactStringReplace from "react-string-replace";
-import { parseTex, evaluateTex } from 'tex-math-parser'
-import { compile, evaluate } from 'mathjs';
 
 import {
     createBrowserRouter,
@@ -143,6 +141,14 @@ function ChatBox({ chatMessages }) {
     );
 }
 
+function ImageDisplayer({ img_string }) {
+    if (!img_string) {
+        return null;
+    }
+    return <img src={require('./assets/images/' + img_string)} style={{ width: "40%", height: "40%" }} alt={img_string} />
+}
+
+
 function Dialogue({ dialogueItem }) {
 
     const generateDialogueText = (currPage, index) => {
@@ -188,7 +194,6 @@ function Dialogue({ dialogueItem }) {
     }
 
     const selectChoice = (idx) => {
-        console.log(runner.currentResult);
         runner.advance(idx);
         fastForward(runner);
         setRunnerHistory(generateDialogueElements(runner.history));
@@ -198,6 +203,8 @@ function Dialogue({ dialogueItem }) {
         fastForward(runner);
         return generateDialogueElements(runner.history);
     }
+
+    
 
     const generateDialogueElements = (historyItems) => {
         const listItems = historyItems.map((historyItem, index) => (
