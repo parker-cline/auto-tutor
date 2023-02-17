@@ -237,7 +237,6 @@ function Lesson() {
     );
 }
 
-
 function Customize() {
     const [a, setA] = useState('1');
     const [b, setB] = useState('1');
@@ -287,43 +286,41 @@ function Customize() {
     return (
         <>
             <NavBar />
-
-            <h1>Choose the type of equation</h1>
-
-            <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
-            <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
-            <br></br>
-            <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
-            <label htmlFor="linear" className="btn btn-success">Linear</label>
-
-            <h1>Enter the equation you want to plot</h1>
-            <StaticMathField>{'y ='}</StaticMathField>
-            <EditableMathField
-                latex={a}
-                onChange={(mathField) => {
-                    setA(mathField.latex())
-                }}
-            />
-            <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
-            <EditableMathField
-                latex={b}
-                onChange={(mathField) => {
-                    setB(mathField.latex())
-                }}
-            />
-            {functionType === 'quadratic' &&
-                <>
-                    <StaticMathField>{'x +'}</StaticMathField>
-                    <EditableMathField
-                        latex={c}
-                        onChange={(mathField) => {
-                            setC(mathField.latex())
-                        }}
-                    />
-                </>}
-            <div id="graph"></div>
-            <div id="error"></div>
-            <button className="btn btn-primary" disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
+            <div className="function-selector-screen">
+                <h1>Choose the type of equation</h1>
+                <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
+                <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
+                <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
+                <label htmlFor="linear" className="btn btn-success">Linear</label>
+                <h1>Enter the equation you want to plot</h1>
+                <StaticMathField>{'y ='}</StaticMathField>
+                <EditableMathField
+                    latex={a}
+                    onChange={(mathField) => {
+                        setA(mathField.latex())
+                    }}
+                />
+                <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
+                <EditableMathField
+                    latex={b}
+                    onChange={(mathField) => {
+                        setB(mathField.latex())
+                    }}
+                />
+                {functionType === 'quadratic' &&
+                    <>
+                        <StaticMathField>{'x +'}</StaticMathField>
+                        <EditableMathField
+                            latex={c}
+                            onChange={(mathField) => {
+                                setC(mathField.latex())
+                            }}
+                        />
+                    </>}
+                <div id="graph"></div>
+                <div id="error"></div>
+                <button className="btn btn-primary" disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
+            </div>
         </>
     )
 
