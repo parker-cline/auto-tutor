@@ -145,7 +145,7 @@ function ImageDisplayer({ img_string }) {
     if (!img_string) {
         return null;
     }
-    return <img src={require('./assets/images/' + img_string)} style={{ width: "40%", height: "40%" }} alt={img_string} />
+    return <img src={require('./assets/images/' + img_string)} className="img-fluid" alt={img_string} />
 }
 
 
