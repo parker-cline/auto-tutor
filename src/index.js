@@ -288,12 +288,15 @@ function Customize() {
         <>
             <NavBar />
 
-            <input type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
-            <label htmlFor="quadratic">Quadratic</label>
-            <input type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
-            <label htmlFor="linear">Linear</label>
+            <h1>Choose the type of equation</h1>
 
-            <h1>Enter the equation you want to plot.</h1>
+            <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
+            <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
+            <br></br>
+            <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
+            <label htmlFor="linear" className="btn btn-success">Linear</label>
+
+            <h1>Enter the equation you want to plot</h1>
             <StaticMathField>{'y ='}</StaticMathField>
             <EditableMathField
                 latex={a}
