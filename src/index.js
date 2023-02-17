@@ -96,6 +96,48 @@ function ImageCard({ imgSrc, captionName }) {
     );
 }
 
+function FunctionPlot({ functionString, xBounds, yBounds }) {
+    // react element that uses function-plot javascript library to plot function (which is a string)
+    // start below:
+    const [windowSize, setWindowSize] = useState([
+        window.innerWidth,
+        window.innerHeight,
+    ]);
+
+    useEffect(() => {
+        const handleWindowResize = () => {
+            setWindowSize([window.innerWidth, window.innerHeight]);
+        };
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    });
+
+    useEffect(() => {
+        functionPlot({
+            target: '#plot',
+            data: [{
+                fn: functionString
+            }],
+            grid: true,
+            width: windowSize[0] / 2.5,
+            height: windowSize[1],
+            xAxis: { domain: xBounds },
+            yAxis: { domain: yBounds },
+        });
+    }, [functionString, xBounds, yBounds, windowSize]);
+
+    return (
+        <div className="col-sm-6">
+            <div id="plot"></div>
+        </div>
+    );
+
+}
+
 function CanvasEditor({ handleClearCanvas, handleChangeColor }) {
     return (
         <>
@@ -232,11 +274,11 @@ function Dialogue({ dialogueItem }) {
 
     const runner = new YarnBound({ dialogue: dialogueItem });
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
-    const imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/440px-Image_created_with_a_mobile_phone.png";
-
+    //const imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/440px-Image_created_with_a_mobile_phone.png";
+    //<ImageCard imgSrc={imgSrc} captionName="test" />
     return (
         <>
-            <ImageCard imgSrc={imgSrc} captionName="test" />
+            <FunctionPlot functionString={"x^2 + 2x + 1"} xBounds={[-5, 5]} yBounds={[-5, 5]} />
             <ChatBox chatMessages={runnerHistory} />
         </>
     );
@@ -273,8 +315,8 @@ function Customize() {
                     fn: functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`,
                 }],
                 grid: true,
-                yAxis: { domain: xBounds },
-                xAxis: { domain: yBounds },
+                xAxis: { domain: xBounds },
+                yAxis: { domain: yBounds },
             });
         } catch {
             document.getElementById('error').innerHTML = 'Invalid function.';
