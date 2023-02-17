@@ -151,10 +151,33 @@ function ImageDisplayer({ img_string }) {
 
 function Dialogue({ dialogueItem }) {
 
+    const fastForward = (runner) => {
+        while (!runner.currentResult.options) {
+            if (runner.currentResult.text === "End of example.") {
+                return;
+            }
+            runner.advance();
+        }
+    }
+
+    const getImageName = (currPage) => {
+        if (!currPage.text) {
+            return null;
+        }
+        if (currPage.markup.length > 1) {
+            const tagDetails = currPage.markup[1];
+            if (tagDetails.name.startsWith("img", 0)) {
+                return tagDetails.name;
+            }
+        }
+        return null;
+    };
+
     const generateDialogueText = (currPage, index) => {
         return (
             <div key={index} className="chat-message p-2">
                 <i className="bi bi-bookmark-plus bookmark-icon"></i>
+                <ImageDisplayer img_string={getImageName(currPage)} />
                 <h6>{currPage.text}</h6>
             </div>
         );
@@ -184,13 +207,16 @@ function Dialogue({ dialogueItem }) {
         );
     }
 
-    const fastForward = (runner) => {
-        while (!runner.currentResult.options) {
-            if (runner.currentResult.text === "End of example.") {
-                return;
-            }
-            runner.advance();
+    const generateDialogueElements = (historyItems) => {
+        const listItems = historyItems.map((historyItem, index) => (
+            historyItem.options ? generateDialogueOptionSelected(historyItem, index) : generateDialogueText(historyItem, index)
+        ));
+        if (runner.currentResult.text !== "End of example.") {
+            listItems.push(generateDialogueOptions(runner.currentResult));
+        } else {
+            listItems.push(generateDialogueText(runner.currentResult))
         }
+        return listItems;
     }
 
     const selectChoice = (idx) => {
@@ -202,20 +228,6 @@ function Dialogue({ dialogueItem }) {
     const initializeHistory = (runner) => {
         fastForward(runner);
         return generateDialogueElements(runner.history);
-    }
-
-    
-
-    const generateDialogueElements = (historyItems) => {
-        const listItems = historyItems.map((historyItem, index) => (
-            historyItem.options ? generateDialogueOptionSelected(historyItem, index) : generateDialogueText(historyItem, index)
-        ));
-        if (runner.currentResult.text !== "End of example.") {
-            listItems.push(generateDialogueOptions(runner.currentResult));
-        } else {
-            listItems.push(generateDialogueText(runner.currentResult))
-        }
-        return listItems;
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
@@ -330,7 +342,6 @@ function Customize() {
             </div>
         </>
     )
-
 }
 
 const router = createBrowserRouter([
