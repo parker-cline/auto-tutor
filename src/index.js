@@ -7,6 +7,8 @@ import reactStringReplace from "react-string-replace";
 import {
     createBrowserRouter,
     RouterProvider,
+    useNavigate,
+    useLocation
 } from "react-router-dom";
 import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill';
 import functionPlot from 'function-plot';
@@ -97,8 +99,6 @@ function ImageCard({ imgSrc, captionName }) {
 }
 
 function FunctionPlot({ functionString, xBounds, yBounds }) {
-    // react element that uses function-plot javascript library to plot function (which is a string)
-    // start below:
     const [windowSize, setWindowSize] = useState([
         window.innerWidth,
         window.innerHeight,
@@ -191,7 +191,7 @@ function ImageDisplayer({ img_string }) {
 }
 
 
-function Dialogue({ dialogueItem }) {
+function Dialogue({ dialogueItem, functionString, xBounds, yBounds }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
@@ -278,19 +278,21 @@ function Dialogue({ dialogueItem }) {
     //<ImageCard imgSrc={imgSrc} captionName="test" />
     return (
         <>
-            <FunctionPlot functionString={"x^2 + 2x + 1"} xBounds={[-5, 5]} yBounds={[-5, 5]} />
+            <FunctionPlot functionString={functionString} xBounds={xBounds} yBounds={yBounds} />
             <ChatBox chatMessages={runnerHistory} />
         </>
     );
 }
 
 function Lesson() {
+    const lessonInfo = useLocation().state;
+    console.log(lessonInfo);
     return (
         <>
             <NavBar />
             <div className="container p-3">
                 <div className="row">
-                    <Dialogue dialogueItem={dialogue1} />
+                    <Dialogue dialogueItem={dialogue1} functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
                     <DrawingCanvas />
                 </div>
             </div>
@@ -344,6 +346,13 @@ function Customize() {
         return (first_root > 0 || second_root > 0) && (c > 0)
     }
 
+    const navigate = useNavigate();
+    const handleStartLesson = () => {
+        const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
+        console.log(functionString);
+        navigate('/lesson', { state: { functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
+    }
+
     return (
         <>
             <NavBar />
@@ -380,7 +389,7 @@ function Customize() {
                     </>}
                 <div id="graph"></div>
                 <div id="error"></div>
-                <button className="btn btn-primary" disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
+                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
             </div>
         </>
     )
