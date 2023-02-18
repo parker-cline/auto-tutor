@@ -124,7 +124,7 @@ function FunctionPlot({ functionString, xBounds, yBounds }) {
             }],
             grid: true,
             width: windowSize[0] / 2.5,
-            height: windowSize[1],
+            height: windowSize[1] / 1.25,
             xAxis: { domain: xBounds },
             yAxis: { domain: yBounds },
         });
@@ -273,6 +273,9 @@ function Dialogue({ dialogueItem, functionString, xBounds, yBounds }) {
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
+    runner.runner.variables.set("linearity", "true");
+    console.log(runner.runner.variables);
+
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     //const imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/440px-Image_created_with_a_mobile_phone.png";
     //<ImageCard imgSrc={imgSrc} captionName="test" />
@@ -286,7 +289,6 @@ function Dialogue({ dialogueItem, functionString, xBounds, yBounds }) {
 
 function Lesson() {
     const lessonInfo = useLocation().state;
-    console.log(lessonInfo);
     return (
         <>
             <NavBar />
@@ -344,6 +346,11 @@ function Customize() {
         const first_root = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const second_root = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         return (first_root > 0 || second_root > 0) && (c > 0)
+    }
+
+    const calculateYBounds = (type, coeffs) => {
+        const constant = (type === 'quadratic' ? coeffs[2] : coeffs[1]);
+        setYBounds([-constant, constant])
     }
 
     const navigate = useNavigate();
