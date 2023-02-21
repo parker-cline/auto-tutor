@@ -54,20 +54,26 @@ function NavBar() {
 /* Drawing Canvas */
 
 function DrawingCanvas() {
+    //https://stackoverflow.com/questions/64611155/canvas-freehand-drawing-undo-and-redo-functionality-in-reactjs
     const [drawing, setDrawing] = useState(false);
     const canvasRef = useRef(null);
     const ctxRef = useRef(null);
+    const [undoSteps, setUndoSteps] = useState({});
+    const [undo, setUndo] = useState(0);
 
     // keep track of stroke locations
-    const [strokeData, setStrokeData] = useState([]);
-    const [strokeLocations, setStrokeLocations] = useState([]);
 
     const startDraw = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
-        setStrokeData([...strokeData, 'beginStroke'])
-        setStrokeLocations([...strokeLocations, strokeData.length - 1])
         ctxRef.current.beginPath();
         ctxRef.current.moveTo(offsetX, offsetY);
+        const temp = {
+            ...undoSteps,
+            [undo + 1]: []
+        };
+        temp[undo + 1].push({ offsetX, offsetY });
+        setUndoSteps(temp);
+        setUndo(undo + 1);
         setDrawing(true);
     };
 
@@ -81,31 +87,44 @@ function DrawingCanvas() {
         const { offsetX, offsetY } = nativeEvent;
         ctxRef.current.lineTo(offsetX, offsetY);
         ctxRef.current.stroke();
-        setStrokeData([...strokeData, { offsetX, offsetY }])
+        const temp = {
+            ...undoSteps
+        };
+        temp[undo].push({ offsetX, offsetY });
+        setUndoSteps(temp);
     };
 
     const handleUndoStroke = () => {
-        const canvas = canvasRef.current;
-        ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
-        let i = 0;
-        while (i < strokeLocations[strokeLocations.length - 1]) {
-            if (strokeData[i] === 'beginStroke') {
-                ctxRef.current.closePath();
-                ctxRef.current.beginPath();
-                ctxRef.current.moveTo(strokeData[i + 1].offsetX, strokeData[i + 1].offsetY);
-            } else {
-                ctxRef.current.lineTo(strokeData[i].offsetX, strokeData[i].offsetY);
-                ctxRef.current.stroke();
-            }
-            i++;
+        if (undo > 0) {
+            const data = undoSteps[undo];
+            const currentColor = ctxRef.current.strokeStyle;
+            ctxRef.current.strokeStyle = "white";
+            ctxRef.current.beginPath();
+            ctxRef.current.moveTo(data[0].offsetX, data[0].offsetY);
+            data.forEach((item, index) => {
+                if (index !== 0) {
+                    ctxRef.current.lineTo(item.offsetX, item.offsetY);
+                    ctxRef.current.stroke();
+                }
+            });
+            ctxRef.current.closePath();
+            ctxRef.current.strokeStyle = currentColor;
+
+            const temp = {
+                ...undoSteps,
+                [undo]: []
+            };
+
+            setUndo(undo - 1);
+            setUndoSteps(temp);
         }
-        ctxRef.current.closePath();
-        setStrokeLocations(strokeLocations.slice(0, strokeLocations.length - 1));
-    }
+    };
+
     const handleClearCanvas = () => {
         const canvas = canvasRef.current;
+        setUndoSteps({});
+        setUndo(0);
         ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
-        setStrokeData([]);
     }
 
     const handleChangeColor = (colorName) => {
