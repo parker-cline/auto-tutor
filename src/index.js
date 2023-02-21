@@ -208,25 +208,26 @@ function Customize() {
         }
     }, [a, b, c, xBounds, yBounds, functionType])
 
-
-    const isValidEquation = (type, coeffs) => {
-        if (type === 'quadratic') {
-            return isValidQuadraticEquation(coeffs[0], coeffs[1], coeffs[2])
+    const xInterceptCheck = () => {
+        if (functionType === 'linear') {
+            return (-1 * b / a > 0)
+        } else {
+            const first_root = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+            const second_root = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+            return (first_root > 0 || second_root > 0)
         }
-        if (type === 'linear') {
-            return isValidLinearEquation(coeffs[0], coeffs[1])
-        }
-        return false
     }
 
-    const isValidLinearEquation = (a, b) => {
-        return (b > 0 && -1 * b / a > 0)
+    const heightCheck = () => {
+        if (functionType === 'linear') {
+            return (b > 0)
+        } else {
+            return (c > 0)
+        }
     }
 
-    const isValidQuadraticEquation = (a, b, c) => {
-        const first_root = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-        const second_root = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-        return (first_root > 0 || second_root > 0) && (c > 0)
+    const isValidEquation = () => {
+        return (xInterceptCheck() && heightCheck());
     }
 
     const navigate = useNavigate();
@@ -245,7 +246,7 @@ function Customize() {
                 <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
                 <label htmlFor="linear" className="btn btn-success">Linear</label>
                 <h1>Enter the equation you want to plot</h1>
-                <StaticMathField>{'y ='}</StaticMathField>
+                <StaticMathField>{'f(x) ='}</StaticMathField>
                 <EditableMathField
                     latex={a}
                     onChange={(mathField) => {
@@ -271,7 +272,16 @@ function Customize() {
                     </>}
                 <div id="graph"></div>
                 <div id="error"></div>
-                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidEquation(functionType, [a, b, c])}>Start Lesson</button>
+                <h3>Checklist</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <StaticMathField>f(0) > 0</StaticMathField> {heightCheck(a, b, c) && <span className="badge bg-success">✓</span>}
+                    </li>
+                    <li class="list-group-item">
+                        There is some x-intercept with an x-value greater than 0 {xInterceptCheck(a, b, c) && <span className="badge bg-success">✓</span>}
+                    </li>
+                </ul>
+                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidEquation()}>Start Lesson</button>
             </div>
         </>
     )
