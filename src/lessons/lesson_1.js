@@ -4,12 +4,13 @@ title: Start
 <<set $learned_about_functions to "false">>
 <<set $graphing to "false">>
 Tutor: Let's get started then. What do you think the first step would be to solve this problem? 
-Tutor: Take a few seconds to think, then click Next when you're done.
-Tutor: Awesome! Now, choose the answer choice that best matches what you thought of.
+Tutor: Select a response.
+<<if $linearity is "true">>
+Tutor: You have a linear function.
+<<else>>
+Tutor: You have a quadratic function.
+<<endif>>
 -> I think we should draw a picture.
-    <<if $linearity is "false">>
-    Tutor: Works!
-    <<endif>>
     Tutor: Ah, interesting idea! Why would we draw a picture here?
     -> Words are scary. Pictures can be more helpful.
     -> Drawing a picture can help us see what we're looking for.

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
 import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
-import reactStringReplace from "react-string-replace";
+//import reactStringReplace from "react-string-replace";
 
 import {
     createBrowserRouter,
@@ -191,7 +191,7 @@ function ImageDisplayer({ img_string }) {
 }
 
 
-function Dialogue({ dialogueItem, functionString, xBounds, yBounds }) {
+function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
@@ -268,13 +268,12 @@ function Dialogue({ dialogueItem, functionString, xBounds, yBounds }) {
     }
 
     const initializeHistory = (runner) => {
+        runner.runner.variables.set("linearity", functionType === 'linear' ? "true" : "false");
         fastForward(runner);
         return generateDialogueElements(runner.history);
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
-    runner.runner.variables.set("linearity", "true");
-    console.log(runner.runner.variables);
 
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     //const imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/440px-Image_created_with_a_mobile_phone.png";
@@ -294,7 +293,7 @@ function Lesson() {
             <NavBar />
             <div className="container p-3">
                 <div className="row">
-                    <Dialogue dialogueItem={dialogue1} functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
+                    <Dialogue dialogueItem={dialogue1} functionType={lessonInfo.functionType} functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
                     <DrawingCanvas />
                 </div>
             </div>
@@ -356,8 +355,8 @@ function Customize() {
     const navigate = useNavigate();
     const handleStartLesson = () => {
         const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
-        console.log(functionString);
-        navigate('/lesson', { state: { functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
+        console.log('function type is', functionType);
+        navigate('/lesson', { state: { functionType: functionType, functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
     }
 
     return (
