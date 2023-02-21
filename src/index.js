@@ -58,8 +58,14 @@ function DrawingCanvas() {
     const canvasRef = useRef(null);
     const ctxRef = useRef(null);
 
+    // keep track of stroke locations
+    const [strokeData, setStrokeData] = useState([]);
+    const [strokeLocations, setStrokeLocations] = useState([]);
+
     const startDraw = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent;
+        setStrokeData([...strokeData, 'beginStroke'])
+        setStrokeLocations([...strokeLocations, strokeData.length - 1])
         ctxRef.current.beginPath();
         ctxRef.current.moveTo(offsetX, offsetY);
         setDrawing(true);
@@ -75,11 +81,31 @@ function DrawingCanvas() {
         const { offsetX, offsetY } = nativeEvent;
         ctxRef.current.lineTo(offsetX, offsetY);
         ctxRef.current.stroke();
+        setStrokeData([...strokeData, { offsetX, offsetY }])
     };
 
+    const handleUndoStroke = () => {
+        const canvas = canvasRef.current;
+        ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
+        let i = 0;
+        while (i < strokeLocations[strokeLocations.length - 1]) {
+            if (strokeData[i] === 'beginStroke') {
+                ctxRef.current.closePath();
+                ctxRef.current.beginPath();
+                ctxRef.current.moveTo(strokeData[i + 1].offsetX, strokeData[i + 1].offsetY);
+            } else {
+                ctxRef.current.lineTo(strokeData[i].offsetX, strokeData[i].offsetY);
+                ctxRef.current.stroke();
+            }
+            i++;
+        }
+        ctxRef.current.closePath();
+        setStrokeLocations(strokeLocations.slice(0, strokeLocations.length - 1));
+    }
     const handleClearCanvas = () => {
         const canvas = canvasRef.current;
         ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
+        setStrokeData([]);
     }
 
     const handleChangeColor = (colorName) => {
@@ -112,18 +138,19 @@ function DrawingCanvas() {
                     height="140"
                 />
             </div>
-            <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor} />
+            <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor} handleUndoStroke={handleUndoStroke} />
         </>
     );
 }
 
-function CanvasEditor({ handleClearCanvas, handleChangeColor }) {
+function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }) {
     return (
         <>
             <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
             <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
             <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
             <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('white')}>Eraser</button>
+            <button type="button" className="btn btn-primary col-sm-3" onClick={handleUndoStroke}>Undo</button>
         </>
     );
 }
