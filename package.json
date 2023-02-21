@@ -24,7 +24,7 @@
     "react18-mathquill": "^1.0.2",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4",
-    "yarn-bound": "^0.3.0"
+    "yarn-bound": "^0.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
