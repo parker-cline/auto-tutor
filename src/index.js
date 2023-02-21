@@ -71,7 +71,7 @@ function DrawingCanvas() {
             ...undoSteps,
             [undo + 1]: []
         };
-        temp[undo + 1].push({ offsetX, offsetY });
+        temp[undo + 1].push(ctxRef.current.strokeStyle, { offsetX, offsetY });
         setUndoSteps(temp);
         setUndo(undo + 1);
         setDrawing(true);
@@ -96,23 +96,27 @@ function DrawingCanvas() {
 
     const handleUndoStroke = () => {
         if (undo > 0) {
+            const currentColor = ctxRef.current.strokeStyle;
+
             // clear canvas
             const canvas = canvasRef.current;
             ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
             // redraw canvas
             for (let i = 1; i < undo; i++) {
-                console.log(undoSteps);
                 const temp = undoSteps[i];
+                ctxRef.current.strokeStyle = temp[0];
                 ctxRef.current.beginPath();
-                ctxRef.current.moveTo(temp[0].offsetX, temp[0].offsetY);
+                ctxRef.current.moveTo(temp[1].offsetX, temp[1].offsetY);
                 temp.forEach((item, index) => {
-                    if (index !== 0) {
+                    if (index !== 0 && index !== 1) {
                         ctxRef.current.lineTo(item.offsetX, item.offsetY);
                         ctxRef.current.stroke();
                     }
                 });
                 ctxRef.current.closePath();
             }
+
+            ctxRef.current.strokeStyle = currentColor;
 
             const temp = {
                 ...undoSteps,
