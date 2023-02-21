@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
-import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
+import { dialogue as dialogue1 } from "./lessons/test_example.js";
 //import reactStringReplace from "react-string-replace";
 
 import {
@@ -28,7 +28,7 @@ function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">Lesson</a>
+                <a className="navbar-brand" href="/">AutoTutor</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -36,13 +36,7 @@ function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/lesson">Lesson</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/bookmarks">Bookmarks</a>
+                            <a className="nav-link active" aria-current="page" href="/">Lesson</a>
                         </li>
                     </ul>
                 </div>
@@ -175,8 +169,7 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
             <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
             <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
             <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
-            <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('white')}>Eraser</button>
-            <button type="button" className="btn btn-primary col-sm-3" onClick={handleUndoStroke}>Undo</button>
+            <button type="button" className="btn btn-secondary col-sm-3" onClick={handleUndoStroke}><i className="bi-arrow-counterclockwise"></i> Undo</button>
         </>
     );
 }
