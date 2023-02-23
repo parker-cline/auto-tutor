@@ -287,9 +287,7 @@ Tutor: Now that we know what functions are, let's see how they are used in word 
 
 title: Graphing
 ---
-Tutor: Go ahead and graph the equation on your graphing calculator or Desmos! Click Next when you're done.
-Tutor: (Note for Prof. Stein: we'll assume the student knows how to do it for now.)
-Tutor: I'll go ahead and post what I did on the screen here. Make sure you got it just like this. All good? [img_functiongraph.png][/img_functiongraph.png]
+Tutor: I just graphed the function in the left half of the screen. If you'd like, go ahead and graph the equation on your graphing calculator or Desmos! 
 <<if $learned_about_functions is "false">> 
 Tutor: By the way: we just graphed a function. Do you know what a function is?
 -> Yes
@@ -304,7 +302,8 @@ Tutor: What are we looking for?
 -> When h(x) = 0
     Tutor: Exactly! At "0 meters of height," the ball hits the ground.
     Tutor: So let's look at the picture again.... 
-    Tutor: We have two points when h(x) is 0. They are located here. Why is h(x) 0 here? [img_twopoints.png][/img_twopoints.png]
+    Tutor: We have two points when h(x) is 0. Find the two points where the function intersects the x-axis. 
+    Tutor: Why is h(x) 0 here?
     -> It's the second number.
         Narrator: End of example.
     -> Shouldn't it be the first number?
@@ -321,8 +320,7 @@ Tutor: What are we looking for?
         -> No
             <<jump CoordinatePlaneOverview>>
 -> When x = 0
-    Tutor: Hmm... let's think about what x and h(x) mean.
-    Tutor: What does x represent here? Read the problem again to be sure.
+    Tutor: And what does x represent here? Read the problem again to be sure.
     -> The horizontal distance from the starting point.
         Tutor: X is the horizontal distance in many problems, but read the problem again...
         Tutor: X of what after Antoine threw the ball?
@@ -348,6 +346,12 @@ Tutor: What are we looking for?
         Tutor: Right! The function itself models the height of the ball -- how high or low it is.
     -> The number of seconds.
         Tutor: Well, x is the number of seconds. We might want something different here.
+        Tutor: Read the problem again. This function h(x) "models" something...
+        -> The height of the ball!
+            Tutor: Right! The output "h(x)" tells us how high or low the ball is. Think of this as our "y-value" output.
+    Tutor: And we need to find when the ball hits the ground. So we need to find when...
+    -> h(x) = 0
+        Tutor: Exactly! At "0 meters of height," the ball hits the ground.
     Narrator: End of example.
 
 ===
@@ -369,9 +373,48 @@ Tutor: The first number "x" is how much we move left and right. If "x" is positi
 Tutor: Let's go! Remember, we want to plot the point (2, 5). I'll start in the middle and move two blocks right.
 Tutor: Now the second number "y" is 5. If "y" is positive, we move up. If "y" is negative, we move down. Here, 5 is positive, so we move up.
 Tutor: Order matters. "We all walk before we climb." This may help you remember! [img_xyclimbing.png][/img_xyclimbing.png]
-Tutor: Okay, let's try another problem. Go ahead and draw this picture on the whiteboard. Click "Next" when you're done. [img_graphtodraw.png][/img_graphtodraw.png]
-Tutor: All set? Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that, and click "Next" when you're done or if you're stumped.
-Tutor: Awesome! Now, choose the picture that best matches your answer.
+Tutor: Okay, let's try another problem. Go ahead and draw this picture on the whiteboard down below. [img_graphtodraw.png][/img_graphtodraw.png]
+Tutor: Then, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that.
+-> I think I got it!
+    Tutor: Great! Did you get something like this picture? [img_graphed.png][/img_graphed.png]
+    -> Yes
+        Tutor: Awesome job! You plotted two units left, then one unit up. You distinguished between x and y-values!
+    -> No
+        Tutor: Hmm... let's go through it together.
+        Tutor: Start at the center.... [img_origin.png]
+        Tutor: Remember, the first number is how much we move left and right. If it's positive, we move right. If it's negative, we move left. Are we moving left or right here?
+        -> Left
+            Tutor: Right! We are moving left. We have the - sign, so we move left.
+        -> Right
+            Tutor: Hmm... almost! 
+            Tutor: Well, if x was positive 2... 2, with that + sign... then we would move right. But here, x does not have a + sign. So it is actually negative, and we move left.
+        Tutor: Now, the second number is how much we move up and down. If it's positive, we move up. If it's negative, we move down. For (-2, 1), are we moving up or down here?
+        -> Up
+            Tutor: Right! We are moving up. We have the + sign, so we move up.
+        -> Down
+            Tutor: Hmm... almost!
+            Tutor: Well, if y was negative 1... -1, with that - sign... then we would move down. But here, y does not have a - sign. So it is actually positive, and we move up.
+        Tutor: This means we go two units left, and one unit up. Like this! [img_graphed.png][/img_graphed.png]
+        Tutor: We go two units left first. Then, we go one unit up.
+-> I'm stumped.
+    Tutor: Let's go through it together.
+    Tutor: Start at the center.... [img_origin.png]
+    Tutor: Remember, the first number is how much we move left and right. If it's positive, we move right. If it's negative, we move left. Are we moving left or right here?
+    -> Left
+        Tutor: Right! We are moving left. We have the - sign, so we move left.
+    -> Right
+        Tutor: Hmm... almost! 
+        Tutor: Well, if x was positive 2... 2, with that + sign... then we would move right. But here, x does not have a + sign. So it is actually negative, and we move left.
+    Tutor: Now, the second number is how much we move up and down. If it's positive, we move up. If it's negative, we move down. For (-2, 1), are we moving up or down here?
+    -> Up
+        Tutor: Right! We are moving up. We have the + sign, so we move up.
+    -> Down
+        Tutor: Hmm... almost!
+        Tutor: Well, if y was negative 1... -1, with that - sign... then we would move down. But here, y does not have a - sign. So it is actually positive, and we move up.
+    Tutor: This means we go two units left, and one unit up. Like this! [img_coordinate_plane_graphing.png][/img_coordinate_plane_graphing.png]
+    Tutor: We go two units left, first. Then, we go one unit up.
+<<set $learned_about_graphing = true>>
+
 Narrator: End of example.
 ===
 `
