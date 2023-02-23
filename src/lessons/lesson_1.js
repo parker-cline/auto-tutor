@@ -5,11 +5,6 @@ title: Start
 <<set $graphing to "false">>
 Tutor: Let's get started then. What do you think the first step would be to solve this problem? 
 Tutor: Select a response.
-<<if $linearity is "true">>
-Tutor: You have a linear function.
-<<else>>
-Tutor: You have a quadratic function.
-<<endif>>
 -> I think we should draw a picture.
     Tutor: Ah, interesting idea! Why would we draw a picture here?
     -> Words are scary. Pictures can be more helpful.
@@ -43,11 +38,11 @@ Tutor: You have a quadratic function.
             Tutor: No worries! 
     -> I don't really know the quadratic formula, actually.
         Tutor: No worries!
-    -> We want to find the roots.
+    -> We want to find the roots
         Tutor: Finding the roots may be useful to solve this problem! This approach definitely works! Do you know what roots are?
         -> Yes
         -> No
-            Tutor: Roots are the x-values where the y-value of our function equals 0. (Keep this in mind... it may be helpful later.) Did what I just say make sense?
+            Tutor: Roots are the x-values where the y-value of our function equals 0. They're also called x-intercepts. (Keep this in mind... it may be helpful later.) Did what I just say make sense?
             -> Yes
             -> No
                 Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
@@ -60,8 +55,65 @@ Tutor: You have a quadratic function.
         Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
         <<jump Graphing>>
     -> We need to find the y-intercepts
-        Tutor: You're on the right track here. But the quadratic formula can actually help us find the x-intercepts! Where the graph meets the x-axis.
-        Tutor: Here's a picture that may help you to better understand it. (Note to Prof. Stein: there likely will be a practice problem associated with this section.) [img_intercepts.png][/img_intercepts.png]
+        Tutor: You're on the right track here! We do need to find an intercept.
+        Tutor: Here's a picture that may help you to better understand it. [img_intercepts.png][/img_intercepts.png]
+        Tutor: The x-intercepts are where the graph intersects the horizontal (left/right) x-axis. Think of like the function "hitting the ground level!" Doesn't the x-axis look like a floor to you?
+        Tutor: The y-intercepts are where the graph intersects the vertical (up/down) y-axis. The function hasn't moved left or right. It's just in the middle.
+        Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after Antoine threw the ball.
+        Tutor: In this case, are we looking for an x-intercept or a y-intercept?
+        -> x-intercept
+            Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
+        -> y-intercept
+            Tutor: Hmm... that is when x is 0, and the ball crosses the y-axis. But remember, x is time, and we're looking for the height of the ball.
+            Tutor: When does the ball hit the ground? 
+            -> When the height is 0 meters. That makes sense!
+                Tutor: Right! And the height is 0 at our x-intercept... when the ball hits the ground!
+            -> When the height is 0 meters. But... why?
+                Tutor: 0 meters is where the "ground" is. If we said 1 meters, that would be 1 meter above the ground. It may start at 5 meters above the ground, but reaching 0 meters above the ground is the same thing as hitting the ground! The ball will hit the ground when it reaches 0 meters.
+            Tutor: Let's try one more practice problem to make sure you're all good. 
+            Tutor: Consider the point (5, 0)--is that an x-intercept or a y-intercept?
+            -> x-intercept
+                Tutor: And why is this an x-intercept?
+                -> Because the y-value is 0, it must intersect the x-axis.
+                    Tutor: Exactly! 
+                -> Because the x-value is 0, it must intersect the x-axis.
+                    Tutor: Oh, I forgot to mention one thing!
+                    Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
+                    Tutor: So in (5, 0), y is actually 0, and x is 5.
+                    Tutor: To make sure you understand: consider the point (2, 5). What is the x-value?
+                    -> 2
+                        Tutor: Right! And the y-value is 5.
+                    -> 5
+                        Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
+                        -> 5
+                            Tutor: Exactly! The second number. You're learning a lot! 
+                    Tutor: Now let's think about x and y-intercepts. 
+                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+            -> y-intercept
+                Tutor: And why is this a y-intercept?
+                -> Because the y-value is 0, it must intersect the y-axis.
+                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+                -> Because the x-value is 0, it must intersect the y-axis.
+                    Tutor: Oh, I forgot to mention one thing!
+                    Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
+                    Tutor: So in (5, 0), y is actually 0, and x is 5.
+                    Tutor: To make sure you understand that: consider the point (2, 5). What is the x-value?
+                    -> 2
+                        Tutor: Right! And the y-value is 5.
+                    -> 5
+                        Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
+                        -> 5
+                            Tutor: Exactly! The second number. You're learning a lot! 
+                    Tutor: Now let's think about x and y-intercepts. 
+                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. I'll share a link to Khan Academy that explains it in more detail. 
+
     Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
     Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a clue on what to do.
     <<jump Drawing>>
@@ -69,7 +121,7 @@ Tutor: You have a quadratic function.
 -> I think we should factor.
     Tutor: And why would we factor here?
     -> There's a function we can do it on.
-        Tutor: There is! Why would we use it?
+        Tutor: There is! Why would we use factoring?
         -> We can use it to find the roots / x-intercepts
             Tutor: Finding the roots may be useful to solve this problem. Do you know what roots are?
             -> Yes
@@ -82,11 +134,12 @@ Tutor: You have a quadratic function.
                     <<jump FunctionsOverview>>
             Tutor: Awesome! Do you know how to factor?
             -> Yes
-                Tutor: Try it out. Can you factor it? Click Next when you've tried.
-                Tutor: Stumped? You actually cannot factor this equation! That's okay though... you did NOT make a mistake choosing factoring first!
+                Tutor: Try it out. Can you factor it?
+                -> Hmm...
+                    Tutor: You actually can't! That doesn't mean you've made a mistake, though.
             -> No
                 Tutor: That's okay. You'll practice factoring later. But if you tried, you'll see that you can't factor this equation! That doesn't mean you've made a mistake, though.
-            Tutor: But you had the right idea to think of factoring first. Some quadratic equations can be factored... and factoring can take little time compared to using other strategies.
+            Tutor: You had the right idea to think of factoring first. Some quadratic equations *can* be factored... and factoring can take little time compared to using other strategies.
             Tutor: Because we can't factor, we'll need to try a different approach here.
             Tutor: We have a calculator. Maybe we can graph instead?
             <<jump Graphing>>
@@ -105,6 +158,7 @@ Tutor: You have a quadratic function.
         -> Yes
         -> No
         Tutor: It's pretty complicated! Doing everything by hand can take some time. I think there might be a faster way...
+        Tutor: 
         Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
         <<jump Graphing>>
     -> I'm not sure, actually.
@@ -134,6 +188,8 @@ Tutor: Someone on a balcony is throwing a ball to a dog on the ground floor... Y
 Tutor: I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img_drawpicture.png]
 -> Yes!
     Tutor: Great!
+-> My drawing was not as pretty.
+    Tutor: That's okay!
 -> My ball followed a different path. Mine was like a straight line.
     Tutor: Ah, good thinking! We haven't really discussed what path our ball is following yet.
     Tutor: Recall that the function "models the height of the ball." What do x^2 functions look like? Take a moment to think...
@@ -145,7 +201,7 @@ Tutor: I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img
     -> I've never seen x^2 functions before.
         Tutor: "x" functions are linear. They're like a straight line. "x^2" functions are quadratic. They're like a curve. We call them "parabolas."
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-Tutor: On a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this. [img_timedtest.gif][/img_timedtest.gif]
+Tutor: Actually, on a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this. [img_timedtest.png][/img_timedtest.png]
 Tutor: We just drew a picture.... this is a great start! I wonder what we could do next...
 -> Let's try graphing.
     Tutor: Aha! If we graph the function, we can see the exact path the ball is taking.
