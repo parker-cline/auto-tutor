@@ -7,9 +7,6 @@ import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
-import "mafs/core.css";
-import { Mafs, Coordinates, Point, Plot } from "mafs"
-
 import {
     createBrowserRouter,
     RouterProvider,
@@ -189,8 +186,23 @@ function Customize() {
     const [functionType, setFunctionType] = useState('quadratic');
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
-    const [xSpacing, setXSpacing] = useState(1)
-    const [ySpacing, setYSpacing] = useState(1)
+
+    useEffect(() => {
+        document.getElementById('error').innerHTML = '';
+        try {
+            functionPlot({
+                target: '#graph',
+                data: [{
+                    fn: functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`,
+                }],
+                grid: true,
+                xAxis: { domain: xBounds },
+                yAxis: { domain: yBounds },
+            });
+        } catch {
+            document.getElementById('error').innerHTML = 'Invalid function.';
+        }
+    }, [a, b, c, xBounds, yBounds, functionType])
 
     const xInterceptCheck = () => {
         if (functionType === 'linear') {
@@ -214,22 +226,6 @@ function Customize() {
         return (xInterceptCheck() && heightCheck());
     }
 
-    const constructFunction = () => {
-        if (functionType === 'quadratic') {
-            return x => a*x*x + b*x + c;
-        } else {
-            return x => a*x + b;
-        }
-    }
-
-    const getNumber = (numStr) => {
-        const number = parseFloat(numStr);
-        if (isNaN(number)) {
-            return numStr;
-        }
-        return number;
-    }
-
     const navigate = useNavigate();
     const handleStartLesson = () => {
         const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
@@ -250,14 +246,14 @@ function Customize() {
                 <EditableMathField
                     latex={a}
                     onChange={(mathField) => {
-                        setA(getNumber(mathField.latex()))
+                        setA(mathField.latex())
                     }}
                 />
                 <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
                 <EditableMathField
                     latex={b}
                     onChange={(mathField) => {
-                        setB(getNumber(mathField.latex()))
+                        setB(mathField.latex())
                     }}
                 />
                 {functionType === 'quadratic' &&
@@ -266,48 +262,12 @@ function Customize() {
                         <EditableMathField
                             latex={c}
                             onChange={(mathField) => {
-                                setC(getNumber(mathField.latex()))
+                                setC(mathField.latex())
                             }}
                         />
                     </>}
-                <h1>Set the bounds of the graph</h1>
-                <EditableMathField
-
-                    latex={xBounds[0]}
-                    onChange={(mathField) => {
-                        setXBounds([getNumber(mathField.latex()), xBounds[1]])
-                    }}
-                />
-                <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
-                <EditableMathField
-                    latex={xBounds[1]}
-                    onChange={(mathField) => {
-                        setXBounds([xBounds[0], getNumber(mathField.latex())])
-                    }}
-                />
-
-                <br></br>
-                
-                <EditableMathField
-                    latex={yBounds[0]}
-                    onChange={(mathField) => {
-                        setYBounds([getNumber(mathField.latex()), yBounds[1]])
-                    }}
-                />
-                <StaticMathField>{'\u2264 y \u2264'}</StaticMathField>
-                <EditableMathField
-                    latex={yBounds[1]}
-                    onChange={(mathField) => {
-                        setYBounds([yBounds[0], getNumber(mathField.latex())])
-                    }}
-                />
-                <h1>Set the spacing of the graph</h1>
-
-                <h1>Graph</h1>
-                <Mafs zoom={true} preserveAspectRatio={true} viewBox={{ x: xBounds, y: yBounds }}>
-                    <Coordinates.Cartesian xAxis={{ lines: xSpacing }} yAxis={{ lines: ySpacing }} />
-                    <Plot.OfX y={constructFunction()} />
-                </Mafs>
+                <div id="graph"></div>
+                <div id="error"></div>
                 <h3>Checklist</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
