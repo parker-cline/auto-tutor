@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import YarnBound from "yarn-bound";
-import { dialogue as dialogue1 } from "./lessons/test_example.js";
+import { dialogue as dialogue1 } from "./lessons/lesson_1.js";
 //import reactStringReplace from "react-string-replace";
+
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
 
 import {
     createBrowserRouter,
@@ -431,7 +434,6 @@ function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds
     );
 }
 
-
 /* The Lesson Page */
 
 function Lesson() {
@@ -440,6 +442,14 @@ function Lesson() {
         <>
             <NavBar />
             <div className="container p-3">
+                <h2>Antoine stands on a balcony and throws a ball to his dog, who is at ground level.</h2>
+                <h3>The ball's height (in meters above the ground) <InlineMath>x</InlineMath> seconds after Antoine threw it, is modeled by:</h3>
+                <div className="equation">
+                    <BlockMath math={lessonInfo.functionString} />
+                </div>
+                <h2>At what time does the ball reach the ground?</h2>
+
+                <br></br>
                 <div className="row">
                     <Dialogue dialogueItem={dialogue1} functionType={lessonInfo.functionType} functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
                     <DrawingCanvas />

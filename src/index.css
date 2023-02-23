@@ -6,6 +6,9 @@
     margin-bottom: 10px;
 }
 
+body {
+    font-family: 'Work Sans';
+}
 
 .chat-message {
     background-color: lightgray;
@@ -15,7 +18,6 @@
     margin: 10px;
     width: 65%;
     display: inline-block;
-    font-family: 'Work Sans';
     position: relative;
 }
 
@@ -27,7 +29,7 @@
 .lesson-column {
     max-height: 600px;
     min-height: 600px;
-    overflow-y: scroll; /* why do we need this */
+    overflow-y: scroll;
 }
 
 .navbar {
@@ -56,7 +58,10 @@
     border: 1px solid gray;
     margin: 10px;
     padding: 15px;
-    font-family: 'Work Sans';
     width: -moz-fit-content;
     width: fit-content;
+}
+
+.equation {
+    font-size: 200%;
 }
