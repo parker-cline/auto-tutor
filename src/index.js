@@ -51,7 +51,6 @@ function NavBar() {
 /* Drawing Canvas */
 
 function DrawingCanvas() {
-    //https://stackoverflow.com/questions/64611155/canvas-freehand-drawing-undo-and-redo-functionality-in-reactjs
     const [drawing, setDrawing] = useState(false);
     const canvasRef = useRef(null);
     const ctxRef = useRef(null);
@@ -92,6 +91,7 @@ function DrawingCanvas() {
     };
 
     const handleUndoStroke = () => {
+        //https://stackoverflow.com/questions/64611155/canvas-freehand-drawing-undo-and-redo-functionality-in-reactjs
         if (undo > 0) {
             const currentColor = ctxRef.current.strokeStyle;
 
@@ -105,7 +105,7 @@ function DrawingCanvas() {
                 ctxRef.current.beginPath();
                 ctxRef.current.moveTo(temp[1].offsetX, temp[1].offsetY);
                 temp.forEach((item, index) => {
-                    if (index !== 0 && index !== 1) {
+                    if (index !== 1 && index !== 0) {
                         ctxRef.current.lineTo(item.offsetX, item.offsetY);
                         ctxRef.current.stroke();
                     }
@@ -190,33 +190,55 @@ function Customize() {
 
 
 
-    const xInterceptCheck = () => {
+    const getQuadraticXIntercepts = () => {
+        const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+        const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+        return [firstRoot, secondRoot];
+    }
+
+    const getLinearXIntercepts = () => {
+        const xIntercept = -1 * b / a;
+        return [xIntercept];
+    }
+
+
+    const xInterceptBoundsCheck = () => {
         if (functionType === 'linear') {
-            return (-1 * b / a > 0)
+            const xIntercepts = getLinearXIntercepts();
+            return (xIntercepts[0] >= xBounds[0] && xIntercepts[0] <= xBounds[1]);
         } else {
-            const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-            const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-            return (firstRoot > 0 || secondRoot > 0)
+            const xIntercepts = getQuadraticXIntercepts();
+            return (xIntercepts[0] >= xBounds[0] && xIntercepts[0] <= xBounds[1] && xIntercepts[1] >= xBounds[0] && xIntercepts[1] <= xBounds[1]);
         }
     }
 
-    const heightCheck = () => {
+    const yInterceptBoundsCheck = () => {
+        const constantTerm = (functionType === 'quadratic' ? c : b);
+        return (constantTerm >= yBounds[0] && constantTerm <= yBounds[1]);
+    }
+
+    const xInterceptPositiveCheck = () => {
         if (functionType === 'linear') {
-            return (b > 0)
+            return getLinearXIntercepts()[0] > 0;
         } else {
-            return (c > 0)
+            return getQuadraticXIntercepts()[0] > 0 || getQuadraticXIntercepts()[1] > 0;
         }
+    }
+
+
+    const heightCheck = () => {
+        return (functionType === 'linear' ? b > 0 : c > 0);
     }
 
     const allFieldsFilledCheck = () => {
-        if (functionType === 'linear') {
-            return (a !== '' && b !== '' && studentName !== '')
-        } else {
-            return (a !== '' && b !== '' && c !== '' && studentName !== '')
+        if (functionType === 'quadratic' && c === '') {
+            return false;
         }
+        return (a !== '' && b !== '' && studentName !== '' && xBounds[0] !== '' && xBounds[1] !== '' && yBounds[0] !== '' && yBounds[1] !== '');
     }
+
     const isValidSetup = () => {
-        return (xInterceptCheck() && heightCheck() && allFieldsFilledCheck());
+        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && allFieldsFilledCheck());
     }
 
     const navigate = useNavigate();
@@ -259,6 +281,36 @@ function Customize() {
                             }}
                         />
                     </>}
+                <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
+                <EditableMathField
+
+                    latex={xBounds[0]}
+                    onChange={(mathField) => {
+                        setXBounds([mathField.latex(), xBounds[1]])
+                    }}
+                />
+                <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
+                <EditableMathField
+
+                    latex={xBounds[1]}
+                    onChange={(mathField) => {
+                        setXBounds([xBounds[0], mathField.latex()])
+                    }}
+                />
+                <h1>Enter the <StaticMathField>{'y'}</StaticMathField>-bounds</h1>
+                <EditableMathField
+                    latex={yBounds[0]}
+                    onChange={(mathField) => {
+                        setYBounds([mathField.latex(), yBounds[1]])
+                    }}
+                />
+                <StaticMathField>{'\u2264 y \u2264'}</StaticMathField>
+                <EditableMathField
+                    latex={yBounds[1]}
+                    onChange={(mathField) => {
+                        setYBounds([yBounds[0], mathField.latex()])
+                    }}
+                />
                 <h1>Enter the student's name</h1>
                 <input type="text" className="form-control" placeholder="Enter name" onChange={e => setStudentName(e.target.value)}/>
 
@@ -266,10 +318,16 @@ function Customize() {
                 <h3>Checklist</h3>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <StaticMathField>f(0) > 0</StaticMathField> {heightCheck(a, b, c) && <span className="badge bg-success">✓</span>}
+                        <StaticMathField>f(0) > 0</StaticMathField> {heightCheck() && <span className="badge bg-success">✓</span>}
                     </li>
                     <li className="list-group-item">
-                        There is some x-intercept with an x-value greater than 0 {xInterceptCheck(a, b, c) && <span className="badge bg-success">✓</span>}
+                        There is some x-intercept with an x-value greater than 0 {xInterceptPositiveCheck() && <span className="badge bg-success">✓</span>}
+                    </li>
+                    <li className="list-group-item">
+                        The x-intercept(s) are visible within the selected x-bounds {xInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
+                    </li>
+                    <li className="list-group-item">
+                        The y-intercept is visible within the selected y-bounds {yInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
                     </li>
                     <li className="list-group-item">
                         All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
