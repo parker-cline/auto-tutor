@@ -189,10 +189,6 @@ function Customize() {
     const [yBounds, setYBounds] = useState([-5, 5])
     const [studentName, setStudentName] = useState('');
 
-    useEffect(() => {
-        console.log(c);
-    }, [c]);
-
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
@@ -353,7 +349,6 @@ function Customize() {
 /* Function Plotter */
 
 function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
-    console.log(functionString);
     const [windowSize, setWindowSize] = useState([
         window.innerWidth,
         window.innerHeight,
@@ -386,7 +381,6 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
                 yAxis: { domain: yBounds },
             });
         } catch (e) {
-            console.log(e);
         }
     }, [functionString, xBounds, yBounds, windowSize, factor]);
 
