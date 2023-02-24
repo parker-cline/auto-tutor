@@ -186,6 +186,7 @@ function Customize() {
     const [functionType, setFunctionType] = useState('quadratic');
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
+    const [studentName, setStudentName] = useState('');
 
 
 
@@ -214,7 +215,7 @@ function Customize() {
     const navigate = useNavigate();
     const handleStartLesson = () => {
         const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
-        navigate('/lesson', { state: { functionType: functionType, functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
+        navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
     }
 
     return (
@@ -251,6 +252,9 @@ function Customize() {
                             }}
                         />
                     </>}
+                <h1>Enter the student's name</h1>
+                <input type="text" className="form-control" placeholder="Enter name" onChange={e => setStudentName(e.target.value)}/>
+
                 <FunctionPlot functionString={functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`} xBounds={xBounds} yBounds={yBounds} />
                 <h3>Checklist</h3>
                 <ul className="list-group">
@@ -322,7 +326,7 @@ function ImageDisplayer({ imgString }) {
     return <img src={require('./assets/images/' + imgString)} className="img-fluid" alt={imgString} />
 }
 
-function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds }) {
+function Dialogue({ dialogueItem, lessonInfo }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
@@ -399,7 +403,9 @@ function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds
     }
 
     const initializeHistory = (runner) => {
-        runner.runner.variables.set("linearity", functionType === 'linear' ? "true" : "false");
+        runner.runner.variables.set("linearity", lessonInfo.functionType === 'linear' ? "true" : "false");
+        console.log(lessonInfo.studentName);
+        runner.runner.variables.set("studentName", lessonInfo.studentName);
         fastForward(runner);
         return generateDialogueElements(runner.history);
     }
@@ -410,7 +416,7 @@ function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds
     return (
         <>
             <div className="col-sm-6">
-                <FunctionPlot functionString={functionString} xBounds={xBounds} yBounds={yBounds} />
+                <FunctionPlot functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
             </div>
             <div className="col-sm-6">
                 <ChatBox chatMessages={runnerHistory} />
@@ -432,11 +438,11 @@ function Lesson() {
                 <div className="equation">
                     <BlockMath math={lessonInfo.functionString} />
                 </div>
-                <h2>At what time does the ball reach the ground?</h2>
+                <h2>a) At what time does the ball reach the ground?</h2>
 
                 <br></br>
                 <div className="row">
-                    <Dialogue dialogueItem={dialogue1} functionType={lessonInfo.functionType} functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
+                    <Dialogue dialogueItem={dialogue1} lessonInfo={lessonInfo} />
                     <DrawingCanvas />
                 </div>
             </div>

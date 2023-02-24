@@ -1,7 +1,7 @@
 const dialogue = `
 title: Start
 ---
-<<set $learned_about_functions to "false">>
+<<set $learnedFunctions to "false">>
 <<set $graphing to "false">>
 Tutor: Let's get started then. What do you think the first step would be to solve this problem? 
 Tutor: Select a response.
@@ -24,7 +24,7 @@ Tutor: Select a response.
                 -> Yes
                 -> No
                     Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                    <<set $learned_about_functions to "true">>
+                    <<set $learnedFunctions to "true">>
                     <<jump FunctionsOverview>>
             Tutor: One thing though: have you used the quadratic formula before?
             -> Yes
@@ -46,7 +46,7 @@ Tutor: Select a response.
             -> Yes
             -> No
                 Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                <<set $learned_about_functions to "true">>
+                <<set $learnedFunctions to "true">>
                 <<jump FunctionsOverview>>
         Awesome! One thing though: have you used the quadratic formula before?
         -> Yes
@@ -130,7 +130,7 @@ Tutor: Select a response.
                 -> Yes
                 -> No
                     Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                    <<set $learned_about_functions to "true">>
+                    <<set $learnedFunctions to "true">>
                     <<jump FunctionsOverview>>
             Tutor: Awesome! Do you know how to factor?
             -> Yes
@@ -152,7 +152,7 @@ Tutor: Select a response.
             -> Yes
             -> No
                 Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                <<set $learned_about_functions to "true">>
+                <<set $learnedFunctions to "true">>
                 <<jump FunctionsOverview>>
         Awesome! One thing though: have you used the quadratic formula before?
         -> Yes
@@ -288,11 +288,11 @@ Tutor: Now that we know what functions are, let's see how they are used in word 
 title: Graphing
 ---
 Tutor: I just graphed the function in the left half of the screen. If you'd like, go ahead and graph the equation on your graphing calculator or Desmos! 
-<<if $learned_about_functions is "false">> 
+<<if $learnedFunctions is "false">> 
 Tutor: By the way: we just graphed a function. Do you know what a function is?
 -> Yes
     Tutor: Great! Just making sure.
-    <<set $learned_about_functions to "true">>
+    <<set $learnedFunctions to "true">>
 -> No
     Tutor: Ooh, this is a great time to tell you!
     <<jump FunctionsOverview>>
@@ -413,7 +413,7 @@ Tutor: Then, plot (-2, 1) on this "coordinate plane." Take a few seconds to do t
         Tutor: Well, if y was negative 1... -1, with that - sign... then we would move down. But here, y does not have a - sign. So it is actually positive, and we move up.
     Tutor: This means we go two units left, and one unit up. Like this! [img_coordinate_plane_graphing.png][/img_coordinate_plane_graphing.png]
     Tutor: We go two units left, first. Then, we go one unit up.
-<<set $learned_about_graphing = true>>
+<<set $learnedGraphing = true>>
 
 Narrator: End of example.
 ===
