@@ -11,7 +11,8 @@ import {
     createBrowserRouter,
     RouterProvider,
     useNavigate,
-    useLocation
+    useLocation,
+    Link
 } from "react-router-dom";
 import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill';
 import functionPlot from 'function-plot';
@@ -39,7 +40,7 @@ function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/">Lesson</a>
+                            <a className="nav-link active" aria-current="page" href="/setup">Lesson</a>
                         </li>
                     </ul>
                 </div>
@@ -526,6 +527,21 @@ function Lesson() {
     );
 }
 
+
+/* homepage */
+function Homepage() {
+    return (
+        <>
+            <NavBar />
+            <div className="container p-3">
+                <h1>AutoTutor</h1>
+                <p>Something something.</p>
+                <Link to={'/setup'}>Setup Lesson</Link>
+            </div>
+        </>
+    );
+}
+
 /* Routing */
 
 const router = createBrowserRouter([
@@ -534,9 +550,13 @@ const router = createBrowserRouter([
         element: <Lesson />,
     },
     {
-        path: "/",
+        path: "/setup",
         element: <Customize />,
     },
+    {
+        path: '/',
+        element: <Homepage />
+    }
 ]);
 
 
