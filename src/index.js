@@ -208,8 +208,15 @@ function Customize() {
         }
     }
 
-    const isValidEquation = () => {
-        return (xInterceptCheck() && heightCheck());
+    const allFieldsFilledCheck = () => {
+        if (functionType === 'linear') {
+            return (a !== '' && b !== '' && studentName !== '')
+        } else {
+            return (a !== '' && b !== '' && c !== '' && studentName !== '')
+        }
+    }
+    const isValidSetup = () => {
+        return (xInterceptCheck() && heightCheck() && allFieldsFilledCheck());
     }
 
     const navigate = useNavigate();
@@ -264,8 +271,11 @@ function Customize() {
                     <li className="list-group-item">
                         There is some x-intercept with an x-value greater than 0 {xInterceptCheck(a, b, c) && <span className="badge bg-success">✓</span>}
                     </li>
+                    <li className="list-group-item">
+                        All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
+                    </li>
                 </ul>
-                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidEquation()}>Start Lesson</button>
+                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
             </div>
         </>
     )
