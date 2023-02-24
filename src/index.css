@@ -56,10 +56,9 @@ body {
 
 .function-selector-screen {
     border: 1px solid gray;
-    margin: 10px;
-    padding: 15px;
     width: -moz-fit-content;
     width: fit-content;
+    margin-top: 10px;
 }
 
 .equation {

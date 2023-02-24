@@ -250,90 +250,98 @@ function Customize() {
     return (
         <>
             <NavBar />
-            <div className="function-selector-screen">
-                <h1>Choose the type of equation</h1>
-                <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
-                <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
-                <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
-                <label htmlFor="linear" className="btn btn-success">Linear</label>
-                <h1>Enter the equation you want to plot</h1>
-                <StaticMathField>{'f(x) ='}</StaticMathField>
-                <EditableMathField
-                    latex={a}
-                    onChange={(mathField) => {
-                        setA(mathField.latex())
-                    }}
-                />
-                <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
-                <EditableMathField
-                    latex={b}
-                    onChange={(mathField) => {
-                        setB(mathField.latex())
-                    }}
-                />
-                {functionType === 'quadratic' &&
-                    <>
-                        <StaticMathField>{'x +'}</StaticMathField>
+            <div className="function-selector-screen container p-3">
+                <div className="row">
+                    <div className="col-sm-4">
+
+                        <h1>Choose the type of equation</h1>
+                        <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
+                        <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
+                        <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
+                        <label htmlFor="linear" className="btn btn-success">Linear</label>
+                        <h1>Enter the equation you want to plot</h1>
+                        <StaticMathField>{'f(x) ='}</StaticMathField>
                         <EditableMathField
-                            latex={c}
+                            latex={a}
                             onChange={(mathField) => {
-                                setC(mathField.latex())
+                                setA(mathField.latex())
                             }}
                         />
-                    </>}
-                <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
-                <EditableMathField
+                        <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
+                        <EditableMathField
+                            latex={b}
+                            onChange={(mathField) => {
+                                setB(mathField.latex())
+                            }}
+                        />
+                        {functionType === 'quadratic' &&
+                            <>
+                                <StaticMathField>{'x +'}</StaticMathField>
+                                <EditableMathField
+                                    latex={c}
+                                    onChange={(mathField) => {
+                                        setC(mathField.latex())
+                                    }}
+                                />
+                            </>}
+                        <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
+                        <EditableMathField
 
-                    latex={xBounds[0]}
-                    onChange={(mathField) => {
-                        setXBounds([mathField.latex(), xBounds[1]])
-                    }}
-                />
-                <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
-                <EditableMathField
+                            latex={xBounds[0]}
+                            onChange={(mathField) => {
+                                setXBounds([mathField.latex(), xBounds[1]])
+                            }}
+                        />
+                        <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
+                        <EditableMathField
 
-                    latex={xBounds[1]}
-                    onChange={(mathField) => {
-                        setXBounds([xBounds[0], mathField.latex()])
-                    }}
-                />
-                <h1>Enter the <StaticMathField>{'y'}</StaticMathField>-bounds</h1>
-                <EditableMathField
-                    latex={yBounds[0]}
-                    onChange={(mathField) => {
-                        setYBounds([mathField.latex(), yBounds[1]])
-                    }}
-                />
-                <StaticMathField>{'\u2264 y \u2264'}</StaticMathField>
-                <EditableMathField
-                    latex={yBounds[1]}
-                    onChange={(mathField) => {
-                        setYBounds([yBounds[0], mathField.latex()])
-                    }}
-                />
-                <h1>Enter the student's name</h1>
-                <input type="text" className="form-control" placeholder="Enter name" onChange={e => setStudentName(e.target.value)}/>
-
-                <FunctionPlot functionString={functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`} xBounds={xBounds} yBounds={yBounds} />
-                <h3>Checklist</h3>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <StaticMathField>f(0) > 0</StaticMathField> {heightCheck() && <span className="badge bg-success">✓</span>}
-                    </li>
-                    <li className="list-group-item">
-                        There is some x-intercept with an x-value greater than 0 {xInterceptPositiveCheck() && <span className="badge bg-success">✓</span>}
-                    </li>
-                    <li className="list-group-item">
-                        The x-intercept(s) are visible within the selected x-bounds {xInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
-                    </li>
-                    <li className="list-group-item">
-                        The y-intercept is visible within the selected y-bounds {yInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
-                    </li>
-                    <li className="list-group-item">
-                        All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
-                    </li>
-                </ul>
-                <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
+                            latex={xBounds[1]}
+                            onChange={(mathField) => {
+                                setXBounds([xBounds[0], mathField.latex()])
+                            }}
+                        />
+                        <h1>Enter the <StaticMathField>{'y'}</StaticMathField>-bounds</h1>
+                        <EditableMathField
+                            latex={yBounds[0]}
+                            onChange={(mathField) => {
+                                setYBounds([mathField.latex(), yBounds[1]])
+                            }}
+                        />
+                        <StaticMathField>{'\u2264 y \u2264'}</StaticMathField>
+                        <EditableMathField
+                            latex={yBounds[1]}
+                            onChange={(mathField) => {
+                                setYBounds([yBounds[0], mathField.latex()])
+                            }}
+                        />
+                        <h1>Enter the student's name</h1>
+                        <input type="text" className="form-control" placeholder="Enter name" onChange={e => setStudentName(e.target.value)} />
+                    </div>
+                    <div className="col-sm-4">
+                        <FunctionPlot functionString={functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`} xBounds={xBounds} yBounds={yBounds} factor={3.5} />
+                    </div>
+                    <div className="col-sm-4">
+                        <h3>Checklist</h3>
+                        <ul className="list-group">
+                            <li className="list-group-item">
+                                <StaticMathField>f(0) > 0</StaticMathField> {heightCheck() && <span className="badge bg-success">✓</span>}
+                            </li>
+                            <li className="list-group-item">
+                                There is some x-intercept with an x-value greater than 0 {xInterceptPositiveCheck() && <span className="badge bg-success">✓</span>}
+                            </li>
+                            <li className="list-group-item">
+                                The x-intercept(s) are visible within the selected x-bounds {xInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
+                            </li>
+                            <li className="list-group-item">
+                                The y-intercept is visible within the selected y-bounds {yInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
+                            </li>
+                            <li className="list-group-item">
+                                All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
+                            </li>
+                        </ul>
+                        <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
+                    </div>
+                </div>
             </div>
         </>
     )
@@ -341,7 +349,7 @@ function Customize() {
 
 /* Function Plotter */
 
-function FunctionPlot({ functionString, xBounds, yBounds }) {
+function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
     const [windowSize, setWindowSize] = useState([
         window.innerWidth,
         window.innerHeight,
@@ -367,12 +375,12 @@ function FunctionPlot({ functionString, xBounds, yBounds }) {
                 skipTip: true
             }],
             grid: true,
-            width: windowSize[0] / 2.5,
+            width: windowSize[0] / factor,
             height: windowSize[1] / 1.25,
             xAxis: { domain: xBounds },
             yAxis: { domain: yBounds },
         });
-    }, [functionString, xBounds, yBounds, windowSize]);
+    }, [functionString, xBounds, yBounds, windowSize, factor]);
 
     return (
         <div id="plot"></div>
@@ -484,7 +492,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     return (
         <>
             <div className="col-sm-6">
-                <FunctionPlot functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} />
+                <FunctionPlot functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} factor={2.5} />
             </div>
             <div className="col-sm-6">
                 <ChatBox chatMessages={runnerHistory} />
