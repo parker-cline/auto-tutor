@@ -187,30 +187,15 @@ function Customize() {
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
 
-    useEffect(() => {
-        document.getElementById('error').innerHTML = '';
-        try {
-            functionPlot({
-                target: '#graph',
-                data: [{
-                    fn: functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`,
-                }],
-                grid: true,
-                xAxis: { domain: xBounds },
-                yAxis: { domain: yBounds },
-            });
-        } catch {
-            document.getElementById('error').innerHTML = 'Invalid function.';
-        }
-    }, [a, b, c, xBounds, yBounds, functionType])
+
 
     const xInterceptCheck = () => {
         if (functionType === 'linear') {
             return (-1 * b / a > 0)
         } else {
-            const first_root = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-            const second_root = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-            return (first_root > 0 || second_root > 0)
+            const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+            const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+            return (firstRoot > 0 || secondRoot > 0)
         }
     }
 
@@ -266,14 +251,13 @@ function Customize() {
                             }}
                         />
                     </>}
-                <div id="graph"></div>
-                <div id="error"></div>
+                <FunctionPlot functionString={functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`} xBounds={xBounds} yBounds={yBounds} />
                 <h3>Checklist</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
+                <ul className="list-group">
+                    <li className="list-group-item">
                         <StaticMathField>f(0) > 0</StaticMathField> {heightCheck(a, b, c) && <span className="badge bg-success">✓</span>}
                     </li>
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                         There is some x-intercept with an x-value greater than 0 {xInterceptCheck(a, b, c) && <span className="badge bg-success">✓</span>}
                     </li>
                 </ul>
@@ -307,7 +291,8 @@ function FunctionPlot({ functionString, xBounds, yBounds }) {
         functionPlot({
             target: '#plot',
             data: [{
-                fn: functionString
+                fn: functionString,
+                skipTip: true
             }],
             grid: true,
             width: windowSize[0] / 2.5,
@@ -318,9 +303,7 @@ function FunctionPlot({ functionString, xBounds, yBounds }) {
     }, [functionString, xBounds, yBounds, windowSize]);
 
     return (
-        <div className="col-sm-6">
-            <div id="plot"></div>
-        </div>
+        <div id="plot"></div>
     );
 
 }
@@ -328,17 +311,15 @@ function FunctionPlot({ functionString, xBounds, yBounds }) {
 /* Chatting and dialogue  */
 function ChatBox({ chatMessages }) {
     return (
-        <div className="col-sm-6">
-            <div id="chat-box" className="lesson-column border overflow-y-auto">{chatMessages}</div>
-        </div>
+        <div id="chat-box" className="lesson-column border overflow-y-auto">{chatMessages}</div>
     );
 }
 
-function ImageDisplayer({ img_string }) {
-    if (!img_string) {
+function ImageDisplayer({ imgString }) {
+    if (!imgString) {
         return null;
     }
-    return <img src={require('./assets/images/' + img_string)} className="img-fluid" alt={img_string} />
+    return <img src={require('./assets/images/' + imgString)} className="img-fluid" alt={imgString} />
 }
 
 function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds }) {
@@ -369,7 +350,7 @@ function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds
         return (
             <div key={index} className="chat-message p-2">
                 <i className="bi bi-bookmark-plus bookmark-icon"></i>
-                <ImageDisplayer img_string={getImageName(currPage)} />
+                <ImageDisplayer imgString={getImageName(currPage)} />
                 <h6>{currPage.text}</h6>
             </div>
         );
@@ -428,8 +409,12 @@ function Dialogue({ dialogueItem, functionString, functionType, xBounds, yBounds
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     return (
         <>
-            <FunctionPlot functionString={functionString} xBounds={xBounds} yBounds={yBounds} />
-            <ChatBox chatMessages={runnerHistory} />
+            <div className="col-sm-6">
+                <FunctionPlot functionString={functionString} xBounds={xBounds} yBounds={yBounds} />
+            </div>
+            <div className="col-sm-6">
+                <ChatBox chatMessages={runnerHistory} />
+            </div>
         </>
     );
 }
