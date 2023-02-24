@@ -481,14 +481,13 @@ function Dialogue({ dialogueItem, lessonInfo }) {
 
     const initializeHistory = (runner) => {
         runner.runner.variables.set("linearity", lessonInfo.functionType === 'linear' ? "true" : "false");
-        console.log(lessonInfo.studentName);
         runner.runner.variables.set("studentName", lessonInfo.studentName);
+        runner.runner.variables.set("functionString", lessonInfo.functionString);
         fastForward(runner);
         return generateDialogueElements(runner.history);
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
-
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     return (
         <>
@@ -515,7 +514,7 @@ function Lesson() {
                 <div className="equation">
                     <BlockMath math={lessonInfo.functionString} />
                 </div>
-                <h2>a) At what time does the ball reach the ground?</h2>
+                <h2>At what time does the ball reach the ground?</h2>
 
                 <br></br>
                 <div className="row">
