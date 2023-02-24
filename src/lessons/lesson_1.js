@@ -2,9 +2,26 @@ const dialogue = `
 title: Start
 ---
 <<set $learnedFunctions to "false">>
-<<set $graphing to "false">>
-Tutor: Let's get started then. What do you think the first step would be to solve this problem? 
-Tutor: Select a response.
+<<set $learnedCoordinates to "false">>
+<<set $learnedIntercepts to "false">>
+Tutor: Hello! I'm your tutor today. You can say hi back by clicking "Hello" down below!
+-> Hello!
+Tutor: Welcome, {$studentName}! So happy you're here! 
+Tutor: I'll be helping you learn a little bit about math today. Scroll up: do you see the problem up above?
+-> Yes
+Tutor: We'll be working on this problem together! I'll be guiding you through the steps, but you'll do a lot of the work yourself. Still... don't worry if the problem seems too hard! After all, hard problems are just a challenge to overcome. I'll be here to help you out along the way.
+Tutor: Also, there's a whiteboard you can draw on if you want to. Scroll down: do you see the whiteboard down below?
+-> Yes
+Tutor: Awesome! You can use it to draw pictures, write notes, or even draw graphs. It's up to you!
+Tutor: Ready to get started?
+-> Yes
+<<jump FirstSteps>>
+===
+
+title: FirstSteps
+---
+Tutor: OK! Read the problem again. First, I'll ask you: what do you think the first step would be to solve this problem? 
+Tutor: Select a response. Now, there's more than one option you can choose from this time. But, there is no right or wrong answer! Make your best guess.
 -> I think we should draw a picture.
     Tutor: Ah, interesting idea! Why would we draw a picture here?
     -> Words are scary. Pictures can be more helpful.
@@ -12,6 +29,7 @@ Tutor: Select a response.
     Tutor: Good idea!
     <<jump Drawing>>
 -> I think we should use the quadratic formula.
+    <set $learnedQuadraticDifferentApproaches to "true">>
     Tutor: And why would we use the quadratic formula here?
     -> There's a function we can use it on.
         Tutor: There is! Why would we use it?
@@ -19,18 +37,23 @@ Tutor: Select a response.
             Tutor: Finding the roots may be useful to solve this problem! This approach definitely works! Do you know what roots are?
             -> Yes
                 Tutor: Awesome!
+                <<set $rootsCompetency to "true">>
             -> No
                 Tutor: Roots are the x-values where the y-value of our function equals 0. (Keep this in mind... it may be helpful later.) Did what I just say make sense?
                 -> Yes
-                -> No
+                -> What is a function?
                     Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                    <<set $learnedFunctions to "true">>
-                    <<jump FunctionsOverview>>
+                    <<jump Functions>>
             Tutor: One thing though: have you used the quadratic formula before?
             -> Yes
             -> No
             Tutor: It's pretty complicated! Doing everything by hand can take some time. I think there might be a faster way...
-            Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
+            Tutor: We have a graphing calculator. Would that make our lives easier?
+            -> Yes!
+                Tutor: Exactly! We can graph this function.
+            -> Ooh, good idea! We can graph this function.
+                Tutor: Exactly!
+            Tutor: But before we even do that...
             <<jump Graphing>>
         -> I'm not sure, actually.
             Tutor: No worries! 
@@ -41,18 +64,22 @@ Tutor: Select a response.
     -> We want to find the roots
         Tutor: Finding the roots may be useful to solve this problem! This approach definitely works! Do you know what roots are?
         -> Yes
+            <<set $rootsCompetency to "true">>
         -> No
             Tutor: Roots are the x-values where the y-value of our function equals 0. They're also called x-intercepts. (Keep this in mind... it may be helpful later.) Did what I just say make sense?
             -> Yes
             -> No
                 Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                <<set $learnedFunctions to "true">>
-                <<jump FunctionsOverview>>
-        Awesome! One thing though: have you used the quadratic formula before?
+                <<jump Functions>>
+        Tutor: Awesome! One thing though: have you used the quadratic formula before?
         -> Yes
         -> No
         Tutor: It's pretty complicated! Doing everything by hand can take some time. I think there might be a faster way...
-        Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
+        Tutor: We have a graphing calculator. Would that make our lives easier?
+        -> Yes!
+            Tutor: Right! We can graph this function.
+        -> Ooh, good idea! We can graph this function.
+            Tutor: Aha!
         <<jump Graphing>>
     -> We need to find the y-intercepts
         Tutor: You're on the right track here! We do need to find an intercept.
@@ -68,8 +95,9 @@ Tutor: Select a response.
             Tutor: When does the ball hit the ground? 
             -> When the height is 0 meters. That makes sense!
                 Tutor: Right! And the height is 0 at our x-intercept... when the ball hits the ground!
-            -> When the height is 0 meters. But... why?
-                Tutor: 0 meters is where the "ground" is. If we said 1 meters, that would be 1 meter above the ground. It may start at 5 meters above the ground, but reaching 0 meters above the ground is the same thing as hitting the ground! The ball will hit the ground when it reaches 0 meters.
+            -> When the height is 0 meters. But... why? 
+                Tutor: I know it's a little weird to describe something at 0 meters tall. But, it's the same thing as saying the ball is on the ground.
+                Tutor: 0 meters is where the "ground" is. If we said 1 meter, that would be 1 meter above the ground. It may start at 5 meters above the ground, but it will eventually reaching 0 meters... the same thing as hitting the ground!
             Tutor: Let's try one more practice problem to make sure you're all good. 
             Tutor: Consider the point (5, 0)--is that an x-intercept or a y-intercept?
             -> x-intercept
@@ -80,7 +108,7 @@ Tutor: Select a response.
                     Tutor: Oh, I forgot to mention one thing!
                     Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
                     Tutor: So in (5, 0), y is actually 0, and x is 5.
-                    Tutor: To make sure you understand: consider the point (2, 5). What is the x-value?
+                    Tutor: Consider the point (2, 5). What is the x-value?
                     -> 2
                         Tutor: Right! And the y-value is 5.
                     -> 5
@@ -113,12 +141,17 @@ Tutor: Select a response.
                     Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
                     Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
             Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. I'll share a link to Khan Academy that explains it in more detail. 
-
+            Tutor: LINK TO VIDEO
+            <<set $learnedIntercepts to "true">>
+        -> Wait, what is x and y? I'm confused.
+            Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
+            <<jump Coordinates>>
     Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
     Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a clue on what to do.
     <<jump Drawing>>
     
 -> I think we should factor.
+    <<set $learnedQuadraticDifferentApproaches to "true">>
     Tutor: And why would we factor here?
     -> There's a function we can do it on.
         Tutor: There is! Why would we use factoring?
@@ -130,18 +163,19 @@ Tutor: Select a response.
                 -> Yes
                 -> No
                     Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                    <<set $learnedFunctions to "true">>
-                    <<jump FunctionsOverview>>
+                    <<jump Functions>>
             Tutor: Awesome! Do you know how to factor?
             -> Yes
                 Tutor: Try it out. Can you factor it?
                 -> Hmm...
                     Tutor: You actually can't! That doesn't mean you've made a mistake, though.
             -> No
-                Tutor: That's okay. You'll practice factoring later. But if you tried, you'll see that you can't factor this equation! That doesn't mean you've made a mistake, though.
+                Tutor: That's okay. You'll practice factoring later. But if you tried, you'll see that you actually can't factor this equation! That doesn't mean you've made a mistake, though.
             Tutor: You had the right idea to think of factoring first. Some quadratic equations *can* be factored... and factoring can take little time compared to using other strategies.
             Tutor: Because we can't factor, we'll need to try a different approach here.
-            Tutor: We have a calculator. Maybe we can graph instead?
+            Tutor: We have a graphing calculator. Could that help us?
+            -> Good idea! We can find the roots by graphing.
+                Tutor: Since we have the tool, we might as well use it.
             <<jump Graphing>>
         -> I'm not sure actually
     -> We want to find the roots.
@@ -152,29 +186,30 @@ Tutor: Select a response.
             -> Yes
             -> No
                 Tutor: No worries! I know it can be a bit overwhelming. I'll help you out here. 
-                <<set $learnedFunctions to "true">>
-                <<jump FunctionsOverview>>
+                <<jump Functions>>
         Awesome! One thing though: have you used the quadratic formula before?
         -> Yes
         -> No
         Tutor: It's pretty complicated! Doing everything by hand can take some time. I think there might be a faster way...
-        Tutor: 
         Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
         <<jump Graphing>>
     -> I'm not sure, actually.
         Tutor: No worries! You are on the right track. h(x) is a quadratic function, so we need to think about those. 
-    
 -> I think we should graph the function.
     Tutor: Ah, interesting idea! Why would we graph the function? 
     -> I want to see how the dog is moving.
-        Tutor: Read the problem again. What is "modeled" by the function? Click Next when you have an answer.
+        Tutor: Read the problem again. What is "modeled" by the function?
+        -> The ball
+            Tutor: Right! That's what they mean by "modeling." The function tells us, or models, the height of the ball (at any given time.)
+        -> The ball's height
+            Tutor: Right! That's what they mean by modeling. The function tells us, or models, the height of the ball (at any given time.)
         Tutor: Did you see the *ball* is modeled? We need to think about the ball's path to determine when it hits the ground.
     -> I don't know.
         Tutor: That's okay!
     -> I want to see how the ball is moving.
         Tutor: Yes, the function can help us with that! Let's try graphing.
         <<jump Graphing>>
--> I didn't know where to start.
+-> I don't know where to start.
     Tutor: Hey, this problem is certainly not easy! It takes practice, but you'll learn and grow... hard problems make your brain grow! 
     Tutor: I'll walk you through this step by step.
 Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a clue.
@@ -184,8 +219,9 @@ Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a c
 title: Drawing
 ---
 <<set $drawing to "true">>
-Tutor: Someone on a balcony is throwing a ball to a dog on the ground floor... You have a whiteboard. Why don't you draw out a rough sketch of what that looks like on the whiteboard? Click Next when you're done.
-Tutor: I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img_drawpicture.png]
+Tutor: Someone on a balcony is throwing a ball to a dog on the ground floor... You have a whiteboard. Why don't you draw out a rough sketch of what that looks like on the whiteboard? You can click and drag to draw on the whiteboard. You can also Undo your drawing, or Clear the whiteboard if you need to.
+-> I finished drawing!
+Tutor: Excellent, {$studentName}! I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img_drawpicture.png]
 -> Yes!
     Tutor: Great!
 -> My drawing was not as pretty.
@@ -197,7 +233,7 @@ Tutor: I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img
         Tutor: Yes--an arc! So instead, it'll curve like in the picture.
     -> They are a straight line!
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
-        Tutor: This picture can help you think about the difference.
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
     -> I've never seen x^2 functions before.
         Tutor: "x" functions are linear. They're like a straight line. "x^2" functions are quadratic. They're like a curve. We call them "parabolas."
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
@@ -208,10 +244,10 @@ Tutor: We just drew a picture.... this is a great start! I wonder what we could 
     <<jump Graphing>>
 ===
 
-title: FunctionsOverview
+title: Functions
 ---
 Tutor: That h(x) thing is called a function. While it seems complicated, it's not as tricky as it looks.
-Tutor: Basically, you give a function an "input," and it gives an "output." Let's say you're using a vending machine, and you want to buy a drink. What drink would you like to buy?
+Tutor: Basically, you give a function an "input," and it gives back an "output." Let's say you're using a vending machine, and you want to buy a drink. What drink would you like to buy?
 -> Coke
     <<set $drink to "Coke">>
 -> Pepsi
@@ -246,18 +282,20 @@ Tutor: This function multiplies any number, which we'll call "x," by 2.
 -> This makes sense!
     Tutor: Glad to hear! 
 Tutor: Let's say x is 8 this time. We can use this function to multiply the number by 2 like this. Do you see how we replace x with the number? That is because x is equal to 8! In the end, our answer is 16. [img_plugin8.png]
-Tutor: One more time. Let's say x = 5. Use the function to multiply x by 2. Follow the example on the whiteboard... show your work! Click Next when you're done.
+Tutor: One more time. Let's say x = 5. Use the function to multiply x by 2. Follow the example on the whiteboard... show your work! 
+Tutor: Click "I'm done" when you're finished. It's okay if you don't get the answer--we'll go over it together if you're stuck.
+-> I'm done
 Tutor: All right, what did you get as your answer?
 -> 10
-    Tutor: Awesome! Congratulations.
+    Tutor: Awesome! Congratulations, {$studentName}!
 -> 7
    Tutor: Remember, imagine there is a hidden multiplication sign between the 2 and the 5. So what is 2 * 5?
    -> 10
-        Tutor: Awesome! Finish up your work on the whiteboard, following the example.
+        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
 -> 25
     Remember to separate the 2 and the 5 with parentheses. 2(5). This means we are multiplying 2 * 5. What is that? [img_step2.png][/img_step2.png]
     -> 10
-        Tutor: Awesome! Finish up your work on the whiteboard, following the example.
+        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
 -> I'm confused
     Tutor: Let's walk through this step by step. Copy down what I'm writing. We'll start by writing our function... [img_step1.png][/img_step1.png]
     Tutor: Next, plugging in 5 for x. We'll replace x with 5 because x is equal to 5. [img_step2.png][/img_step2.png]
@@ -267,7 +305,7 @@ Tutor: All right, what did you get as your answer?
     -> Multiplying!
         Tutor: Yep! Last line. What is 2 * 5?
         -> 10!
-            Tutor: Awesome! [img_plugin5.png][/img_plugin5.png]
+            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
     -> Adding!
         Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5.
     -> Subtracting!
@@ -275,9 +313,16 @@ Tutor: All right, what did you get as your answer?
     -> Dividing!
         Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5.
 
-Tutor: Now if we go back to the problem.... h(x) = -2x^2 + 10x + 15
-Tutor: This is a big function! In our previous example, the function only multiplied the number by 2. It multiplied the number by 2 for any number you gave it. Here, the function does a bunch of stuff: squaring the number, multiplying it by -2, adding 10 times the number... that's a lot, but don't worry. The basic thing is it is still doing the same thing for any number "x" you give it.
+Tutor: Now if we go back to the problem.... and that function up above? {$functionString}?
+Tutor: This is a different function, and it's probably much bigger. Does it look a little more complicated to you?
+-> Yes
+    Tutor: Don't worry! It's definitely more complicated, but it's still just a function that follows a certain rule. It's just this rule may be a little more complicated than just multiplying something by 2!
+-> No 
+Tutor: The basic idea is it is still doing the same thing, following the same rule, for any "input" "x" you give it.
+Tutor: Hopefully, this makes sense! I'll share a link to a video that explains functions in more detail.
+Tutor: LINK TO VIDEO
 Tutor: Now that we know what functions are, let's see how they are used in word problems!
+<<set $learnedFunctions to "true">>
 <<if $drawing is "true">>
 <<jump Graphing>>
 <<else>>
@@ -287,15 +332,15 @@ Tutor: Now that we know what functions are, let's see how they are used in word 
 
 title: Graphing
 ---
+<<set $graphing to "true">>
 Tutor: I just graphed the function in the left half of the screen. If you'd like, go ahead and graph the equation on your graphing calculator or Desmos! 
 <<if $learnedFunctions is "false">> 
 Tutor: By the way: we just graphed a function. Do you know what a function is?
 -> Yes
     Tutor: Great! Just making sure.
-    <<set $learnedFunctions to "true">>
 -> No
     Tutor: Ooh, this is a great time to tell you!
-    <<jump FunctionsOverview>>
+    <<jump Functions>>
 <<endif>>
 Tutor: We want to know when the ball will hit the ground. We have two variables: x (our input) and h(x) (our output.) 
 Tutor: What are we looking for?
@@ -311,14 +356,14 @@ Tutor: What are we looking for?
         -> Yes
             Narrator: End of example.
         -> No
-            <<jump CoordinatePlaneOverview>>
+            <<jump Coordinates>>
     -> I'm not sure.
     -> Isn't this where y is 0, not h(x)?
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. Does that make sense?
         -> Yes
             Narrator: End of example.
         -> No
-            <<jump CoordinatePlaneOverview>>
+            <<jump Coordinates>>
 -> When x = 0
     Tutor: And what does x represent here? Read the problem again to be sure.
     -> The horizontal distance from the starting point.
@@ -355,11 +400,11 @@ Tutor: What are we looking for?
     Narrator: End of example.
 
 ===
-title: CoordinatePlaneOverview
+title: Coordinates
 ---
 Tutor: Points are little dots that move up and down and left and right. How do we know where a point is on our computer screen?
 Tutor: We use "coordinates." These are two numbers... the first number is how much we move left and right. The second number is how much we move up and down.
-Tutor: I'll give you an example. Say I wanted to plot the point (2, 5). 
+Tutor: I'll give you an example. Say I wanted to plot the point (2, 1). 
 Tutor: The first number "x" is how much we move left and right. If "x" is positive, then we move right. If "x" is negative, we move left. Here, this number is 2. Are we moving left or right?
 -> Left
     Tutor: Hmm... Well, if x was negative 2... -2, with that - sign... then we would move left. But here, x does not have a - sign. So it is actually positive, and we move right.
@@ -370,11 +415,16 @@ Tutor: The first number "x" is how much we move left and right. If "x" is positi
         Tutor: Close! Remember, if x is negative, we move left. We have the - sign, so we are moving left.
 -> Right
     Tutor: Right on! x is positive.
-Tutor: Let's go! Remember, we want to plot the point (2, 5). I'll start in the middle and move two blocks right.
-Tutor: Now the second number "y" is 5. If "y" is positive, we move up. If "y" is negative, we move down. Here, 5 is positive, so we move up.
+Tutor: Let's go! Say we wanted to plot the point (2, 1). Start out with an empty "coordinate plane." You draw it like this: [img_graphtodraw.png][/img_graphtodraw.png]
+Tutor: Next, I'll start in the middle... [img_origin.png][/img_origin.png]
+Tutor: I move two tick marks right because the first number is 2. [img_move2.png][/img_move2.png]
+Tutor: Now the second number "y" is 1. If "y" is positive, we move up. If "y" is negative, we move down. Here, 1 is positive, so we move up. We move up one tick mark from where we were before.
+Tutor: We end up with this picture: [img_examplegraphed.png][/img_examplegraphed.png]
 Tutor: Order matters. "We all walk before we climb." This may help you remember! [img_xyclimbing.png][/img_xyclimbing.png]
 Tutor: Okay, let's try another problem. Go ahead and draw this picture on the whiteboard down below. [img_graphtodraw.png][/img_graphtodraw.png]
-Tutor: Then, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that.
+-> I got it!
+Tutor: Awesome! This is a coordinate plane. It's a grid with an x-axis and a y-axis. The x-axis is horizontal, and the y-axis is vertical.
+Tutor: Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that.
 -> I think I got it!
     Tutor: Great! Did you get something like this picture? [img_graphed.png][/img_graphed.png]
     -> Yes
@@ -413,10 +463,31 @@ Tutor: Then, plot (-2, 1) on this "coordinate plane." Take a few seconds to do t
         Tutor: Well, if y was negative 1... -1, with that - sign... then we would move down. But here, y does not have a - sign. So it is actually positive, and we move up.
     Tutor: This means we go two units left, and one unit up. Like this! [img_coordinate_plane_graphing.png][/img_coordinate_plane_graphing.png]
     Tutor: We go two units left, first. Then, we go one unit up.
-<<set $learnedGraphing = true>>
-
+<<set $learnedCoordinates = true>>
+Tutor: Hopefully this makes a little more sense now! I'll share a link to a video that goes over this in more detail.
+Tutor: LINK TO VIDEO
 Narrator: End of example.
 ===
+
+title: Overview
+---
+Tutor: Let's recap what you've learned. 
+Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
+<<if $learnedCoordinates is "true">>
+Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
+<<endif>>
+<<if $learnedFunctions is "true">>
+Tutor: You've learned about functions and what inputs and outputs are!
+<<endif>>
+<<if $learnedQuadraticDifferentApproaches is "true">>
+Tutor: You've learned about quadratic equations and how you can use different approaches to solve them!
+Tutor: We used graphing today because we had a calculator. Sometimes, other ways are better when you don't have a calculator. The quadratic formula, if you've heard of that, always works and doesn't require a calculator. Sometimes, you can even do factoring, if you've heard of that, which can be much faster!
+<<endif>>
+<<if $learnedIntercepts is "true">>
+Tutor: You've learned about the difference between x and y-intercepts! X-intercepts cross a horizontal line, while y-intercepts cross a vertical line.
+<<endif>>
+Tutor: It was great working with you today, {$studentName!} Hope to work with you again. Bye!
+Narrator: End of example.
 `
 
 export { dialogue }
