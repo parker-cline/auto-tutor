@@ -535,7 +535,7 @@ function Homepage() {
             <NavBar />
             <div className="container p-3">
                 <h1>AutoTutor</h1>
-                <p>Something something.</p>
+                <p>This homepage will briefly describe what the website is and how to use it. Creating this homepage will be done next week or the week after that, and it should not take but a couple of days because it is predominantly front-end work. For now:</p>
                 <Link to={'/setup'}>Setup Lesson</Link>
             </div>
         </>
