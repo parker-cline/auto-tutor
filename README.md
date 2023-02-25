@@ -1,6 +1,6 @@
-# Dialogue Engine for Lesson Plan App
+# AutoTutor: Proof-of-Concept for Personalized, Customizable Algebra Math Lessons
 
-Things have changed. README coming shortly.
+Developed as part of a Capstone project for Minerva University.
 
 To run, clone the repository, navigate to the directory in your terminal, and do
 
