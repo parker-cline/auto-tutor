@@ -440,7 +440,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
 
     const generateDialogueOptions = (currPage, index) => {
         const listItems = currPage.options.map((dialogueChoice, index) => (
-            <li key={index} onClick={() => selectChoice(index)}>
+            <li key={index} className="link-button" onClick={() => selectChoice(index)}>
                 {dialogueChoice.text}
             </li>
         ));
