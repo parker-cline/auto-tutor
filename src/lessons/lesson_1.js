@@ -525,16 +525,26 @@ Tutor: What are we looking for?
 -> When h(x) = 0
     Tutor: Exactly! At "0 meters of height," the ball hits the ground.
     Tutor: So let's look at the picture again.... 
+    <<if $linearity is "false">>
     Tutor: We have two points when h(x) is 0. Find the two points where the function intersects the x-axis. 
-    Tutor: Why is h(x) 0 here?
+    <<else>>
+    Tutor: We have one point when h(x) is 0. Find the point where the function intersects the x-axis.
+    <<endif>>
+    Tutor: And if we write down this point: is h(x) the first number or the second number?
     -> It's the second number.
-    -> It's the output.
+        Tutor: Right!
     -> Shouldn't it be the first number?
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
         -> Got it!
         -> That confuses me still.
+            Tutor: I'll give you a brief refresher then!
             <<jump Coordinates>>
     -> I'm not sure.
+        Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
+        -> Got it!
+        -> That confuses me still.
+            Tutor: I'll give you a brief refresher then!
+            <<jump Coordinates>>
     -> Isn't this where y is 0, not h(x)?
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
         -> Got it!
