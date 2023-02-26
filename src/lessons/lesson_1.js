@@ -11,8 +11,10 @@ title: Start
 <<set $learnedInputOutputDistinguishing to "false">>
 <<set $learnedUnits to "false">>
 
-Tutor: Hello! I'm your tutor today. You can say hi back by clicking "Hello" down below!
+Tutor: Hello! I'm Cauley! You can say hi back by clicking "Hello" down below!
 -> Hello!
+-> Hey!
+-> Hi!
 Tutor: Welcome, {$studentName}! So happy you're here! 
 Tutor: I'll be helping you learn a little bit about math today. Scroll up: do you see the problem up above?
 -> Yes
@@ -20,6 +22,7 @@ Tutor: We'll be working on this problem together! I'll be guiding you through th
 Tutor: Also, there's a whiteboard you can draw on if you want to. Scroll down: do you see the whiteboard down below?
 -> Yes
 Tutor: Awesome! You can use it to draw pictures, write notes, or even draw graphs. It's up to you!
+Tutor: Take your time to try things out on the whiteboard when you feel like it. There's no time limit here. See what works and what doesn't!
 Tutor: Ready to get started?
 -> Yes
 <<jump FirstSteps>>
@@ -28,7 +31,7 @@ Tutor: Ready to get started?
 title: FirstSteps
 ---
 <<set $currSection to "FirstSteps">>
-Tutor: OK! Read the problem again. First, I'll ask you: what do you think the first step would be to solve this problem? 
+Tutor: OK! Read the problem again--take your time to make sure you understand it. First, I'll ask you: what do you think the first step would be to solve this problem? 
 Tutor: Select a response. Now, there's more than one option you can choose from this time. But, there is no right or wrong answer! Make your best guess.
 -> I think we should draw a picture.
     Tutor: Ah, interesting idea! Why would we draw a picture here?
@@ -147,7 +150,7 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                     Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
                     Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
                     Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. I'll share a link to Khan Academy that explains it in more detail. 
+            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Failure is an opportunity to learn, you know! I'll share a link to Khan Academy that explains it in more detail. 
             Tutor: LINK TO VIDEO
             <<set $learnedIntercepts to "true">>
         -> Wait, what is x and y? I'm confused.
@@ -306,11 +309,13 @@ Tutor: Excellent, {$studentName}! I'll draw out a picture I made. Looks similar?
         Tutor: Yes--an arc! So instead, it'll curve like in the picture.
     -> They are a straight line!
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
         <<$set $learnedLinearQuadratic to "true">>
     -> I've never seen x^2 functions before.
         Tutor: "x" functions are linear. They're like a straight line. "x^2" functions are quadratic. They're like a curve. We call them "parabolas."
-        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: Hey, this picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
         <<$set $learnedLinearQuadratic to "true">>
 Tutor: Actually, on a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this. [img_timedtest.png][/img_timedtest.png]
 Tutor: We just drew a picture.... this is a great start! I wonder what we could do next... I'll ask you again.
