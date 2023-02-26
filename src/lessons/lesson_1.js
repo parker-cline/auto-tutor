@@ -679,7 +679,7 @@ Tutor: Which one should we choose?
         Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
         Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
         -> It's like we're traveling back in time!
-            Tutor: Haha,right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+            Tutor: Haha, right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
         -> I'm confused.
             Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
         <<else>>
