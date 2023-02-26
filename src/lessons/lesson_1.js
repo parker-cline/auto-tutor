@@ -10,8 +10,8 @@ title: Start
 <<set $learnedQuadraticDifferentApproaches to "false">>
 <<set $learnedInputOutputDistinguishing to "false">>
 <<set $learnedUnits to "false">>
-
-Tutor: Hello! I'm Cauley! You can say hi back by clicking "Hello" down below!
+<<set $learnedReasonable to "false">>
+Tutor: Hello! I'm Cauley! You can say hi back by clicking "Hello" down below! 
 -> Hello!
 -> Hey!
 -> Hi!
@@ -40,7 +40,30 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
     Tutor: Good idea!
     <<jump Drawing>>
 -> I think we should use the quadratic formula.
-    <<set $learnedQuadraticDifferentApproaches to "true">>
+    <<if $linearity is "true">>
+    Tutor: And why would we use the quadratic formula here?
+    -> There's a function we can use it on
+        Tutor: Hmm... the quadratic formula is way too complicated and can't even be used with this function. But we can use it on some functions!
+    -> The function is quadratic
+        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        <<$set $learnedLinearQuadratic to "true">>
+    -> We can use it to find the roots / x-intercepts
+        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        <<$set $learnedLinearQuadratic to "true">>
+    -> I don't know
+        Tutor: No worries! Have you heard of the quadratic formula before?
+        -> Yes
+        -> No
+        Tutor: Hmm... the quadratic formula is way too complicated and can't even be used here. But we can use it on other problems!
+    Tutor: Why don't we try drawing a picture? Then we can see what is going on.
+    <<jump Drawing>>
+    <<else>>
+    <set $learnedQuadraticDifferentApproaches to "true">>
+    Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
     Tutor: And why would we use the quadratic formula here?
     -> There's a function we can use it on.
         Tutor: There is! Why would we use it?
@@ -155,11 +178,32 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
         -> Wait, Cauley, what is x and y? I'm confused.
             Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
             <<jump Coordinates>>
-    Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
     Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a clue on what to do.
     <<jump Drawing>>
-    
+    <<endif>>
 -> I think we should factor.
+    <<if $linearity is "true">>
+    Tutor: And why would we factor here?
+    -> There's a function we can use it on.
+        Tutor: Hmm... factoring is a little complicated and can't even be used with this function. But we can use it on some functions!
+    -> The function is quadratic.
+        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        <<$set $learnedLinearQuadratic to "true">>
+    -> We can use it to find the roots / x-intercepts
+        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        <<$set $learnedLinearQuadratic to "true">>
+    -> I don't know
+        Tutor: No worries! Have you heard of factoring before?
+        -> Yes
+        -> No
+        Tutor: Hmm... factoring is way too complicated and can't even be used with this function. But we can use it on some functions!
+    Tutor: Why don't we try drawing a picture? Then we can see what is going on.
+    <<jump Drawing>>
+    <<else>>
     <<set $learnedQuadraticDifferentApproaches to "true">>
     Tutor: And why would we factor here?
     -> There's a function we can do it on.
@@ -267,7 +311,8 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
         Tutor: We have a calculator. Maybe we can find the roots by graphing instead?
         <<jump Graphing>>
     -> I'm not sure, actually.
-        Tutor: No worries! You are on the right track. h(x) is a quadratic function, so we need to think about those. 
+        Tutor: No worries! You are on the right track. h(x) is a quadratic function, so we need to think about those.
+    <<endif>> 
 -> I think we should graph the function.
     Tutor: Ah, interesting idea! Why would we graph the function? 
     -> I want to see how the dog is moving.
@@ -295,14 +340,21 @@ title: Drawing
 <<set $currentSection to "Drawing">>
 Tutor: Someone on a balcony is throwing a ball to a dog on the ground floor... You have a whiteboard. Why don't you draw out a rough sketch of what that looks like on the whiteboard? You can click and drag to draw on the whiteboard. You can also Undo your drawing, or Clear the whiteboard if you need to.
 -> I finished drawing!
-Tutor: Excellent, {$studentName}! I'll draw out a picture I made. Looks similar? [img_drawpicture.png][/img_drawpicture.png]
+Tutor: Excellent, {$studentName}! I'll draw out a picture I made. 
+<<if $linearity is "false">>
+Tutor: Looks similar? [img_drawpicture.png][/img_drawpicture.png]
+<<else>>
+Tutor: Looks similar? [img_drawpicturelinear.png][/img_drawpicturelinear.png]
+<<endif>>
 -> Yes!
     Tutor: Great!
 -> My drawing was not as pretty.
     Tutor: That's okay!
--> My ball followed a different path. Mine was like a straight line.
+-> My ball followed a different path. 
     Tutor: Ah, we haven't really discussed what path our ball is following yet.
-    Tutor: Recall that the function "models the height of the ball." What do x^2 functions look like? Take a moment to think...
+    Tutor: Recall that the function "models the height of the ball." 
+    <<if $linearity is "false">>
+    Tutor: What do x^2 functions look like? Take a moment to think...
     -> They are a curve!
         Tutor: Yes--an arc! So instead, it'll curve like in the picture.
     -> They are a straight line!
@@ -315,7 +367,27 @@ Tutor: Excellent, {$studentName}! I'll draw out a picture I made. Looks similar?
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: Hey, this picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
         <<$set $learnedLinearQuadratic to "true">>
-Tutor: Actually, on a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! Like this. [img_timedtest.png][/img_timedtest.png]
+    <<else>>
+    Tutor: Ah, we haven't really discussed what path our ball is following yet.
+    Tutor: Recall that the function "models the height of the ball." 
+    Tutor: What do x functions look like? Take a moment to think...
+    -> They are a curve!
+        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
+        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        <<$set $learnedLinearQuadratic to "true">>
+    -> They are a straight line!
+        Tutor: Yes!
+    -> I've never seen x functions before.
+        Tutor: "x" functions are linear. They're like a straight line. You may see other functions with "x" in them, like x^2. Those are quadratic. Don't worry about those if you haven't seen them.
+        <<$set $learnedLinearQuadratic to "true">>
+    <<endif>>
+Tutor: Actually, on a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! 
+<<if $linearity is "false">>
+Tutor: Like this. [img_timedtest.png][/img_timedtest.png]
+<<else>>
+Tutor: Like this. [img_timedtestlinear.png][/img_timedtestlinear.png]
+<<endif>>
 Tutor: We just drew a picture.... this is a great start! I wonder what we could do next... I'll ask you again.
 -> Let's try graphing.
     Tutor: Ah, interesting idea! Why would we graph the function? 
@@ -333,7 +405,7 @@ Tutor: We just drew a picture.... this is a great start! I wonder what we could 
         Tutor: Let's try graphing!
     -> I want to see how the ball is moving.
         Tutor: Yes, the function can help us with that! Let's try graphing.
-    <<jump Graphing>>
+<<jump Graphing>>
 ===
 
 title: Functions
@@ -426,8 +498,7 @@ Tutor: This is a different function. Does it look a little more complicated to y
     Tutor: Don't worry! It's definitely more complicated, but it's still just a function that follows a certain rule. It's just this rule may be a little more complicated than just multiplying something by 2!
 -> No 
 Tutor: The basic idea is it is still doing the same thing, following the same rule, for any "input" "x" you give it.
-Tutor: Hopefully, this makes sense! I'll share a link to a video that explains functions in more detail.
-Tutor: LINK TO VIDEO
+Tutor: Hopefully, this makes sense! Later, I'll share a link to a video that explains functions in more detail.
 Tutor: Now that we know what functions are, let's see how they are used in word problems!
 <<set $learnedFunctions to "true">>
 <<if $currentSection is "Graphing">>
@@ -509,6 +580,7 @@ Tutor: What are we looking for?
     -> What are units?
         <<set $learnedUnits to "true">>
         Tutor: Units are the "measurements" of a variable. For example, if I say "I have five apples," I'm not just saying I have five things. I'm saying I have five apples. I'm being specific about what I have. [img_apples.png][/img_apples.png]
+        Tutor: I can ask someone "what is the time?" The time is the quantity, but the units are the "measurements" of the quantity. In this case, the units are hours and minutes. [img_clock.png][/img_clock.png]
         Tutor: In this problem, what are the units?
         -> Seconds and meters.
             Tutor: Exactly! We need to be specific about what we're measuring.
@@ -582,8 +654,143 @@ Tutor: What are we looking for?
         Tutor: Nice work, {$studentName}!
         Tutor: I can create a table like so: [img_inputoutputtable2.png][/img_inputoutputtable2.png]
     Tutor: Back to the problem!
-Tutor: So...
-Narrator: End of example.
+<<jump WrapUp>>
+===
+
+title: WrapUp
+---
+<<if $linearity is "false">>
+Tutor: We have a quadratic function. In this case, we have two x-intercepts. These are where the graph crosses the x-axis.
+Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifyquadraticxintercepts.png][/img_identifyquadraticxintercepts.png]
+Tutor: Look on the graph and see if you can find those two points. Do you see them?
+-> Yes
+-> No
+    Tutor: You may have to zoom out with your mouse wheel or pinch to zoom out on your touchpad. You can also drag downwards and upwards until you get to the origin (the middle area.)
+    Tutor: Do you see them now?
+    -> Yes
+Tutor: Awesome! So, on my calculator, I get two points: {$x1} and {$x2}.
+Tutor: Which one should we choose?
+-> {$x1}
+    Tutor: And why are we choosing that one?
+    -> Because the x-coordinate is before x = 0
+        Tutor: You're on the right track. Let's check to make sure our answer is reasonable.
+        Tutor: X represents the number of seconds, remember? If the x-intercept is before x = 0, that means we have negative seconds. Does that make sense?
+        -> It's like we're traveling back in time!
+            Tutor: Haha, we don't need to get that complicated, Doc! Thankfully, the ball is moving forward in time.
+        -> I'm confused.
+            Tutor: I imagine you are! A negative number of seconds is very strange... maybe our answer isn't reasonable?
+        Tutor: Whenever we get an answer, we should double-check to make sure it's reasonable. We can't have a negative number of seconds.
+        <<set $learnedReasonable to "true">>
+    -> I don't know
+        Tutor: Remember, when did the ball start moving?
+        -> When x = 0 seconds
+            Tutor: Right!
+        -> When h(x) = 0 seconds
+            Tutor: Read the problem one more time. Remember, we can make a table to help us keep organized. [img_inputoutputtable.png][/img_inputoutputtable.png]
+            Tutor: What does x represent?
+            -> The number of seconds
+                Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future. So, we can't have a negative x-value. We can't have a negative number of seconds.
+-> {$x2}
+    Tutor: And why are we choosing that one?
+    -> Because the x-coordinate is after x = 0
+        Tutor: Yep! The ball starts moving at 0, and hits the ground at some point in the future (when x is greater than 0.)
+    -> I'm not sure
+        Tutor: Remember, when did the ball start moving?
+        -> When x = 0 seconds
+            Tutor: Right!
+        -> When h(x) = 0 seconds
+            Tutor: Read the problem one more time. Remember, we can make a table to help us keep organized. [img_inputoutputtable.png][/img_inputoutputtable.png]
+            Tutor: What does x represent?
+            -> The number of seconds
+                Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future. So, we can't have a negative x-value. We can't have a negative number of seconds.
+                <<set $learnedReasonable to "true">>
+Tutor: We'll choose {$x2} because the x-coordinate is after x = 0. So, what is our answer?
+-> {$x2}
+    Tutor: Oh, read the problem one more time--what is the problem asking for?
+    -> The number of seconds
+        Tutor: Right! So, our answer is {$x2} seconds. The point is useful, but we need to directly answer the problem.
+        <<set $learnedReasonable to "true">>
+-> {$x2Num}
+    Tutor: And what are the units?
+    -> Seconds
+    -> Minutes
+        Tutor: Read the problem one more time....
+        -> Seconds
+    -> Time
+        Tutor: Remember, units are a measurement of a quantity. For example, the units for time in this problem are...
+        -> Seconds
+        -> Minutes
+            Tutor: Read the problem one more time....
+            -> Seconds
+    Tutor: Yes! So, our answer is {$x2Num} seconds.
+-> {$x2Num} seconds.
+    Tutor: Exactly!
+-> 0
+    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds because our answer needs to be given in seconds. Does that make sense?
+    -> Um....
+    -> No
+    -> It wouldn't be launching at all. Strange...
+    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
+    <<set $learnedReasonable to "true">>
+-> 0 seconds
+    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds. Does that make sense?
+    -> Um....
+    -> No
+    -> It wouldn't be launching at all. Strange...
+    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
+    <<set $learnedReasonable to "true">>
+<<else>>
+Tutor: We have a linear function. In this case, we have one x-intercept. This is where the graph crosses the x-axis. 
+Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifylinearxintercepts.png][/img_identifylinearxintercepts.png]
+Tutor: Look on the graph and see if you can find the x-intercept. Do you see where it is?
+-> Yes
+-> No
+    Tutor: You may have to zoom out with your mouse wheel or pinch to zoom out on your touchpad. You can also drag downwards and upwards until you get to the origin (the middle area.)
+    Tutor: Do you see it now?
+    -> Yes
+Tutor: Awesome! So, on my calculator, I get one point: {$x1}.
+Tutor: So what is our answer?
+-> {$x1}
+    Tutor: Oh, read the problem one more time--what is the problem asking for?
+    -> The number of seconds
+        Tutor: Right! So, our answer is {$x1} seconds. The point is useful, but we need to directly answer the problem.
+        <<set $learnedReasonable to "true">>
+-> {$x1Num}
+    Tutor: And what are the units?
+    -> Seconds
+    -> Minutes
+        Tutor: Read the problem one more time....
+        -> Seconds
+    -> Time
+        Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+        -> Seconds
+        -> Minutes
+            Tutor: Read the problem one more time....
+            -> Seconds
+    Tutor: Yes! So, our answer is {$x1Num} seconds.
+-> {$x1Num} seconds.
+    Tutor: Exactly!
+-> 0
+    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds because our answer needs to be given in seconds. Does that make sense?
+    -> Um....
+    -> No
+    -> It wouldn't be launching at all. Strange...
+    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
+    <<set $learnedReasonable to "true">>
+-> 0 seconds
+    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds. Does that make sense?
+    -> Um....
+    -> No
+    -> It wouldn't be launching at all. Strange...
+    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
+    <<set $learnedReasonable to "true">>
+<<endif>>
+Tutor: Awesome job, {$studentName}! 
+<<jump Overview>>
 ===
 
 title: Coordinates
@@ -677,6 +884,7 @@ Tutor: Let's recap what you've learned! I know this lesson may have been challen
 Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
 <<if $learnedCoordinates is "true">>
 Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedFunctions is "true">>
 Tutor: You've learned about functions and what inputs and outputs are!
@@ -707,10 +915,11 @@ Tutor: LINK TO VIDEO
 Tutor: You've learned what units are! Units are how we measure some quantity. If I say, "I have five!" you won't know what I have five of. But if I say, "I have five apples!" you'll know that I have five apples. The word "apples" is the unit.
 Tutor: LINK TO VIDEO
 <<endif>>
-Tutor: It was great working with you today, {$studentName!} Hope to work with you again. Bye!
--> Bye!
--> Thanks for helping!
-    Tutor: Happy to help!
+<<if $learnedReasonable is "true">>
+Tutor: You've learned about reasonable answers! When you solve a problem, you should always check your answer to make sure it makes sense. For example, if you're solving a problem about how many apples you have, you should check that your answer is a positive number.
+Tutor: LINK TO VIDEO
+<<endif>>
+Tutor: It was great working with you today, {$studentName}! Hope to work with you again!
 Narrator: End of example.
 ===
 `

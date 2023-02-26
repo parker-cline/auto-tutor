@@ -192,12 +192,12 @@ function Customize() {
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-        return [firstRoot, secondRoot];
+        return [Math.round(firstRoot, 2), Math.round(secondRoot, 2)];
     }
 
     const getLinearXIntercepts = () => {
         const xIntercept = -1 * b / a;
-        return [xIntercept];
+        return [Math.round(xIntercept, 2)];
     }
 
 
@@ -243,7 +243,8 @@ function Customize() {
     const navigate = useNavigate();
     const handleStartLesson = () => {
         const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
-        navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds } });
+        const xIntercepts = functionType === 'quadratic' ? getQuadraticXIntercepts() : getLinearXIntercepts();
+        navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds, xIntercepts: xIntercepts } });
     }
 
     return (
@@ -483,6 +484,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     const initializeHistory = (runner) => {
         runner.runner.variables.set("linearity", lessonInfo.functionType === 'linear' ? "true" : "false");
         runner.runner.variables.set("studentName", lessonInfo.studentName);
+        runner.runner.variables.set("x1", "(" + lessonInfo.xIntercepts[0].toString() + ", 0)");
+        runner.runner.variables.set("x2", lessonInfo.functionType === 'linear' ? "none" : "(" + lessonInfo.xIntercepts[1].toString() + ", 0)")
+        runner.runner.variables.set("x1Num", lessonInfo.xIntercepts[0].toString());
+        runner.runner.variables.set("x2Num", lessonInfo.functionType === 'linear' ? "none" : lessonInfo.xIntercepts[1].toString());
         runner.runner.variables.set("functionString", lessonInfo.functionString);
         fastForward(runner);
         return generateDialogueElements(runner.history);
