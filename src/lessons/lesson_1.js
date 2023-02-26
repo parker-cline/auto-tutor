@@ -32,7 +32,7 @@ title: FirstSteps
 ---
 <<set $currSection to "FirstSteps">>
 Tutor: OK! Read the problem again--take your time to make sure you understand it. First, I'll ask you: what do you think the first step would be to solve this problem? 
-Tutor: Select a response. Now, there's more than one option you can choose from this time. But, there is no right or wrong answer! Make your best guess.
+Tutor: Select a response. Now, there's more than one option you can choose from this time. Make your best guess! It's okay if you get something incorrect. Be honest when you pick an answer. We'll learn from our mistakes!
 -> I think we should draw a picture.
     Tutor: Ah, interesting idea! Why would we draw a picture here?
     -> Words are scary. Pictures can be more helpful.
@@ -150,10 +150,9 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                     Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
                     Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
                     Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Failure is an opportunity to learn, you know! I'll share a link to Khan Academy that explains it in more detail. 
-            Tutor: LINK TO VIDEO
+            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Failure is an opportunity to learn, you know! Later, I'll share a link to Khan Academy that explains it in more detail. 
             <<set $learnedIntercepts to "true">>
-        -> Wait, what is x and y? I'm confused.
+        -> Wait, Cauley, what is x and y? I'm confused.
             Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
             <<jump Coordinates>>
     Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
@@ -246,10 +245,9 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                         Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
                         Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
                         Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-                Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. I'll share a link to Khan Academy that explains it in more detail. 
-                Tutor: LINK TO VIDEO
+                Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Later, I'll share a link to Khan Academy that explains it in more detail. 
                 <<set $learnedIntercepts to "true">>
-            -> Wait, what is x and y? I'm confused.
+            -> Wait, Cauley, what is x and y? I'm confused.
                 Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
                 <<jump Coordinates>>
         -> I'm not sure actually.
@@ -350,6 +348,7 @@ Tutor: Basically, you give a function an "input," and it gives back an "output."
     <<set $drink to "lemonade">>
 Tutor: Awesome! So imagine you're paying for a delicious {$drink}. But to get the {$drink}, you have to give the vending machine money. You *input* a dollar into the machine, and the machine *outputs* a {$drink}! [img_function.png][/img_function.png]
 Tutor: Functions are similar. Here, you can input a number, and the function machine will output another number. The cool thing is that each function has a "rule." A function will do the same thing for any number you give it.
+Tutor: If I had a rule to "add 3 to any number," and I gave the function 4, it would output 7. If I gave it 10, it would output 13. I can give it ANY number, and it will always add 3 to the number.
 Tutor: Let's say you're talking to a friendly computer, and you give the computer a rule: "multiply any number I give you by 2!" [img_friendlycomputer.png][/img_friendlycomputer.png]
 Tutor: You give the computer 4. What will the computer *output?*
 -> 8
@@ -371,7 +370,7 @@ Tutor: This function multiplies any number, which we'll call "x," by 2.
 -> Wait... where did x come in here?
     Tutor: x is what is called a variable. x can be any number we want it to be. 
     Tutor: Think of it like a box that holds a number. [img_box.png][/img_box.png]
-    Tutor: That box has a label, like "x" or "y." The box can be filled with any number you want, and the label stays the same.
+    Tutor: That box has a label, like "x" or "y." The box can be filled with any number you want, and the label stays the same, just as you can define a variable as any number (x = 2 or x = 4).
     <<set $learnedVariables to "true">>
     Tutor: Remember when we multiplied 4 by 2? x was 4 then. But in other problems, x may be different.
 -> But I don't see a multiplication sign...
@@ -382,7 +381,7 @@ Tutor: This function multiplies any number, which we'll call "x," by 2.
 Tutor: Let's say x is 8 this time. We can use this function to multiply the number by 2 like this. Do you see how we replace x with the number? That is because x is equal to 8! In the end, our answer is 16. [img_plugin8.png][/img_plugin8.png]
 Tutor: One more time. Let's say x = 5. Use the function to multiply x by 2. Follow the example on the whiteboard... show your work! 
 Tutor: Click "I'm done" when you're finished. It's okay if you don't get the answer--we'll go over it together if you're stuck.
--> I'm done
+-> I'm done, Cauley!
 Tutor: All right, what did you get as your answer?
 -> 10
     Tutor: Awesome! Congratulations, {$studentName}!
@@ -395,7 +394,7 @@ Tutor: All right, what did you get as your answer?
     Remember to separate the 2 and the 5 with parentheses. 2(5). This means we are multiplying 2 * 5. What is that? [img_step2.png][/img_step2.png]
     -> 10
         Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
--> I'm confused
+-> I'm confused, Cauley
     Tutor: Let's walk through this step by step. Copy down what I'm writing. We'll start by writing our function... [img_step1.png][/img_step1.png]
     Tutor: Next, plugging in 5 for x. We'll replace x with 5 because x is equal to 5. [img_step2.png][/img_step2.png]
     Tutor: What would happen if we did not put parentheses around the 5?
@@ -446,7 +445,7 @@ Tutor: I just graphed the function in the left half of the screen. If you'd like
 Tutor: By the way: we just graphed a function. Do you know what a function is?
 -> Yes
     Tutor: Great! Just making sure.
--> No
+-> No... Cauley, what is a function?
     Tutor: Ooh, this is a great time to tell you!
     <<jump Functions>>
 <<endif>>
@@ -610,7 +609,7 @@ Tutor: Now the second number "y" is 1. If "y" is positive, we move up. If "y" is
 Tutor: We end up with this picture: [img_examplegraphed.png][/img_examplegraphed.png]
 Tutor: Order matters. "We all walk before we climb." This may help you remember! [img_xyclimbing.png][/img_xyclimbing.png]
 Tutor: Okay, let's try another problem. Go ahead and draw this picture on the whiteboard down below. [img_graphtodraw.png][/img_graphtodraw.png]
--> I got it!
+-> I got it, Cauley!
 Tutor: Awesome! This is a coordinate plane. It's a grid with an x-axis and a y-axis. The x-axis is horizontal, and the y-axis is vertical.
 Tutor: Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that.
 -> I think I got it!
@@ -652,8 +651,7 @@ Tutor: Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do th
     Tutor: This means we go two units left, and one unit up. Like this! [img_coordinate_plane_graphing.png][/img_coordinate_plane_graphing.png]
     Tutor: We go two units left, first. Then, we go one unit up.
 <<set $learnedCoordinates to "true">>
-Tutor: Hopefully this makes a little more sense now! I'll share a link to a video that goes over this in more detail.
-Tutor: LINK TO VIDEO
+Tutor: Hopefully this makes a little more sense now! Later, I'll share a link to a video that goes over this in more detail.
 <<if $currentSection is "Graphing">>
 Tutor: Let's go back to the problem. We'll graph the function now. 
 <<if $learnedFunctions is "true">>
@@ -675,32 +673,39 @@ Tutor: Let's go back to the problem. We'll first draw a picture!
 
 title: Overview
 ---
-Tutor: Let's recap what you've learned:
+Tutor: Let's recap what you've learned! I know this lesson may have been challenging, but now you know where you can learn in the future. I know when I first learned algebra, there was a lot of strange stuff I didn't fully understand. How could a number be negative? Why is a number a letter like "x?" But over time, you'll see that algebra is not as scary as it seems.
 Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
 <<if $learnedCoordinates is "true">>
 Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
 <<endif>>
 <<if $learnedFunctions is "true">>
 Tutor: You've learned about functions and what inputs and outputs are!
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedQuadraticDifferentApproaches is "true">>
 Tutor: You've learned about quadratic equations and how you can use different approaches to solve them!
 Tutor: We used graphing today because we had a calculator. Sometimes, other ways are better when you don't have a calculator. The quadratic formula, if you've heard of that, always works and doesn't require a calculator. Sometimes, you can even do factoring, if you've heard of that, which can be much faster!
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedIntercepts is "true">>
 Tutor: You've learned about the difference between x and y-intercepts! X-intercepts cross a horizontal line, while y-intercepts cross a vertical line.
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedVariables is "true">>
 Tutor: You've learned about what a variable is! It's a letter that represents a number. Think of it like a box that holds a number. 
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedLinearQuadratic is "true">>
 Tutor: You've learned about linear and quadratic equations! Linear equations (with one x) look like lines, while quadratic equations (with an x^2) look like curves: smiley faces or frowny faces.
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedHiddenMultiplication is "true">>
 Tutor: You've learned about hidden multiplication! When you see a number next to an x, it's actually a number multiplied by x. For example, 3x is the same as 3 * x.
+Tutor: LINK TO VIDEO
 <<endif>>
 <<if $learnedUnits is "true">>
 Tutor: You've learned what units are! Units are how we measure some quantity. If I say, "I have five!" you won't know what I have five of. But if I say, "I have five apples!" you'll know that I have five apples. The word "apples" is the unit.
+Tutor: LINK TO VIDEO
 <<endif>>
 Tutor: It was great working with you today, {$studentName!} Hope to work with you again. Bye!
 -> Bye!
