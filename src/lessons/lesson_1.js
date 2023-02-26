@@ -659,6 +659,7 @@ Tutor: What are we looking for?
 
 title: WrapUp
 ---
+<<set $currentSection to "WrapUp">>
 <<if $linearity is "false">>
 Tutor: We have a quadratic function. In this case, we have two x-intercepts. These are where the graph crosses the x-axis.
 Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifyquadraticxintercepts.png][/img_identifyquadraticxintercepts.png]
@@ -672,28 +673,64 @@ Tutor: Awesome! So, on my calculator, I get two points: {$x1} and {$x2}.
 Tutor: Which one should we choose?
 -> {$x1}
     Tutor: And why are we choosing that one?
+    -> Because the y-coordinate is before y = 0
+        Tutor: Hmm.. 
+        <<if $learnedCoordinates is "true">>
+        Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
+        Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
+        -> It's like we're traveling back in time!
+            Tutor: Haha,right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+        -> I'm confused.
+            Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+        <<else>>
+        Tutor: Let's have a brief review of the difference between x and y!
+        <<jump Coordinates>>
+        <<endif>>
     -> Because the x-coordinate is before x = 0
         Tutor: You're on the right track. Let's check to make sure our answer is reasonable.
         Tutor: X represents the number of seconds, remember? If the x-intercept is before x = 0, that means we have negative seconds. Does that make sense?
         -> It's like we're traveling back in time!
-            Tutor: Haha, we don't need to get that complicated, Doc! Thankfully, the ball is moving forward in time.
+            Tutor: Haha, we don't need to get that complicated! Thankfully, the ball is moving forward in time.
         -> I'm confused.
-            Tutor: I imagine you are! A negative number of seconds is very strange... maybe our answer isn't reasonable?
+            Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe our answer isn't reasonable?
         Tutor: Whenever we get an answer, we should double-check to make sure it's reasonable. We can't have a negative number of seconds.
         <<set $learnedReasonable to "true">>
     -> I don't know
         Tutor: Remember, when did the ball start moving?
         -> When x = 0 seconds
-            Tutor: Right!
+            Tutor: This means that the ball starts moving at 0 seconds, and hits the ground at some point in the future (when x is greater than 0.)
         -> When h(x) = 0 seconds
             Tutor: Read the problem one more time. Remember, we can make a table to help us keep organized. [img_inputoutputtable.png][/img_inputoutputtable.png]
             Tutor: What does x represent?
             -> The number of seconds
-                Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future. So, we can't have a negative x-value. We can't have a negative number of seconds.
+                Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future (when x is greater than 0.)
+        Tutor: {$x1} wouldn't make sense. Why not?
+        -> Because the x-coordinate is before x = 0
+            Tutor: Yep! And x is the number of seconds... What does it mean to have a negative number of seconds?
+            -> It's like we're traveling back in time!
+                Tutor: Haha, exactly! And we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+            -> I'm confused.
+                Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+        -> Because the y-coordinate is before y = 0
+            Tutor: Hmm.. 
+            <<if $learnedCoordinates is "true">>
+            Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
+            Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
+            -> It's like we're traveling back in time!
+                Tutor: Haha,right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+            -> I'm confused.
+                Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+            <<else>>
+            Tutor: Let's have a brief review of the difference between x and y!
+            <<jump Coordinates>>
+            <<endif>>
+        -> We can't have a negative number of seconds.
+            Tutor: Exactly!
+        Tutor: This means we can't have a negative number of seconds. We can't have a negative x-value here! So {$x2} is the point we'll look at.
 -> {$x2}
     Tutor: And why are we choosing that one?
     -> Because the x-coordinate is after x = 0
-        Tutor: Yep! The ball starts moving at 0, and hits the ground at some point in the future (when x is greater than 0.)
+        Tutor: Yep! The ball starts moving at 0, and hits the ground at some point in the future (a positive number of seconds, when x is greater than 0.)
     -> I'm not sure
         Tutor: Remember, when did the ball start moving?
         -> When x = 0 seconds
@@ -704,43 +741,18 @@ Tutor: Which one should we choose?
             -> The number of seconds
                 Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future. So, we can't have a negative x-value. We can't have a negative number of seconds.
                 <<set $learnedReasonable to "true">>
-Tutor: We'll choose {$x2} because the x-coordinate is after x = 0. So, what is our answer?
--> {$x2}
-    Tutor: Oh, read the problem one more time--what is the problem asking for?
-    -> The number of seconds
-        Tutor: Right! So, our answer is {$x2} seconds. The point is useful, but we need to directly answer the problem.
-        <<set $learnedReasonable to "true">>
--> {$x2Num}
-    Tutor: And what are the units?
-    -> Seconds
-    -> Minutes
-        Tutor: Read the problem one more time....
-        -> Seconds
-    -> Time
-        Tutor: Remember, units are a measurement of a quantity. For example, the units for time in this problem are...
-        -> Seconds
-        -> Minutes
-            Tutor: Read the problem one more time....
-            -> Seconds
-    Tutor: Yes! So, our answer is {$x2Num} seconds.
--> {$x2Num} seconds.
-    Tutor: Exactly!
--> 0
-    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
-    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds because our answer needs to be given in seconds. Does that make sense?
-    -> Um....
-    -> No
-    -> It wouldn't be launching at all. Strange...
-    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
-    <<set $learnedReasonable to "true">>
--> 0 seconds
-    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
-    Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds. Does that make sense?
-    -> Um....
-    -> No
-    -> It wouldn't be launching at all. Strange...
-    Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
-    <<set $learnedReasonable to "true">>
+    -> Because the y-coordinate is after y = 0
+        <<if $learnedCoordinates is "true">>
+        Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
+        Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
+        -> It's like we're traveling back in time!
+            Tutor: Haha, right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+        -> I'm confused.
+            Tutor: I imagine you are, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+        <<else>>
+        Tutor: Let's have a brief review of the difference between x and y!
+        <<jump Coordinates>>
+        <<endif>>
 <<else>>
 Tutor: We have a linear function. In this case, we have one x-intercept. This is where the graph crosses the x-axis. 
 Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifylinearxintercepts.png][/img_identifylinearxintercepts.png]
@@ -751,13 +763,56 @@ Tutor: Look on the graph and see if you can find the x-intercept. Do you see whe
     Tutor: Do you see it now?
     -> Yes
 Tutor: Awesome! So, on my calculator, I get one point: {$x1}.
+<<endif>>
 Tutor: So what is our answer?
--> {$x1}
+-> {$answerCoords}
     Tutor: Oh, read the problem one more time--what is the problem asking for?
     -> The number of seconds
-        Tutor: Right! So, our answer is {$x1} seconds. The point is useful, but we need to directly answer the problem.
+        Tutor: Right! So, instead of the point, we choose a number for the seconds. The point is useful, but we need to directly answer the problem.
         <<set $learnedReasonable to "true">>
--> {$x1Num}
+        Tutor: Which number should we choose?
+        -> {$answerNum}
+            Tutor: And what are the units?
+            -> Seconds
+            -> Minutes
+                Tutor: Read the problem one more time....
+                -> Seconds
+            -> Time
+                Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+                -> Seconds
+                -> Minutes
+                    Tutor: Read the problem one more time....
+                    -> Seconds
+        -> 0
+            Tutor: Hmm... Let's check to make sure our answer is reasonable.
+            Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds because our answer needs to be given in seconds. Does that make sense?
+            -> Um....
+            -> No
+            -> It wouldn't be launching at all. Strange...
+            Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
+            <<set $learnedReasonable to "true">>
+            <<if $learnedCoordinates is "false">>
+            Tutor: Oh, I've been saying a lot about x and y stuff. Need a refresh on what x and y are?
+            -> Yes
+                Tutor: Okay!
+                <<jump Coordinates>>
+            -> No
+                Tutor: Okay!
+            <<endif>>
+            Tutor: In that case... we must choose the other number. Which number should we choose?
+            -> {$answerNum}!
+                Tutor: And what are the units?
+                -> Seconds
+                -> Minutes
+                    Tutor: Read the problem one more time....
+                    -> Seconds
+                -> Time
+                    Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+                    -> Seconds
+                    -> Minutes
+                        Tutor: Read the problem one more time....
+                        -> Seconds
+-> {$answerNum}
     Tutor: And what are the units?
     -> Seconds
     -> Minutes
@@ -769,27 +824,39 @@ Tutor: So what is our answer?
         -> Minutes
             Tutor: Read the problem one more time....
             -> Seconds
-    Tutor: Yes! So, our answer is {$x1Num} seconds.
--> {$x1Num} seconds.
-    Tutor: Exactly!
+-> {$answerNum} seconds
 -> 0
-    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: Hmm... Let's check to make sure our answer is reasonable.
     Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds because our answer needs to be given in seconds. Does that make sense?
     -> Um....
     -> No
     -> It wouldn't be launching at all. Strange...
     Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
     <<set $learnedReasonable to "true">>
+    Tutor: And what does that mean? If we select the other number...
+    -> {$answerNum}!
+    Tutor: And what are the units?
+    -> Seconds
+    -> Minutes
+        Tutor: Read the problem one more time....
+        -> Seconds
+    -> Time
+        Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+        -> Seconds
+        -> Minutes
+            Tutor: Read the problem one more time....
+            -> Seconds
 -> 0 seconds
-    Tutor: Hmm... I don't think that's right. Let's check to make sure our answer is reasonable.
+    Tutor: Hmm... Let's check to make sure our answer is reasonable.
     Tutor: The ball is launched at x = 0 seconds. And it hits the ground at 0 seconds. Does that make sense?
     -> Um....
     -> No
     -> It wouldn't be launching at all. Strange...
     Tutor: No worries if you're confused. That must mean our answer isn't reasonable. Whenever we get an answer, we should double-check to make sure it's reasonable. 
     <<set $learnedReasonable to "true">>
-<<endif>>
-Tutor: Awesome job, {$studentName}! 
+    Tutor: And what does that mean? If we select the other number...
+    -> {$answerNum} seconds!
+Tutor: Yes! {$answerNum} seconds. Awesome job, {$studentName}! 
 <<jump Overview>>
 ===
 
@@ -872,6 +939,9 @@ Tutor: Do you need a refresher on what a function is?
     Tutor: In that case, let's get graphing!
     <<jump Graphing>>
 <<endif>>
+<<elseif $currentSection is "WrapUp">>
+Tutor: Let's finish up the problem then!
+<<jump WrapUp>>
 <<else>>
 Tutor: Let's go back to the problem. We'll first draw a picture! 
 <<jump Drawing>>

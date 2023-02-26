@@ -12,7 +12,7 @@ import {
     RouterProvider,
     useNavigate,
     useLocation,
-    Link
+    Link,
 } from "react-router-dom";
 import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill';
 import functionPlot from 'function-plot';
@@ -482,13 +482,25 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     }
 
     const initializeHistory = (runner) => {
-        runner.runner.variables.set("linearity", lessonInfo.functionType === 'linear' ? "true" : "false");
+
+        const x1Coords = "(" + lessonInfo.xIntercepts[0].toString() + ", 0)"
+        const x2Coords = lessonInfo.functionType === 'linear' ? "none" : "(" + lessonInfo.xIntercepts[1].toString() + ", 0)"
+        const answerCoords = lessonInfo.functionType === 'linear' ? x1Coords : x2Coords
+        const x1Num = lessonInfo.xIntercepts[0].toString();
+        const x2Num = lessonInfo.functionType === 'linear' ? "none" : lessonInfo.xIntercepts[1].toString();
+        const answerNum = lessonInfo.functionType === 'linear' ? x1Num : x2Num
+        const linearity = lessonInfo.functionType === 'linear' ? "true" : "false"
+
+        runner.runner.variables.set("linearity", linearity);
         runner.runner.variables.set("studentName", lessonInfo.studentName);
-        runner.runner.variables.set("x1", "(" + lessonInfo.xIntercepts[0].toString() + ", 0)");
-        runner.runner.variables.set("x2", lessonInfo.functionType === 'linear' ? "none" : "(" + lessonInfo.xIntercepts[1].toString() + ", 0)")
-        runner.runner.variables.set("x1Num", lessonInfo.xIntercepts[0].toString());
-        runner.runner.variables.set("x2Num", lessonInfo.functionType === 'linear' ? "none" : lessonInfo.xIntercepts[1].toString());
+        runner.runner.variables.set("x1", x1Coords);
+        runner.runner.variables.set("x2", x2Coords)
+        runner.runner.variables.set("x1Num", x1Num);
+        runner.runner.variables.set("x2Num", x2Num);
+        runner.runner.variables.set("answerNum", answerNum)
+        runner.runner.variables.set("answerCoords", answerCoords);
         runner.runner.variables.set("functionString", lessonInfo.functionString);
+
         fastForward(runner);
         return generateDialogueElements(runner.history);
     }
