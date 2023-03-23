@@ -181,13 +181,13 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
 /* Customize Page */
 
 function Customize() {
-    const [a, setA] = useState('1');
+    const [a, setA] = useState('-1');
     const [b, setB] = useState('1');
     const [c, setC] = useState('1');
     const [functionType, setFunctionType] = useState('quadratic');
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
-    const [studentName, setStudentName] = useState('');
+    const [studentName, setStudentName] = useState('TestName');
 
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
