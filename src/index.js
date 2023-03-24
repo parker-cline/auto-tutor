@@ -323,19 +323,19 @@ function Customize() {
                     <div className="col-sm-4">
                         <h3>Checklist</h3>
                         <ul className="list-group">
-                            <li className="list-group-item">
+                            <li className="list-group-item" style={heightCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
                                 <StaticMathField>f(0) > 0</StaticMathField> {heightCheck() && <span className="badge bg-success">✓</span>}
                             </li>
-                            <li className="list-group-item">
+                            <li className="list-group-item" style={xInterceptPositiveCheck() ? {'color': 'black'} : {'color': 'red'} }>
                                 There is some x-intercept with an x-value greater than 0 {xInterceptPositiveCheck() && <span className="badge bg-success">✓</span>}
                             </li>
-                            <li className="list-group-item">
+                            <li className="list-group-item" style={xInterceptBoundsCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
                                 The x-intercept(s) are visible within the selected x-bounds {xInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
                             </li>
-                            <li className="list-group-item">
+                            <li className="list-group-item" style={yInterceptBoundsCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
                                 The y-intercept is visible within the selected y-bounds {yInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
                             </li>
-                            <li className="list-group-item">
+                            <li className="list-group-item" style={allFieldsFilledCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
                                 All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
                             </li>
                         </ul>
