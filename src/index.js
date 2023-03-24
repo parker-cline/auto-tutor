@@ -371,6 +371,7 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
         try {
             functionPlot({
                 target: '#plot',
+                disableZoom: true,
                 data: [{
                     fn: functionString,
                     skipTip: true
