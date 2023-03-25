@@ -178,16 +178,27 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
     );
 }
 
+
 /* Customize Page */
 
-function ChecklistItem({ func, itemDescription }) {
+function FunctionTypeButton({functionType, setFunctionType, checked}) {
     return (
-        <li className="list-group-item" style={func() ? { 'color': 'black' } : { 'color': 'red' }}>
-            {itemDescription} {func() && <span className="badge bg-success">✓</span>}
+        <>
+            <input className="btn-check" type="radio" id={functionType} name="functionType" value={functionType} checked={checked} onChange={(e) => setFunctionType(e.target.value)} />
+            <label htmlFor={functionType} className="btn btn-success">{functionType.charAt(0).toUpperCase() + functionType.slice(1)}</label>
+        </>
+    )
+}
+
+function ChecklistItem({ testFunc, itemDescription }) {
+    return (
+        <li className="list-group-item" style={testFunc() ? { 'color': 'black' } : { 'color': 'red' }}>
+            {itemDescription} {testFunc() && <span className="badge bg-success">✓</span>}
         </li>
     );
 
 }
+
 function Customize() {
     const [a, setA] = useState('-1');
     const [b, setB] = useState('1');
@@ -263,10 +274,8 @@ function Customize() {
                     <div className="col-sm-4">
 
                         <h1>Choose the type of equation</h1>
-                        <input className="btn-check" type="radio" id="quadratic" name="functionType" value="quadratic" checked={functionType === 'quadratic'} onChange={(e) => setFunctionType(e.target.value)} />
-                        <label htmlFor="quadratic" className="btn btn-success">Quadratic</label>
-                        <input className="btn-check" type="radio" id="linear" name="functionType" value="linear" checked={functionType === 'linear'} onChange={(e) => setFunctionType(e.target.value)} />
-                        <label htmlFor="linear" className="btn btn-success">Linear</label>
+                        <FunctionTypeButton functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType}/>
+                        <FunctionTypeButton functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType}/>
                         <h1>Enter the equation you want to plot</h1>
                         <StaticMathField>{'f(x) ='}</StaticMathField>
                         <EditableMathField
@@ -329,11 +338,11 @@ function Customize() {
                     <div className="col-sm-4">
                         <h3>Checklist</h3>
                         <ul className="list-group">
-                            <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} func={heightCheck} />
-                            <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' func={xInterceptPositiveCheck} />
-                            <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' func={xInterceptBoundsCheck} />
-                            <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' func={yInterceptBoundsCheck} />
-                            <ChecklistItem itemDescription='All fields are filled' func={allFieldsFilledCheck} />
+                            <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} testFunc={heightCheck} />
+                            <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' testFunc={xInterceptPositiveCheck} />
+                            <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' testFunc={xInterceptBoundsCheck} />
+                            <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' testFunc={yInterceptBoundsCheck} />
+                            <ChecklistItem itemDescription='All fields are filled' testFunc={allFieldsFilledCheck} />
                         </ul>
                         <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
                     </div>
