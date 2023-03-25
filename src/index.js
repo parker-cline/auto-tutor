@@ -181,7 +181,7 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
 
 /* Customize Page */
 
-function FunctionTypeButton({functionType, setFunctionType, checked}) {
+function FunctionTypeButton({ functionType, setFunctionType, checked }) {
     return (
         <>
             <input className="btn-check" type="radio" id={functionType} name="functionType" value={functionType} checked={checked} onChange={(e) => setFunctionType(e.target.value)} />
@@ -218,7 +218,6 @@ function Customize() {
         const xIntercept = -1 * b / a;
         return [Math.round(xIntercept, 2)];
     }
-
 
     const xInterceptBoundsCheck = () => {
         if (functionType === 'linear') {
@@ -274,8 +273,8 @@ function Customize() {
                     <div className="col-sm-4">
 
                         <h1>Choose the type of equation</h1>
-                        <FunctionTypeButton functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType}/>
-                        <FunctionTypeButton functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType}/>
+                        <FunctionTypeButton functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType} />
+                        <FunctionTypeButton functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType} />
                         <h1>Enter the equation you want to plot</h1>
                         <StaticMathField>{'f(x) ='}</StaticMathField>
                         <EditableMathField
@@ -388,6 +387,7 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
                 yAxis: { domain: yBounds },
             });
         } catch (e) {
+            console.log("Error plotting function: ", e);
         }
     }, [functionString, xBounds, yBounds, windowSize, factor]);
 
@@ -450,7 +450,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         return null;
     };
 
-    const generateDialogueText = (currPage, index) => {
+    const generateTextBox = (currPage, index) => {
         return (
             <ChatMessageLeft index={index}>
                 <ImageDisplayer imgString={getImageName(currPage)} />
@@ -459,7 +459,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         );
     };
 
-    const generateDialogueOptions = (currPage, index) => {
+    const generateOptionsBox = (currPage, index) => {
         const listItems = currPage.options.map((dialogueChoice, index) => (
             <li key={index} className="link-button" onClick={() => selectChoice(index)}>
                 {dialogueChoice.text}
@@ -475,7 +475,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         );
     }
 
-    const generateDialogueOptionSelected = (currPage, index) => {
+    const generateSelectedOptionsBox = (currPage, index) => {
         return (
             <ChatMessageRight index={index}>
                 <h2>{currPage.options[currPage.selected].text}</h2>
@@ -483,14 +483,14 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         );
     }
 
-    const generateDialogueElements = (historyItems) => {
+    const generateDialogue = (historyItems) => {
         const listItems = historyItems.map((historyItem, index) => (
-            historyItem.options ? generateDialogueOptionSelected(historyItem, index) : generateDialogueText(historyItem, index)
+            historyItem.options ? generateSelectedOptionsBox(historyItem, index) : generateTextBox(historyItem, index)
         ));
         if (runner.currentResult.text !== "End of example.") {
-            listItems.push(generateDialogueOptions(runner.currentResult));
+            listItems.push(generateOptionsBox(runner.currentResult));
         } else {
-            listItems.push(generateDialogueText(runner.currentResult))
+            listItems.push(generateTextBox(runner.currentResult))
         }
         return listItems;
     }
@@ -498,7 +498,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     const selectChoice = (idx) => {
         runner.advance(idx);
         fastForward(runner);
-        setRunnerHistory(generateDialogueElements(runner.history));
+        setRunnerHistory(generateDialogue(runner.history));
     }
 
     const initializeHistory = (runner) => {
@@ -511,13 +511,24 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         const answerNum = lessonInfo.functionType === 'linear' ? x1Num : x2Num
         const linearity = lessonInfo.functionType === 'linear' ? "true" : "false"
 
-        const variables = { 'linearity': linearity, 'studentName': lessonInfo.studentName, 'x1': x1Coords, 'x2': x2Coords, 'x1Num': x1Num, 'x2Num': x2Num, 'answerNum': answerNum, 'answerCoords': answerCoords, 'functionString': lessonInfo.functionString }
+        const variables = {
+            'linearity': linearity,
+            'studentName': lessonInfo.studentName,
+            'x1': x1Coords,
+            'x2': x2Coords,
+            'x1Num': x1Num,
+            'x2Num': x2Num,
+            'answerNum': answerNum,
+            'answerCoords': answerCoords,
+            'functionString': lessonInfo.functionString
+        }
+
         for (const key in variables) {
             runner.runner.variables.set(key, variables[key]);
         }
 
         fastForward(runner);
-        return generateDialogueElements(runner.history);
+        return generateDialogue(runner.history);
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
