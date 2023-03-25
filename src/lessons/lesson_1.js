@@ -62,7 +62,7 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
     Tutor: Why don't we try drawing a picture? Then we can see what is going on.
     <<jump Drawing>>
     <<else>>
-    <set $learnedQuadraticDifferentApproaches to "true">>
+    <<set $learnedQuadraticDifferentApproaches to "true">>
     Tutor: You are on the right track. h(x) is a quadratic function, so we need to think about those. 
     Tutor: And why would we use the quadratic formula here?
     -> There's a function we can use it on.
