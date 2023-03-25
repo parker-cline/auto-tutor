@@ -396,6 +396,9 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
     );
 
 }
+
+/* Chatting and dialogue  */
+
 function ChatMessageLeft({ index, children }) {
     return (
         <div key={index} className="chat-message p-2">
@@ -412,7 +415,6 @@ function ChatMessageRight({ index, children }) {
     );
 }
 
-/* Chatting and dialogue  */
 function ChatBox({ chatMessages }) {
     return (
         <div id="chat-box" className="lesson-column border overflow-y-auto">{chatMessages}</div>
@@ -423,7 +425,13 @@ function ImageDisplayer({ imgString }) {
     if (!imgString) {
         return null;
     }
-    return <img src={require('./assets/images/' + imgString)} className="img-fluid" alt={imgString} />
+    try {
+        const imgSrc = require('./assets/images/' + imgString);
+        return <img src={imgSrc} className="img-fluid" alt={imgString} />;
+    } catch (err) {
+        console.error(`Error displaying image ${imgString}: ${err}`);
+        return <p>Error displaying image</p>;
+    }
 }
 
 function Dialogue({ dialogueItem, lessonInfo }) {
@@ -451,9 +459,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     };
 
     const generateTextBox = (currPage, index) => {
+        const imageName = getImageName(currPage);
         return (
             <ChatMessageLeft index={index}>
-                <ImageDisplayer imgString={getImageName(currPage)} />
+                {imageName && <ImageDisplayer imgString={imageName} />}
                 <h6>{currPage.text}</h6>
             </ChatMessageLeft>
         );
@@ -484,15 +493,15 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     }
 
     const generateDialogue = (historyItems) => {
-        const listItems = historyItems.map((historyItem, index) => (
+        const messageList = historyItems.map((historyItem, index) => (
             historyItem.options ? generateSelectedOptionsBox(historyItem, index) : generateTextBox(historyItem, index)
         ));
         if (runner.currentResult.text !== "End of example.") {
-            listItems.push(generateOptionsBox(runner.currentResult));
+            messageList.push(generateOptionsBox(runner.currentResult));
         } else {
-            listItems.push(generateTextBox(runner.currentResult))
+            messageList.push(generateTextBox(runner.currentResult))
         }
-        return listItems;
+        return messageList;
     }
 
     const selectChoice = (idx) => {
