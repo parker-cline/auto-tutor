@@ -559,7 +559,6 @@ function Lesson() {
                     <BlockMath math={lessonInfo.functionString} />
                 </div>
                 <h2>At what time does the ball reach the ground?</h2>
-
                 <br></br>
                 <div className="row">
                     <Dialogue dialogueItem={dialogue1} lessonInfo={lessonInfo} />
@@ -587,6 +586,16 @@ function Homepage() {
 
 /* Routing */
 
+function ErrorBoundary() {
+    return (
+        <>
+            <h1>Looks like you've encountered an error.</h1>
+            <p>If you see this message, you should contact Parker. Might be an issue. For now...</p>
+            <Link to={'/setup'}>Go back to the setup page.</Link>
+        </>
+    )
+}
+
 const router = createBrowserRouter([
     {
         path: "/lesson",
@@ -598,7 +607,8 @@ const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <Homepage />
+        element: <Homepage />,
+        errorElement: <ErrorBoundary />
     }
 ]);
 
