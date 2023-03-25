@@ -180,7 +180,7 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
 
 /* Customize Page */
 
-function ChecklistItem({ func, itemDescription}) {
+function ChecklistItem({ func, itemDescription }) {
     return (
         <li className="list-group-item" style={func() ? { 'color': 'black' } : { 'color': 'red' }}>
             {itemDescription} {func() && <span className="badge bg-success">✓</span>}
@@ -294,7 +294,6 @@ function Customize() {
                             </>}
                         <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
                         <EditableMathField
-
                             latex={xBounds[0]}
                             onChange={(mathField) => {
                                 setXBounds([mathField.latex(), xBounds[1]])
@@ -302,7 +301,6 @@ function Customize() {
                         />
                         <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
                         <EditableMathField
-
                             latex={xBounds[1]}
                             onChange={(mathField) => {
                                 setXBounds([xBounds[0], mathField.latex()])
@@ -389,6 +387,21 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
     );
 
 }
+function ChatMessageLeft({ index, children }) {
+    return (
+        <div key={index} className="chat-message p-2">
+            {children}
+        </div>
+    );
+}
+
+function ChatMessageRight({ index, children }) {
+    return (
+        <div key={index} className="p-3 chat-message right">
+            {children}
+        </div>
+    );
+}
 
 /* Chatting and dialogue  */
 function ChatBox({ chatMessages }) {
@@ -430,10 +443,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
 
     const generateDialogueText = (currPage, index) => {
         return (
-            <div key={index} className="chat-message p-2">
+            <ChatMessageLeft index={index}>
                 <ImageDisplayer imgString={getImageName(currPage)} />
                 <h6>{currPage.text}</h6>
-            </div>
+            </ChatMessageLeft>
         );
     };
 
@@ -444,20 +457,20 @@ function Dialogue({ dialogueItem, lessonInfo }) {
             </li>
         ));
         return (
-            <div key={index} className="p-3 chat-message right">
+            <ChatMessageRight index={index}>
                 <h2>Choose an option.</h2>
                 <ul>
                     {listItems}
                 </ul>
-            </div>
+            </ChatMessageRight>
         );
     }
 
     const generateDialogueOptionSelected = (currPage, index) => {
         return (
-            <div key={index} className="p-3 chat-message right">
+            <ChatMessageRight index={index}>
                 <h2>{currPage.options[currPage.selected].text}</h2>
-            </div>
+            </ChatMessageRight>
         );
     }
 
@@ -489,15 +502,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         const answerNum = lessonInfo.functionType === 'linear' ? x1Num : x2Num
         const linearity = lessonInfo.functionType === 'linear' ? "true" : "false"
 
-        runner.runner.variables.set("linearity", linearity);
-        runner.runner.variables.set("studentName", lessonInfo.studentName);
-        runner.runner.variables.set("x1", x1Coords);
-        runner.runner.variables.set("x2", x2Coords)
-        runner.runner.variables.set("x1Num", x1Num);
-        runner.runner.variables.set("x2Num", x2Num);
-        runner.runner.variables.set("answerNum", answerNum)
-        runner.runner.variables.set("answerCoords", answerCoords);
-        runner.runner.variables.set("functionString", lessonInfo.functionString);
+        const variables = { 'linearity': linearity, 'studentName': lessonInfo.studentName, 'x1': x1Coords, 'x2': x2Coords, 'x1Num': x1Num, 'x2Num': x2Num, 'answerNum': answerNum, 'answerCoords': answerCoords, 'functionString': lessonInfo.functionString }
+        for (const key in variables) {
+            runner.runner.variables.set(key, variables[key]);
+        }
 
         fastForward(runner);
         return generateDialogueElements(runner.history);
