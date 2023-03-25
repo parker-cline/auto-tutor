@@ -180,6 +180,14 @@ function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }
 
 /* Customize Page */
 
+function ChecklistItem({ func, itemDescription}) {
+    return (
+        <li className="list-group-item" style={func() ? { 'color': 'black' } : { 'color': 'red' }}>
+            {itemDescription} {func() && <span className="badge bg-success">✓</span>}
+        </li>
+    );
+
+}
 function Customize() {
     const [a, setA] = useState('-1');
     const [b, setB] = useState('1');
@@ -323,21 +331,11 @@ function Customize() {
                     <div className="col-sm-4">
                         <h3>Checklist</h3>
                         <ul className="list-group">
-                            <li className="list-group-item" style={heightCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
-                                <StaticMathField>f(0) > 0</StaticMathField> {heightCheck() && <span className="badge bg-success">✓</span>}
-                            </li>
-                            <li className="list-group-item" style={xInterceptPositiveCheck() ? {'color': 'black'} : {'color': 'red'} }>
-                                There is some x-intercept with an x-value greater than 0 {xInterceptPositiveCheck() && <span className="badge bg-success">✓</span>}
-                            </li>
-                            <li className="list-group-item" style={xInterceptBoundsCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
-                                The x-intercept(s) are visible within the selected x-bounds {xInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
-                            </li>
-                            <li className="list-group-item" style={yInterceptBoundsCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
-                                The y-intercept is visible within the selected y-bounds {yInterceptBoundsCheck() && <span className="badge bg-success">✓</span>}
-                            </li>
-                            <li className="list-group-item" style={allFieldsFilledCheck() ? { 'color': 'black' } : { 'color': 'red' }}>
-                                All fields are filled in {allFieldsFilledCheck() && <span className="badge bg-success">✓</span>}
-                            </li>
+                            <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} func={heightCheck} />
+                            <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' func={xInterceptPositiveCheck} />
+                            <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' func={xInterceptBoundsCheck} />
+                            <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' func={yInterceptBoundsCheck} />
+                            <ChecklistItem itemDescription='All fields are filled' func={allFieldsFilledCheck} />
                         </ul>
                         <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
                     </div>
@@ -433,7 +431,6 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     const generateDialogueText = (currPage, index) => {
         return (
             <div key={index} className="chat-message p-2">
-                <i className="bi bi-bookmark-plus bookmark-icon"></i>
                 <ImageDisplayer imgString={getImageName(currPage)} />
                 <h6>{currPage.text}</h6>
             </div>
