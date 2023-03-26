@@ -1,4 +1,4 @@
-# AutoTutor: Proof-of-Concept for Personalized, Customizable Algebra Math Lessons
+# PathFinder: Proof-of-Concept for Personalized, Customizable Algebra Math Lessons
 
 Developed as part of a Capstone project for Minerva University.
 

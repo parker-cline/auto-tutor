@@ -4,7 +4,7 @@ import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill
 import { useNavigate } from 'react-router-dom';
 import FunctionPlot from './components/functionPlot.js';
 
-addStyles();
+addStyles(); // needed for MathQuill
 
 function FunctionTypeSetter({ functionType, setFunctionType, checked }) {
     return (

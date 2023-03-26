@@ -6,8 +6,8 @@ function Homepage() {
     return (
         <>
             <div className="container p-3">
-                <h1>AutoTutor</h1>
-                <h2>Automated, adaptive, personalized math tutoring in algebra</h2>
+                <h1>PathFinder</h1>
+                <h4>Automated, adaptive, personalized math tutoring in algebra</h4>
                 <Link to={'/setup'}>Setup Lesson</Link>
             </div>
         </>
