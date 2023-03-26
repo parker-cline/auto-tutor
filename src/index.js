@@ -96,15 +96,19 @@ function Customize() {
     const [yBounds, setYBounds] = useState([-5, 5])
     const [studentName, setStudentName] = useState('TestName');
 
+    const roundToTwoPlaces = (value) => {
+        return Math.round(value * 100) / 100;
+    }
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-        return [Math.round(firstRoot, 2), Math.round(secondRoot, 2)];
+        // round to two decimal places
+        return [roundToTwoPlaces(firstRoot), roundToTwoPlaces(secondRoot)]
     }
 
     const getLinearXIntercepts = () => {
         const xIntercept = -1 * b / a;
-        return [Math.round(xIntercept, 2)];
+        return [roundToTwoPlaces(xIntercept)];
     }
 
     const xInterceptPositiveCheck = () => {
