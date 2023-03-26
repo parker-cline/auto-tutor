@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import NavBar from "./navBar.js";
+import NavBar from "./components/navBar.js";
 import Customize from "./customize.js";
 import Lesson from "./lesson.js";
 import Homepage from "./homepage.js";

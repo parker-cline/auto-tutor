@@ -1,6 +1,17 @@
 /* Drawing Canvas */
 import React, { useRef, useEffect, useState } from "react";
 
+function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }) {
+    return (
+        <>
+            <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
+            <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
+            <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
+            <button type="button" className="btn btn-secondary col-sm-3" onClick={handleUndoStroke}><i className="bi-arrow-counterclockwise"></i> Undo</button>
+        </>
+    );
+}
+
 function DrawingCanvas() {
     const [drawing, setDrawing] = useState(false);
     const canvasRef = useRef(null);
@@ -113,17 +124,6 @@ function DrawingCanvas() {
                 />
             </div>
             <CanvasEditor handleClearCanvas={handleClearCanvas} handleChangeColor={handleChangeColor} handleUndoStroke={handleUndoStroke} />
-        </>
-    );
-}
-
-function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }) {
-    return (
-        <>
-            <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
-            <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
-            <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
-            <button type="button" className="btn btn-secondary col-sm-3" onClick={handleUndoStroke}><i className="bi-arrow-counterclockwise"></i> Undo</button>
         </>
     );
 }

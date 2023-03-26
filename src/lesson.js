@@ -5,7 +5,7 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { useLocation } from 'react-router-dom';
 import YarnBound from 'yarn-bound';
-import FunctionPlot from './functionPlot.js';
+import FunctionPlot from './components/functionPlot.js';
 import DrawingCanvas from './canvas.js';
 import { dialogue as lesson1 } from "./lessons/lesson_1.js";
 
