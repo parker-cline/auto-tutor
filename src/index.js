@@ -107,6 +107,14 @@ function Customize() {
         return [Math.round(xIntercept, 2)];
     }
 
+    const xInterceptPositiveCheck = () => {
+        if (functionType === 'linear') {
+            return getLinearXIntercepts()[0] > 0;
+        } else {
+            return getQuadraticXIntercepts()[0] > 0 || getQuadraticXIntercepts()[1] > 0;
+        }
+    }
+
     const xInterceptBoundsCheck = () => {
         if (functionType === 'linear') {
             const xIntercepts = getLinearXIntercepts();
@@ -123,15 +131,6 @@ function Customize() {
         const upperBound = yBounds[1];
         return (constantTerm >= lowerBound && constantTerm <= upperBound);
     }
-
-    const xInterceptPositiveCheck = () => {
-        if (functionType === 'linear') {
-            return getLinearXIntercepts()[0] > 0;
-        } else {
-            return getQuadraticXIntercepts()[0] > 0 || getQuadraticXIntercepts()[1] > 0;
-        }
-    }
-
 
     const heightCheck = () => {
         return (functionType === 'linear' ? b > 0 : c > 0);
@@ -238,7 +237,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
-            if (runner.currentResult.text === "End of example.") {
+            if (runner.currentResult.isDialogueEnd) {
                 return;
             }
             runner.advance();
@@ -296,10 +295,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         const chatMessageList = historyItems.map((historyItem, index) => (
             historyItem.options ? generateSelectedOptionsBox(historyItem, index) : generateTextBox(historyItem, index)
         ));
-        if (runner.currentResult.text !== "End of example.") {
-            chatMessageList.push(generateOptionsBox(runner.currentResult));
+        if (runner.currentResult.isDialogueEnd) {
+            chatMessageList.push(generateTextBox(runner.currentResult));
         } else {
-            chatMessageList.push(generateTextBox(runner.currentResult))
+            chatMessageList.push(generateOptionsBox(runner.currentResult));
         }
         return chatMessageList;
     }
