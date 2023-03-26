@@ -21,18 +21,16 @@ import { addStyles, EditableMathField, StaticMathField } from 'react18-mathquill
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "@fontsource/work-sans";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import "animate.css";
 import "./index.css";
 
-addStyles()
+addStyles() // needed for mathquill library
 
 /* Customize Page */
 
-function FunctionTypeButton({ functionType, setFunctionType, checked }) {
+function FunctionTypeSetter({ functionType, setFunctionType, checked }) {
     return (
         <>
             <input className="btn-check" type="radio" id={functionType} name="functionType" value={functionType} checked={checked} onChange={(e) => setFunctionType(e.target.value)} />
@@ -50,6 +48,18 @@ function ChecklistItem({ testFunc, itemDescription }) {
 
 }
 
+function CoefficientSetter({ coeff, setCoeff, label }) {
+    return (
+        <>
+            <StaticMathField>{label}</StaticMathField>
+            <EditableMathField
+                latex={coeff}
+                onChange={(mathField) => {
+                    setCoeff(mathField.latex())
+                }} />
+        </>
+    );
+}
 function Customize() {
     const [a, setA] = useState('-1');
     const [b, setB] = useState('1');
@@ -106,7 +116,7 @@ function Customize() {
     }
 
     const isValidSetup = () => {
-        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && allFieldsFilledCheck());
+        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && yInterceptallFieldsFilledCheck());
     }
 
     const navigate = useNavigate();
@@ -123,35 +133,16 @@ function Customize() {
                     <div className="col-sm-4">
 
                         <h1>Choose the type of equation</h1>
-                        <FunctionTypeButton functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType} />
-                        <FunctionTypeButton functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType} />
+                        <FunctionTypeSetter functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType} />
+                        <FunctionTypeSetter functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType} />
 
                         <h1>Enter the equation you want to plot</h1>
-                        <StaticMathField>{'f(x) ='}</StaticMathField>
-                        <EditableMathField
-                            latex={a}
-                            onChange={(mathField) => {
-                                setA(mathField.latex())
-                            }}
-                        />
-                        <StaticMathField>{functionType === 'quadratic' ? 'x^2 +' : 'x +'}</StaticMathField>
-                        <EditableMathField
-                            latex={b}
-                            onChange={(mathField) => {
-                                setB(mathField.latex())
-                            }}
-                        />
-                        {functionType === 'quadratic' &&
-                            <>
-                                <StaticMathField>{'x +'}</StaticMathField>
-                                <EditableMathField
-                                    latex={c}
-                                    onChange={(mathField) => {
-                                        setC(mathField.latex())
-                                    }}
-                                />
-                            </>}
+                        <CoefficientSetter coeff={a} setCoeff={setA} label={'f(x) ='} />
+                        <CoefficientSetter coeff={b} setCoeff={setB} label={functionType === 'quadratic' ? 'x^2 +' : 'x +'} />
+                        {functionType === 'quadratic' && <CoefficientSetter coeff={c} setCoeff={setC} label={'x +'} />}
+
                         <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
+
                         <EditableMathField
                             latex={xBounds[0]}
                             onChange={(mathField) => {
@@ -165,7 +156,9 @@ function Customize() {
                                 setXBounds([xBounds[0], mathField.latex()])
                             }}
                         />
+
                         <h1>Enter the <StaticMathField>{'y'}</StaticMathField>-bounds</h1>
+
                         <EditableMathField
                             latex={yBounds[0]}
                             onChange={(mathField) => {
@@ -180,7 +173,7 @@ function Customize() {
                             }}
                         />
                         <h1>Enter the student's name</h1>
-                        <input type="text" className="form-control" placeholder="Enter name" onChange={e => setStudentName(e.target.value)} />
+                        <input type="text" className="form-control" value="TestName" onChange={e => setStudentName(e.target.value)} />
                     </div>
 
                     <div className="col-sm-4">
@@ -237,7 +230,7 @@ function ImageDisplayer({ imgString }) {
         const imgSrc = require('./assets/images/' + imgString);
         return <img src={imgSrc} className="img-fluid" alt={imgString} />;
     } catch (err) {
-        console.error(`Error displaying image ${imgString}: ${err}`);
+        console.error(`Error displaying the image ${imgString}: ${err}`);
         return <p>Error displaying image</p>;
     }
 }
