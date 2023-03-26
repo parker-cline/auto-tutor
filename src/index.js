@@ -116,7 +116,7 @@ function Customize() {
     }
 
     const isValidSetup = () => {
-        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && yInterceptallFieldsFilledCheck());
+        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && yInterceptBoundsCheck() && allFieldsFilledCheck());
     }
 
     const navigate = useNavigate();
