@@ -47,23 +47,50 @@ function ChecklistItem({ testFunc, itemDescription }) {
     );
 
 }
-
 function CoefficientSetter({ coeff, setCoeff, label }) {
+
+    const convertToString = (value) => {
+        const convertedString = value.toString();
+        if (isNaN(convertedString)) {
+            return '';
+        }
+        return convertedString;
+    }
+
     return (
         <>
             <StaticMathField>{label}</StaticMathField>
             <EditableMathField
-                latex={coeff}
+                latex={convertToString(coeff)}
                 onChange={(mathField) => {
-                    setCoeff(mathField.latex())
+                    setCoeff(parseInt(mathField.latex()))
                 }} />
         </>
     );
 }
+function BoundsSetter({ bounds, setBounds, label }) {
+    return (
+        <>
+            <h1>Enter the <StaticMathField>{label}</StaticMathField>-bounds</h1>
+            <EditableMathField
+                latex={bounds[0].toString()}
+                onChange={(mathField) => {
+                    setBounds([parseInt(mathField.latex()), bounds[1]])
+                }} />
+            <StaticMathField>{'\u2264 ' + label + ' \u2264'}</StaticMathField>
+            <EditableMathField
+                latex={bounds[1].toString()}
+                onChange={(mathField) => {
+                    setBounds([bounds[0], parseInt(mathField.latex())])
+                }} />
+        </>
+    );
+}
+
 function Customize() {
-    const [a, setA] = useState('-1');
-    const [b, setB] = useState('1');
-    const [c, setC] = useState('1');
+    const [a, setA] = useState(-1);
+    const [b, setB] = useState(1);
+    const [c, setC] = useState(1);
     const [functionType, setFunctionType] = useState('quadratic');
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
@@ -91,8 +118,10 @@ function Customize() {
     }
 
     const yInterceptBoundsCheck = () => {
-        const constantTerm = (functionType === 'quadratic' ? c : b);
-        return (constantTerm >= yBounds[0] && constantTerm <= yBounds[1]);
+        const constantTerm = (functionType === 'quadratic' ? parseInt(c) : parseInt(b));
+        const lowerBound = yBounds[0];
+        const upperBound = yBounds[1];
+        return (constantTerm >= lowerBound && constantTerm <= upperBound);
     }
 
     const xInterceptPositiveCheck = () => {
@@ -140,38 +169,8 @@ function Customize() {
                         <CoefficientSetter coeff={a} setCoeff={setA} label={'f(x) ='} />
                         <CoefficientSetter coeff={b} setCoeff={setB} label={functionType === 'quadratic' ? 'x^2 +' : 'x +'} />
                         {functionType === 'quadratic' && <CoefficientSetter coeff={c} setCoeff={setC} label={'x +'} />}
-
-                        <h1>Enter the <StaticMathField>{'x'}</StaticMathField>-bounds</h1>
-
-                        <EditableMathField
-                            latex={xBounds[0]}
-                            onChange={(mathField) => {
-                                setXBounds([mathField.latex(), xBounds[1]])
-                            }}
-                        />
-                        <StaticMathField>{'\u2264 x \u2264'}</StaticMathField>
-                        <EditableMathField
-                            latex={xBounds[1]}
-                            onChange={(mathField) => {
-                                setXBounds([xBounds[0], mathField.latex()])
-                            }}
-                        />
-
-                        <h1>Enter the <StaticMathField>{'y'}</StaticMathField>-bounds</h1>
-
-                        <EditableMathField
-                            latex={yBounds[0]}
-                            onChange={(mathField) => {
-                                setYBounds([mathField.latex(), yBounds[1]])
-                            }}
-                        />
-                        <StaticMathField>{'\u2264 y \u2264'}</StaticMathField>
-                        <EditableMathField
-                            latex={yBounds[1]}
-                            onChange={(mathField) => {
-                                setYBounds([yBounds[0], mathField.latex()])
-                            }}
-                        />
+                        <BoundsSetter bounds={xBounds} setBounds={setXBounds} label={'x'} />
+                        <BoundsSetter bounds={yBounds} setBounds={setYBounds} label={'y'} />
                         <h1>Enter the student's name</h1>
                         <input type="text" className="form-control" value="TestName" onChange={e => setStudentName(e.target.value)} />
                     </div>
