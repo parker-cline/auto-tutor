@@ -218,13 +218,7 @@ function ChatMessageRight({ index, children }) {
     );
 }
 
-function ChatBox({ chatMessages }) {
-    return (
-        <div id="chat-box" className="lesson-column border overflow-y-auto">{chatMessages}</div>
-    );
-}
-
-function ImageDisplayer({ imgString }) {
+function LessonImage({ imgString }) {
     if (!imgString) {
         return null;
     }
@@ -237,7 +231,7 @@ function ImageDisplayer({ imgString }) {
     }
 }
 
-function Dialogue({ dialogueItem, lessonInfo }) {
+function ChatBox({ dialogueItem, lessonInfo }) {
 
     const fastForward = (runner) => {
         while (!runner.currentResult.options) {
@@ -265,16 +259,16 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         const imageName = getImageName(currPage);
         return (
             <ChatMessageLeft index={index}>
-                {imageName && <ImageDisplayer imgString={imageName} />}
+                {imageName && <LessonImage imgString={imageName} />}
                 <h6>{currPage.text}</h6>
             </ChatMessageLeft>
         );
     };
 
     const generateOptionsBox = (currPage, index) => {
-        const listItems = currPage.options.map((dialogueChoice, index) => (
+        const listItems = currPage.options.map((userChoice, index) => (
             <li key={index} className="link-button" onClick={() => selectChoice(index)}>
-                {dialogueChoice.text}
+                {userChoice.text}
             </li>
         ));
         return (
@@ -313,8 +307,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         setRunnerHistory(generateDialogue(runner.history));
     }
 
-    const initializeHistory = (runner) => {
-
+    const setVariables = (runner) => {
         const x1Coords = "(" + lessonInfo.xIntercepts[0].toString() + ", 0)"
         const x2Coords = lessonInfo.functionType === 'linear' ? "none" : "(" + lessonInfo.xIntercepts[1].toString() + ", 0)"
         const answerCoords = lessonInfo.functionType === 'linear' ? x1Coords : x2Coords
@@ -338,7 +331,10 @@ function Dialogue({ dialogueItem, lessonInfo }) {
         for (const key in variables) {
             runner.runner.variables.set(key, variables[key]);
         }
+    }
 
+    const initializeHistory = (runner) => {
+        setVariables(runner);
         fastForward(runner);
         return generateDialogue(runner.history);
     }
@@ -346,14 +342,7 @@ function Dialogue({ dialogueItem, lessonInfo }) {
     const runner = new YarnBound({ dialogue: dialogueItem });
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     return (
-        <>
-            <div className="col-sm-6">
-                <FunctionPlot functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} factor={2.5} />
-            </div>
-            <div className="col-sm-6">
-                <ChatBox chatMessages={runnerHistory} />
-            </div>
-        </>
+        <div id="chat-box" className="lesson-column border overflow-y-auto">{runnerHistory}</div>
     );
 }
 
@@ -372,7 +361,12 @@ function Lesson() {
                 <h2>At what time does the ball reach the ground?</h2>
                 <br></br>
                 <div className="row">
-                    <Dialogue dialogueItem={dialogue1} lessonInfo={lessonInfo} />
+                    <div className="col-sm-6">
+                        <FunctionPlot functionString={lessonInfo.functionString} xBounds={lessonInfo.xBounds} yBounds={lessonInfo.yBounds} factor={2.5} />
+                    </div>
+                    <div className="col-sm-6">
+                        <ChatBox dialogueItem={dialogue1} lessonInfo={lessonInfo} />
+                    </div>
                     <DrawingCanvas />
                 </div>
             </div>
