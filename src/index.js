@@ -102,7 +102,6 @@ function Customize() {
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-        // round to two decimal places
         return [roundToTwoPlaces(firstRoot), roundToTwoPlaces(secondRoot)]
     }
 
@@ -111,7 +110,7 @@ function Customize() {
         return [roundToTwoPlaces(xIntercept)];
     }
 
-    const xInterceptPositiveCheck = () => {
+    const checkXInterceptPositive = () => {
         if (functionType === 'linear') {
             return getLinearXIntercepts()[0] > 0;
         } else {
@@ -119,7 +118,7 @@ function Customize() {
         }
     }
 
-    const xInterceptBoundsCheck = () => {
+    const checkXInterceptBounds = () => {
         if (functionType === 'linear') {
             const xIntercepts = getLinearXIntercepts();
             return (xIntercepts[0] >= xBounds[0] && xIntercepts[0] <= xBounds[1]);
@@ -129,18 +128,18 @@ function Customize() {
         }
     }
 
-    const yInterceptBoundsCheck = () => {
+    const checkYInterceptBounds = () => {
         const constantTerm = (functionType === 'quadratic' ? parseInt(c) : parseInt(b));
         const lowerBound = yBounds[0];
         const upperBound = yBounds[1];
         return (constantTerm >= lowerBound && constantTerm <= upperBound);
     }
 
-    const heightCheck = () => {
+    const checkHeight = () => {
         return (functionType === 'linear' ? b > 0 : c > 0);
     }
 
-    const allFieldsFilledCheck = () => {
+    const checkAllFieldsFilled = () => {
         if (functionType === 'quadratic' && c === '') {
             return false;
         }
@@ -148,7 +147,7 @@ function Customize() {
     }
 
     const isValidSetup = () => {
-        return (xInterceptPositiveCheck() && xInterceptBoundsCheck() && heightCheck() && yInterceptBoundsCheck() && allFieldsFilledCheck());
+        return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled());
     }
 
     const navigate = useNavigate();
@@ -185,11 +184,11 @@ function Customize() {
                     <div className="col-sm-4">
                         <h3>Checklist</h3>
                         <ul className="list-group">
-                            <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} testFunc={heightCheck} />
-                            <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' testFunc={xInterceptPositiveCheck} />
-                            <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' testFunc={xInterceptBoundsCheck} />
-                            <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' testFunc={yInterceptBoundsCheck} />
-                            <ChecklistItem itemDescription='All fields are filled' testFunc={allFieldsFilledCheck} />
+                            <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} testFunc={checkHeight} />
+                            <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' testFunc={checkXInterceptPositive} />
+                            <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' testFunc={checkXInterceptBounds} />
+                            <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' testFunc={checkYInterceptBounds} />
+                            <ChecklistItem itemDescription='All fields are filled' testFunc={checkAllFieldsFilled} />
                         </ul>
                         <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
                     </div>
@@ -289,7 +288,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
         );
     }
 
-    const generateDialogue = (historyItems) => {
+    const generateChatMessages = (historyItems) => {
         const chatMessageList = historyItems.map((historyItem, index) => (
             historyItem.options ? generateSelectedOptionsBox(historyItem, index) : generateTextBox(historyItem, index)
         ));
@@ -304,7 +303,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     const selectChoice = (idx) => {
         runner.advance(idx);
         fastForward(runner);
-        setRunnerHistory(generateDialogue(runner.history));
+        setRunnerHistory(generateChatMessages(runner.history));
     }
 
     const setVariables = (runner) => {
@@ -336,7 +335,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     const initializeHistory = (runner) => {
         setVariables(runner);
         fastForward(runner);
-        return generateDialogue(runner.history);
+        return generateChatMessages(runner.history);
     }
 
     const runner = new YarnBound({ dialogue: dialogueItem });
