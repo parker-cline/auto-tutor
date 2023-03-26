@@ -897,7 +897,7 @@ Tutor: Okay, let's try another problem. Go ahead and draw this picture on the wh
 Tutor: Awesome! This is a coordinate plane. It's a grid with an x-axis and a y-axis. The x-axis is horizontal, and the y-axis is vertical.
 Tutor: Now, plot (-2, 1) on this "coordinate plane." Take a few seconds to do that.
 -> I think I got it!
-    Tutor: Great! Did you get something like this picture? [img_secondexamplegraphed.png][/img_secondexamplegraphed.png]
+    Tutor: Great! Did you get something like this picture? If you don't have the arrows, don't worry. Just see if the point is in the correct place. [img_secondexamplegraphed.png][/img_secondexamplegraphed.png]
     -> Yes
         Tutor: Awesome job! You plotted two units left, then one unit up. You distinguished between x and y-values!
     -> No
