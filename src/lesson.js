@@ -160,8 +160,8 @@ function Lesson() {
     return (
         <>
             <div className="container p-3">
-                <h2>Antoine stands on a balcony and throws a ball to his dog, who is at ground level.</h2>
-                <h3>The ball's height (in meters above the ground) <InlineMath>x</InlineMath> seconds after Antoine threw it, is modeled by:</h3>
+                <h2>{lessonInfo.studentName} stands on a balcony and throws a ball to his dog, who is at ground level.</h2>
+                <h3>The ball's height (in meters above the ground) <InlineMath>x</InlineMath> seconds after {lessonInfo.studentName} threw it, is modeled by:</h3>
                 <div className="equation">
                     <BlockMath math={lessonInfo.functionString} />
                 </div>

@@ -377,17 +377,17 @@ Tutor: What are we looking for?
     Tutor: And what does x represent here? Read the problem again to be sure.
     -> The horizontal distance from the starting point.
         Tutor: X is the horizontal distance in many problems, but read the problem again...
-        Tutor: X of what after Antoine threw the ball?
+        Tutor: X of what after you threw the ball?
         -> Seconds!
             Tutor: Right! Here, x is time.
     -> The height of the ball.
-        Tutor: Read the problem one more time. X of what after Antoine threw the ball?
+        Tutor: Read the problem one more time. X of what after you threw the ball?
         -> Seconds!
             Tutor: Right! Here, x is time.
     -> The number of seconds.
         Tutor: Yes! Here, x is time.
     -> The vertical distance from the starting point.
-        Tutor: Read the problem one more time. X of what after Antoine threw the ball?
+        Tutor: Read the problem one more time. X of what after you threw the ball?
         -> Seconds!
             Tutor: Right! Here, x is time.
     Tutor: What does h(x) represent?
@@ -860,7 +860,7 @@ Tutor: You're on the right track here! We do need to find an intercept.
 Tutor: Here's a picture that may help you to better understand it, {$studentName}. [img_intercepts.png][/img_intercepts.png]
 Tutor: The x-intercepts are where the graph intersects the horizontal (left/right) x-axis. Think of like the function "hitting the ground level!" Doesn't the x-axis look like a floor to you?
 Tutor: The y-intercepts are where the graph intersects the vertical (up/down) y-axis. The function hasn't moved left or right. It's just in the middle.
-Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after Antoine threw the ball.
+Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after you threw the ball.
 Tutor: In this case, are we looking for an x-intercept or a y-intercept?
 -> x-intercept
     Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
