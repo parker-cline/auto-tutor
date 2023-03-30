@@ -50,9 +50,6 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     }
 
     const getImageName = (currPage) => {
-        if (!currPage.text) {
-            return null;
-        }
         if (currPage.markup.length > 1) {
             const tagDetails = currPage.markup[1];
             if (tagDetails.name.startsWith("img", 0)) {
@@ -63,6 +60,9 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     };
 
     const generateTextBox = (currPage, index) => {
+        if (!currPage.text) {
+            return null;
+        }
         const imageName = getImageName(currPage);
         return (
             <ChatMessageLeft index={index}>
