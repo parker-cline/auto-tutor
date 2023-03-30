@@ -52,9 +52,27 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
         -> No
             Tutor: In that case, don't worry about the quadratic formula too much.
     -> The function is quadratic
-        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
-        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
-        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        Tutor: You're close! If a function just has an x term, and maybe a number too, like f(x) = x or f(x) = x + 3, then it's "linear." This example does not have x^2 in it. It just has x.
+        Tutor: But if a function has an x^2 term, like f(x) = x^2 + 3 or f(x) = 4x^2 + 3x + 6 -- then it's "quadratic."
+        Tutor: What about f(x) = 5x^2 + 3x + 2? Is that quadratic?
+        -> Yes
+            Tutor: Yes! It's quadratic because it has an x^2 term here: 5x^2.
+        -> No
+            Tutor: And why not?
+            -> It's not quadratic because it has 5x^2 instead of x^2.
+                Tutor: True, it's 5x^2 instead of x^2. You're on the right track here. But it also has x^2 with it, right? 5x^2 is just 5 times x^2. So 5x^2 *is* an x^2 term, even though there is an extra number on it.
+                Tutor: This means the function is quadratic!
+            -> It's not quadratic because it has x in it.
+                Tutor: True, it does have an x term! But it also has an x^2 with it, right? 5x^2 is just 5 times x^2. This means the function is quadratic.
+            -> I'm not sure
+                Tutor: Let's go over it then! Look at each of the "terms": 5x^2, 3x, and 2. Separate each of them out. Do any of them have x^2 in them?
+                -> Yes
+                    Tutor: Right! The first term is 5x^2, which is an x^2 term. So the function is quadratic.
+                -> No
+                    Tutor: Look at that first term though. It's 5x^2. 5x^2 is just 5 times x^2. So it's an x^2 term, even though there's an extra number on it.
+                    Tutor: We see an x^2 term, meaning... the function is actually quadratic here! 
+        Tutor: You'll get some more practice in your math class. I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. The graphs of linear and quadratic functions are different. [img_linearquadratics.png][/img_linearquadratics.png]
         <<$set $learnedLinearQuadratic to "true">>
     -> We can use it to find the roots / x-intercepts
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
@@ -131,10 +149,28 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
     Tutor: And why would we factor here?
     -> There's a function we can use it on.
         Tutor: Hmm... factoring is a little complicated and can't even be used with this function. But we can use it on some functions!
-    -> The function is quadratic.
-        Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
-        Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
-        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+    -> The function is quadratic
+        Tutor: You're close! If a function just has an x term, and maybe a number too, like f(x) = x or f(x) = x + 3, then it's "linear." This example does not have x^2 in it. It just has x.
+        Tutor: But if a function has an x^2 term, like f(x) = x^2 + 3 or f(x) = 4x^2 + 3x + 6 -- then it's "quadratic."
+        Tutor: What about f(x) = 5x^2 + 3x + 2? Is that quadratic?
+        -> Yes
+            Tutor: Yes! It's quadratic because it has an x^2 term here: 5x^2.
+        -> No
+            Tutor: And why not?
+            -> It's not quadratic because it has 5x^2 instead of x^2.
+                Tutor: True, it's 5x^2 instead of x^2. You're on the right track here. But it also has x^2 with it, right? 5x^2 is just 5 times x^2. So 5x^2 *is* an x^2 term, even though there is an extra number on it.
+                Tutor: This means the function is quadratic!
+            -> It's not quadratic because it has x in it.
+                Tutor: True, it does have an x term! But it also has an x^2 with it, right? 5x^2 is just 5 times x^2. This means the function is quadratic.
+            -> I'm not sure
+                Tutor: Let's go over it then! Look at each of the "terms": 5x^2, 3x, and 2. Separate each of them out. Do any of them have x^2 in them?
+                -> Yes
+                    Tutor: Right! The first term is 5x^2, which is an x^2 term. So the function is quadratic.
+                -> No
+                    Tutor: Look at that first term though. It's 5x^2. 5x^2 is just 5 times x^2. So it's an x^2 term, even though there's an extra number on it.
+                    Tutor: We see an x^2 term, meaning... the function is actually quadratic here! 
+        Tutor: You'll get some more practice in your math class. I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
+        Tutor: This picture can help you think about the difference. The graphs of linear and quadratic functions are different. [img_linearquadratics.png][/img_linearquadratics.png]
         <<$set $learnedLinearQuadratic to "true">>
     -> We can use it to find the roots / x-intercepts
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
