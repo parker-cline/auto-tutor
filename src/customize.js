@@ -44,18 +44,26 @@ function CoefficientSetter({ coeff, setCoeff, label }) {
         </>
     );
 }
+
 function BoundsSetter({ bounds, setBounds, label }) {
+    const convertToString = (value) => {
+        const convertedString = value.toString();
+        if (isNaN(convertedString)) {
+            return '';
+        }
+        return convertedString;
+    }
     return (
         <>
             <h1>Enter the <StaticMathField>{label}</StaticMathField>-bounds</h1>
             <EditableMathField
-                latex={bounds[0].toString()}
+                latex={convertToString(bounds[0])}
                 onChange={(mathField) => {
                     setBounds([parseInt(mathField.latex()), bounds[1]])
                 }} />
             <StaticMathField>{'\u2264 ' + label + ' \u2264'}</StaticMathField>
             <EditableMathField
-                latex={bounds[1].toString()}
+                latex={convertToString(bounds[1])}
                 onChange={(mathField) => {
                     setBounds([bounds[0], parseInt(mathField.latex())])
                 }} />
