@@ -155,7 +155,7 @@ function Customize() {
                         <BoundsSetter bounds={xBounds} setBounds={setXBounds} label={'x'} />
                         <BoundsSetter bounds={yBounds} setBounds={setYBounds} label={'y'} />
                         <h1>Enter the student's name</h1>
-                        <input type="text" className="form-control" value="TestName" onChange={e => setStudentName(e.target.value)} />
+                        <input type="text" className="form-control" value={studentName} onChange={e => setStudentName(e.target.value)} />
                     </div>
 
                     <div className="col-sm-4">
