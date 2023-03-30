@@ -485,7 +485,7 @@ Tutor: What are we looking for?
                     Tutor: Right!
         Tutor: Nice work, {$studentName}!
         Tutor: I can create a table like so: [img_inputoutputtable2.png][/img_inputoutputtable2.png]
-    Tutor: Back to the problem!
+    Tutor: Back to the main problem!
 <<jump WrapUp>>
 ===
 
@@ -494,11 +494,11 @@ title: WrapUp
 <<set $currentSection to "WrapUp">>
 <<if $linearity is "false">>
 Tutor: We have a quadratic function. In this case, we have two x-intercepts. These are where the graph crosses the x-axis.
-Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifyquadraticxintercepts.png][/img_identifyquadraticxintercepts.png]
 Tutor: Look on the graph and see if you can find those two points. Do you see them?
 -> Yes
 -> No
-    Tutor: You may have to zoom out with your mouse wheel or pinch to zoom out on your touchpad. You can also drag downwards and upwards until you get to the origin (the middle area.)
+    Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifyquadraticxintercepts.png][/img_identifyquadraticxintercepts.png]
+    Tutor: You should see two points intersecting a horizontal line. Those are the x-intercepts.
     Tutor: Do you see them now?
     -> Yes
 Tutor: Awesome! So, on my calculator, I get two points: {$x1} and {$x2}.
@@ -543,6 +543,7 @@ Tutor: Which one should we choose?
                 Tutor: Haha, exactly! And we don't need to get that complicated! Thankfully, the ball is moving forward in time.
             -> I'm confused.
                 Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+                <<set $learnedReasonable to "true">>
         -> Because the y-coordinate is before y = 0
             Tutor: Hmm.. 
             <<if $learnedCoordinates is "true">>
@@ -552,6 +553,7 @@ Tutor: Which one should we choose?
                 Tutor: Haha,right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
             -> I'm confused.
                 Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+                <<set $learnedReasonable to "true">>
             <<else>>
             Tutor: Let's have a brief review of the difference between x and y!
             <<jump Coordinates>>
@@ -572,7 +574,7 @@ Tutor: Which one should we choose?
             Tutor: What does x represent?
             -> The number of seconds
                 Tutor: Right! So the ball starts at 0 seconds, but hits the ground (when h(x) = 0) at some point in the future. So, we can't have a negative x-value. We can't have a negative number of seconds.
-                <<set $learnedReasonable to "true">>
+        <<set $learnedReasonable to "true">>
     -> Because the y-coordinate is after y = 0
         <<if $learnedCoordinates is "true">>
         Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
@@ -605,15 +607,35 @@ Tutor: So what is our answer?
         Tutor: Which number should we choose?
         -> {$answerNum}
             Tutor: And what are the units?
+            -> What are units?
+                <<set $learnedUnits to "true">>
+                Tutor: Units are the "measurements" of a variable. For example, if I say "I have five apples," I'm not just saying I have five things. I'm saying I have five apples. I'm being specific about what I have. [img_apples.png][/img_apples.png]
+                Tutor: I can ask someone "what is the time?" The time is the quantity, but the units are the "measurements" of the quantity. In this case, the units are hours and minutes. [img_clock.png][/img_clock.png]
+                Tutor: In this problem, what are the units?
+                -> Seconds and meters.
+                    Tutor: Exactly! We need to be specific about what we're measuring.
+                -> Height and time.
+                    Tutor: Hmm... we're measuring time in seconds, and we're measuring height in meters. Time and height are what we're measuring... but we're measuring time IN seconds, and we're measuring height IN meters.
+                    Tutor: That means seconds and meters are actually the units!
+                Tutor: Let's try one more problem. Say I had a function where x is the time in days since I started my job, and y is the amount of money I've made in dollars. What are the units?
+                -> Dollars and days.
+                    Tutor: Right! We're measuring money in dollars, and we're measuring time in days. Dollars and days are the units.
+                -> Time and money.
+                    Tutor: Hmm... we're measuring time in days, and we're measuring money in dollars. Time and money are what we're measuring... but we're measuring time IN days, and we're measuring money IN dollars.
+                    Tutor: That's the idea!
+                Tutor: Nice work, {$studentName}! You're really getting the hang of this.
+                Tutor: Now back to the problem. We're looking for the number of seconds. So our units are...
+                -> Seconds!
             -> Seconds
             -> Minutes
                 Tutor: Read the problem one more time....
                 -> Seconds
             -> Time
-                Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+                <<set $learnedUnits to "true">>
+                Tutor: Remember, units are a measurement of a quantity. For example, the unit of time in this problem is...
                 -> Seconds
                 -> Minutes
-                    Tutor: Read the problem one more time....
+                    Tutor: Read the problem one more time... Remember, we're looking for the number of...
                     -> Seconds
         -> 0
             Tutor: Hmm... Let's check to make sure our answer is reasonable.
@@ -646,12 +668,32 @@ Tutor: So what is our answer?
                         -> Seconds
 -> {$answerNum}
     Tutor: And what are the units?
+    -> Wait, what are units?
+        <<set $learnedUnits to "true">>
+        Tutor: Units are the "measurements" of a variable. For example, if I say "I have five apples," I'm not just saying I have five things. I'm saying I have five apples. I'm being specific about what I have. [img_apples.png][/img_apples.png]
+        Tutor: I can ask someone "what is the time?" The time is the quantity, but the units are the "measurements" of the quantity. In this case, the units are hours and minutes. [img_clock.png][/img_clock.png]
+        Tutor: In this problem, what are the units?
+        -> Seconds and meters.
+            Tutor: Exactly! We need to be specific about what we're measuring.
+        -> Height and time.
+            Tutor: Hmm... we're measuring time in seconds, and we're measuring height in meters. Time and height are what we're measuring... but we're measuring time IN seconds, and we're measuring height IN meters.
+            Tutor: That means seconds and meters are actually the units!
+        Tutor: Let's try one more problem. Say I had a function where x is the time in days since I started my job, and y is the amount of money I've made in dollars. What are the units?
+        -> Dollars and days.
+            Tutor: Right! We're measuring money in dollars, and we're measuring time in days. Dollars and days are the units.
+        -> Time and money.
+            Tutor: Hmm... we're measuring time in days, and we're measuring money in dollars. Time and money are what we're measuring... but we're measuring time IN days, and we're measuring money IN dollars.
+            Tutor: That's the idea!
+        Tutor: Nice work, {$studentName}! You're really getting the hang of this.
+        Tutor: Now back to the problem. We're looking for the number of seconds. So our units are...
+        -> Seconds!
     -> Seconds
     -> Minutes
         Tutor: Read the problem one more time....
         -> Seconds
     -> Time
-        Tutor: Remember, units are a measurement of a quantity. For example, the unit of time is...
+        <<set $learnedUnits to "true">>
+        Tutor: Remember, units are a measurement of a quantity. The quantity is time here, but in this problem, the unit of time is...
         -> Seconds
         -> Minutes
             Tutor: Read the problem one more time....
@@ -668,6 +710,26 @@ Tutor: So what is our answer?
     Tutor: And what does that mean? If we select the other number...
     -> {$answerNum}!
     Tutor: And what are the units?
+    -> Wait, what are units?
+        <<set $learnedUnits to "true">>
+        Tutor: Units are the "measurements" of a variable. For example, if I say "I have five apples," I'm not just saying I have five things. I'm saying I have five apples. I'm being specific about what I have. [img_apples.png][/img_apples.png]
+        Tutor: I can ask someone "what is the time?" The time is the quantity, but the units are the "measurements" of the quantity. In this case, the units are hours and minutes. [img_clock.png][/img_clock.png]
+        Tutor: In this problem, what are the units?
+        -> Seconds and meters.
+            Tutor: Exactly! We need to be specific about what we're measuring.
+        -> Height and time.
+            Tutor: Hmm... we're measuring time in seconds, and we're measuring height in meters. Time and height are what we're measuring... but we're measuring time IN seconds, and we're measuring height IN meters.
+            Tutor: That means seconds and meters are actually the units!
+        Tutor: Let's try one more problem. Say I had a function where x is the time in days since I started my job, and y is the amount of money I've made in dollars. What are the units?
+        -> Dollars and days.
+            Tutor: Right! We're measuring money in dollars, and we're measuring time in days. Dollars and days are the units.
+        -> Time and money.
+            Tutor: Hmm... we're measuring time in days, and we're measuring money in dollars. Time and money are what we're measuring... but we're measuring time IN days, and we're measuring money IN dollars.
+            Tutor: That's the idea!
+        Tutor: Nice work, {$studentName}! You're really getting the hang of this.
+        Tutor: Now back to the problem. We're looking for the number of seconds. So our units are...
+        -> Seconds!
+            Tutor: You got it!
     -> Seconds
     -> Minutes
         Tutor: Read the problem one more time....
