@@ -4,10 +4,12 @@ import React, { useRef, useEffect, useState } from "react";
 function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }) {
     return (
         <>
-            <button type="button" className="btn btn-success col-sm-3" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
-            <button type="button" className="btn btn-danger col-sm-3" onClick={() => handleChangeColor('red')}>Change to Red</button>
-            <button type="button" className="btn btn-primary col-sm-3" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
-            <button type="button" className="btn btn-secondary col-sm-3" onClick={handleUndoStroke}><i className="bi-arrow-counterclockwise"></i> Undo</button>
+            <button type="button" className="btn btn-success col-sm-2" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
+            <button type="button" className="btn btn-dark col-sm-2" onClick={() => handleChangeColor('black')}>Change to Black</button>
+            <button type="button" className="btn btn-danger col-sm-2" onClick={() => handleChangeColor('red')}>Change to Red</button>
+            <button type="button" className="btn btn-primary col-sm-2" onClick={() => handleChangeColor('blue')}>Change to Blue</button>
+            <button type="button" className="btn btn-warning col-sm-2" onClick={() => handleChangeColor('yellow')}>Change to Yellow</button>
+            <button type="button" className="btn btn-secondary col-sm-2" onClick={handleUndoStroke}><i className="bi-arrow-counterclockwise"></i> Undo</button>
         </>
     );
 }
