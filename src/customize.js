@@ -138,9 +138,36 @@ function Customize() {
         return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled());
     }
 
+    const setFunctionString = (a, b, c) => {
+        let functionString = '';
+        if (a === 1) {
+            functionString += 'x^2';
+        } else if (a === -1) {
+            functionString += '-x^2';
+        } else {
+            functionString += a + 'x^2';
+        }
+        if (b === 1) {
+            functionString += '+ x';
+        } else if (b === -1) {
+            functionString += '- x';
+        } else if (b > 0) {
+            functionString += '+' + b + 'x';
+        } else if (b < 0) {
+            functionString += b + 'x';
+        }
+        if (c > 0) {
+            functionString += '+' + c;
+        } else if (c < 0) {
+            functionString += c;
+        }
+        // can we make this cleaner?
+        return functionString;
+    }
+
     const navigate = useNavigate();
     const handleStartLesson = () => {
-        const functionString = functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`;
+        const functionString = setFunctionString(a, b, c);
         const xIntercepts = functionType === 'quadratic' ? getQuadraticXIntercepts() : getLinearXIntercepts();
         navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds, xIntercepts: xIntercepts } });
     }
