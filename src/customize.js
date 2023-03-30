@@ -55,7 +55,6 @@ function BoundsSetter({ bounds, setBounds, label }) {
     }
     return (
         <>
-            <h1>Enter the <StaticMathField>{label}</StaticMathField>-bounds</h1>
             <EditableMathField
                 latex={convertToString(bounds[0])}
                 onChange={(mathField) => {
@@ -208,17 +207,19 @@ function Customize() {
                 <div className="row">
                     <div className="col-sm-4">
 
-                        <h1>Choose the type of equation</h1>
+                        <h3>Choose the type of equation</h3>
                         <FunctionTypeSetter functionType="linear" selectedFunctionType={functionType === 'linear'} setFunctionType={setFunctionType} />
                         <FunctionTypeSetter functionType="quadratic" checked={functionType === 'quadratic'} setFunctionType={setFunctionType} />
 
-                        <h1>Enter the equation you want to plot</h1>
+                        <h3>Enter the equation you want to plot</h3>
                         <CoefficientSetter coeff={a} setCoeff={setA} label={'f(x) ='} />
                         <CoefficientSetter coeff={b} setCoeff={setB} label={functionType === 'quadratic' ? 'x^2 +' : 'x +'} />
                         {functionType === 'quadratic' && <CoefficientSetter coeff={c} setCoeff={setC} label={'x +'} />}
+                        <h3>Enter the <StaticMathField>x</StaticMathField>-bounds</h3>
                         <BoundsSetter bounds={xBounds} setBounds={setXBounds} label={'x'} />
+                        <h3>Enter the <StaticMathField>y</StaticMathField>-bounds</h3>
                         <BoundsSetter bounds={yBounds} setBounds={setYBounds} label={'y'} />
-                        <h1>Enter the student's name</h1>
+                        <h3>Enter the student's name</h3>
                         <input type="text" className="form-control" value={studentName} onChange={e => setStudentName(e.target.value)} />
                     </div>
 
