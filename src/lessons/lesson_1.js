@@ -33,7 +33,7 @@ Tutor: Ready to get started?
 title: FirstSteps
 ---
 <<set $currSection to "FirstSteps">>
-Tutor: OK! Read the problem again--take your time to make sure you understand it. First, I'll ask you: what do you think the first step would be to solve this problem? 
+Tutor: OK! Read the problem again. Take your time to make sure you understand it. First, I'll ask you: what do you think the first step would be to solve this problem? 
 Tutor: Select a response. Now, there's more than one option you can choose from this time. Make your best guess! It's okay if you get something incorrect. Be honest when you pick an answer. We'll learn from our mistakes!
 -> I think we should draw a picture.
     Tutor: Ah, interesting idea! Why would we draw a picture here?
@@ -73,17 +73,17 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                     Tutor: We see an x^2 term, meaning... the function is actually quadratic here! 
         Tutor: You'll get some more practice in your math class. I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. The graphs of linear and quadratic functions are different. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     -> We can use it to find the roots / x-intercepts
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     -> I don't know
         Tutor: No worries! Have you heard of the quadratic formula before?
         -> Yes
         -> No
-        Tutor: Hmm... the quadratic formula is way too complicated and can't even be used here. But we can use it on other problems!
+        Tutor: Hmm... the quadratic formula actually can't even be used here. But we can use it on other problems!
     Tutor: Why don't we try drawing a picture? Then we can see what is going on.
     <<jump Drawing>>
     <<else>>
@@ -171,17 +171,17 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                     Tutor: We see an x^2 term, meaning... the function is actually quadratic here! 
         Tutor: You'll get some more practice in your math class. I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. The graphs of linear and quadratic functions are different. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     -> We can use it to find the roots / x-intercepts
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     -> I don't know
         Tutor: No worries! Have you heard of factoring before?
         -> Yes
         -> No
-        Tutor: Hmm... factoring is way too complicated and can't even be used with this function. But we can use it on some functions!
+        Tutor: Hmm... factoring can't even be used with this function. But we can use it on some functions!
     Tutor: Why don't we try drawing a picture? Then we can see what is going on.
     <<jump Drawing>>
     <<else>>
@@ -212,16 +212,7 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
                 Tutor: Since we have the tool, we might as well use it.
             <<jump Graphing>>
         -> We need to find the y-intercepts
-            Tutor: You're on the right track here! We do need to find an intercept.
-            Tutor: Here's a picture that may help you to better understand it, {$studentName}. [img_intercepts.png][/img_intercepts.png]
-            Tutor: The x-intercepts are where the graph intersects the horizontal (left/right) x-axis. Think of like the function "hitting the ground level!" Doesn't the x-axis look like a floor to you?
-            Tutor: The y-intercepts are where the graph intersects the vertical (up/down) y-axis. The function hasn't moved left or right. It's just in the middle.
-            Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after Antoine threw the ball.
-            Tutor: In this case, are we looking for an x-intercept or a y-intercept?
-            -> x-intercept
-                Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
-            -> y-intercept
-                <<jump Intercepts>>
+            <<jump Intercepts>>
         -> I'm not sure actually.
     -> We want to find the roots.
         Tutor: Finding the roots may be useful to solve this problem! This approach definitely works! Do you know what roots are?
@@ -288,13 +279,16 @@ Tutor: Looks similar? [img_drawpicturelinear.png][/img_drawpicturelinear.png]
     -> They are a straight line!
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
-        Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        Tutor: Hey, this picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
+        Tutor: Linear functions have x as their highest term. Quadratic functions have x^2 as their highest term.
+        <<set $learnedLinearQuadratic to "true">>
+        Tutor: 
     -> I've never seen x^2 functions before.
         Tutor: "x" functions are linear. They're like a straight line. "x^2" functions are quadratic. They're like a curve. We call them "parabolas."
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: Hey, this picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        Tutor: Linear functions have x as their highest term. Quadratic functions have x^2 as their highest term.
+        <<set $learnedLinearQuadratic to "true">>
     <<else>>
     Tutor: Ah, we haven't really discussed what path our ball is following yet.
     Tutor: Recall that the function "models the height of the ball." 
@@ -303,12 +297,12 @@ Tutor: Looks similar? [img_drawpicturelinear.png][/img_drawpicturelinear.png]
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
         Tutor: This picture can help you think about the difference. [img_linearquadratics.png][/img_linearquadratics.png]
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     -> They are a straight line!
         Tutor: Yes!
     -> I've never seen x functions before.
         Tutor: "x" functions are linear. They're like a straight line. You may see other functions with "x" in them, like x^2. Those are quadratic. Don't worry about those if you haven't seen them.
-        <<$set $learnedLinearQuadratic to "true">>
+        <<set $learnedLinearQuadratic to "true">>
     <<endif>>
 Tutor: Actually, on a timed test, I wouldn't make my drawing this fancy. Stick figures and lines work just fine! 
 <<if $linearity is "false">>
