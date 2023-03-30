@@ -550,7 +550,7 @@ Tutor: Which one should we choose?
             Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
             Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
             -> It's like we're traveling back in time!
-                Tutor: Haha,right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+                Tutor: Haha, right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
             -> I'm confused.
                 Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
                 <<set $learnedReasonable to "true">>
@@ -577,12 +577,12 @@ Tutor: Which one should we choose?
         <<set $learnedReasonable to "true">>
     -> Because the y-coordinate is after y = 0
         <<if $learnedCoordinates is "true">>
-        Tutor: Remember, the y-coordinate is the second number. [img_xyclimbing.png][/img_xyclimbing.png]
-        Tutor: So the x-coordinate is actually before x = 0 here! And x represents the number of seconds...
+        Tutor: Remember, the y-coordinate is the second number. Y is 0 already. [img_xyclimbing.png][/img_xyclimbing.png]
+        Tutor: So the x-coordinate is greater than 0 here! It needs to be greater than 0. What happens if we have a negative number of seconds?
         -> It's like we're traveling back in time!
-            Tutor: Haha, right! we don't need to get that complicated! Thankfully, the ball is moving forward in time.
+            Tutor: Haha, right! we don't need to get that complicated! Thankfully, the ball is moving forward in time. So we choose the one where x is greater than 0.
         -> I'm confused.
-            Tutor: I imagine you are, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable?
+            Tutor: I imagine, but don't worry! A negative number of seconds is very strange... maybe that answer isn't reasonable. 
         <<else>>
         Tutor: Let's have a brief review of the difference between x and y!
         <<jump Coordinates>>
