@@ -130,19 +130,19 @@ function Customize() {
         return (a !== '' && b !== '' && studentName !== '' && xBounds[0] !== '' && xBounds[1] !== '' && yBounds[0] !== '' && yBounds[1] !== '');
     }
 
+    const checkXInterceptNegative = () => {
+        if (functionType === 'linear') {
+            return true;
+        } else {
+            return getQuadraticXIntercepts()[0] < 0 || getQuadraticXIntercepts()[1] < 0;
+        }
+    }
     const checkNonZeroTerm = () => {
         return (a !== 0);
     }
 
     const isValidSetup = () => {
-        return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled());
-    }
-
-    const setFunctionString = () => {
-        if (functionType === 'quadratic') {
-            return setQuadraticFunctionString(a, b, c);
-        }
-        return setLinearFunctionString(a, b);
+        return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled() && checkXInterceptNegative() && checkNonZeroTerm());
     }
 
     const setQuadraticFunctionString = (a, b, c) => {
@@ -157,19 +157,19 @@ function Customize() {
         }
 
         if (b === 1) {
-            functionString += '+ x';
+            functionString += ' + x';
         } else if (b === -1) {
-            functionString += '- x';
+            functionString += ' - x';
         } else if (b > 0) {
-            functionString += `+ ${b}x`;
+            functionString += ` + ${b}x`;
         } else if (b < 0) {
-            functionString += `- ${Math.abs(b)}x`;
+            functionString += ` - ${Math.abs(b)}x`;
         }
 
         if (c > 0) {
-            functionString += `+ ${c}`;
+            functionString += ` + ${c}`;
         } else if (c < 0) {
-            functionString += `- ${Math.abs(c)}`;
+            functionString += ` - ${Math.abs(c)}`;
         }
         return functionString;
     }
@@ -186,20 +186,17 @@ function Customize() {
             functionString = `${a}x`;
         }
         if (b > 0) {
-            functionString += `+ ${b}`;
+            functionString += ` + ${b}`;
         }
         else if (b < 0) {
-            functionString += `- ${Math.abs(b)}`;
+            functionString += ` - ${Math.abs(b)}`;
         }
         return functionString;
     }
 
-
-
-
     const navigate = useNavigate();
     const handleStartLesson = () => {
-        const functionString = setFunctionString(a, b, c);
+        const functionString = functionType === 'quadratic' ? setQuadraticFunctionString(a, b, c) : setLinearFunctionString(a, b);
         const xIntercepts = functionType === 'quadratic' ? getQuadraticXIntercepts() : getLinearXIntercepts();
         navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds, xIntercepts: xIntercepts } });
     }
@@ -226,17 +223,21 @@ function Customize() {
                     </div>
 
                     <div className="col-sm-4">
-                        <FunctionPlot functionString={setFunctionString(a, b, c)} xBounds={xBounds} yBounds={yBounds} factor={3.5} />
+                        <FunctionPlot functionString={functionType === 'quadratic' ? setQuadraticFunctionString(a, b, c) : setLinearFunctionString(a, b)} xBounds={xBounds} yBounds={yBounds} factor={3.5} />
                     </div>
 
                     <div className="col-sm-4">
-                        <h3>Checklist</h3>
+                        <h2>Checklist</h2>
                         <ul className="list-group">
+                            <h4>Function</h4>
                             <ChecklistItem itemDescription={<StaticMathField>f(0) > 0</StaticMathField>} testFunc={checkHeight} />
                             <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' testFunc={checkXInterceptPositive} />
+                            {functionType === 'quadratic' && <ChecklistItem itemDescription='There is some x-intercept with an x-value less than 0' testFunc={checkXInterceptNegative} />}
+                            <ChecklistItem itemDescription={'The ' + highestFunctionTerm + ' term is non-zero'} testFunc={checkNonZeroTerm} />
+                            <h4>Bounds</h4>
                             <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' testFunc={checkXInterceptBounds} />
                             <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' testFunc={checkYInterceptBounds} />
-                            <ChecklistItem itemDescription={'The ' + highestFunctionTerm + ' term is non-zero'} testFunc={checkNonZeroTerm} />
+                            <h4>Final Check</h4>
                             <ChecklistItem itemDescription='All fields are filled' testFunc={checkAllFieldsFilled} />
                         </ul>
                         <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
