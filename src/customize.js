@@ -122,6 +122,10 @@ function Customize() {
         return (a !== '' && b !== '' && studentName !== '' && xBounds[0] !== '' && xBounds[1] !== '' && yBounds[0] !== '' && yBounds[1] !== '');
     }
 
+    const checkNonZeroTerm = () => {
+        return (a !== 0);
+    }
+
     const isValidSetup = () => {
         return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled());
     }
@@ -132,6 +136,7 @@ function Customize() {
         const xIntercepts = functionType === 'quadratic' ? getQuadraticXIntercepts() : getLinearXIntercepts();
         navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds, xIntercepts: xIntercepts } });
     }
+    const highestFunctionTerm = functionType === 'quadratic' ? 'x^2' : 'x';
 
     return (
         <>
@@ -164,6 +169,7 @@ function Customize() {
                             <ChecklistItem itemDescription='There is some x-intercept with an x-value greater than 0' testFunc={checkXInterceptPositive} />
                             <ChecklistItem itemDescription='The x-intercept(s) are visible within the selected x-bounds' testFunc={checkXInterceptBounds} />
                             <ChecklistItem itemDescription='The y-intercept is visible within the selected y-bounds' testFunc={checkYInterceptBounds} />
+                            <ChecklistItem itemDescription={'The ' + highestFunctionTerm + ' term is non-zero'} testFunc={checkNonZeroTerm} />
                             <ChecklistItem itemDescription='All fields are filled' testFunc={checkAllFieldsFilled} />
                         </ul>
                         <button className="btn btn-primary" onClick={handleStartLesson} disabled={!isValidSetup()}>Start Lesson</button>
