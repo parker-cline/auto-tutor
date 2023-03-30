@@ -140,30 +140,36 @@ function Customize() {
 
     const setFunctionString = (a, b, c) => {
         let functionString = '';
+
         if (a === 1) {
-            functionString += 'x^2';
+            functionString = 'x^2';
         } else if (a === -1) {
-            functionString += '-x^2';
-        } else {
-            functionString += a + 'x^2';
+            functionString = '-x^2';
+        } else if (a !== 0) {
+            functionString = `${a}x^2`;
         }
+
         if (b === 1) {
             functionString += '+ x';
         } else if (b === -1) {
             functionString += '- x';
         } else if (b > 0) {
-            functionString += '+' + b + 'x';
+            functionString += `+ ${b}x`;
         } else if (b < 0) {
-            functionString += b + 'x';
+            functionString += `- ${Math.abs(b)}x`;
         }
+
         if (c > 0) {
-            functionString += '+' + c;
+            functionString += `+ ${c}`;
         } else if (c < 0) {
-            functionString += c;
+            functionString += `- ${Math.abs(c)}`;
         }
-        // can we make this cleaner?
+
         return functionString;
     }
+
+
+
 
     const navigate = useNavigate();
     const handleStartLesson = () => {
@@ -194,7 +200,7 @@ function Customize() {
                     </div>
 
                     <div className="col-sm-4">
-                        <FunctionPlot functionString={functionType === 'quadratic' ? `${a}x^2 + ${b}x + ${c}` : `${a}x + ${b}`} xBounds={xBounds} yBounds={yBounds} factor={3.5} />
+                        <FunctionPlot functionString={setFunctionString(a, b, c)} xBounds={xBounds} yBounds={yBounds} factor={3.5} />
                     </div>
 
                     <div className="col-sm-4">
