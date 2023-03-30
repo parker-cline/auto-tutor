@@ -1,6 +1,7 @@
 const dialogue = `
 title: Start
 ---
+
 <<set $learnedFunctions to "false">>
 <<set $learnedCoordinates to "false">>
 <<set $learnedIntercepts to "false">>
@@ -11,6 +12,7 @@ title: Start
 <<set $learnedInputOutputDistinguishing to "false">>
 <<set $learnedUnits to "false">>
 <<set $learnedReasonable to "false">>
+
 Tutor: Hello! I'm Cauley! You can say hi back by clicking "Hello" down below! 
 -> Hello!
 -> Hey!
@@ -43,7 +45,12 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
     <<if $linearity is "true">>
     Tutor: And why would we use the quadratic formula here?
     -> There's a function we can use it on
-        Tutor: Hmm... the quadratic formula is way too complicated and can't even be used with this function. But we can use it on some functions!
+        Tutor: Hmm... the quadratic formula does work on some functions. Here, it can't actually be used. But we can use it on some functions!
+        Tutor: Have you studied x^2 functions before?
+        -> Yes
+            Tutor: Here, we can't use the quadratic formula because the function is not quadratic. It's an x^2 function.
+        -> No
+            Tutor: In that case, don't worry about the quadratic formula too much.
     -> The function is quadratic
         Tutor: You're close! But functions with just x instead of x^2 will be a straight line. x^2 functions will be a curve. We'll see this later.
         Tutor: I know it's strange to think about with the "x" and "x^2" stuff. It's super abstract. But you'll get the hang of it!
@@ -115,69 +122,7 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
             Tutor: Aha!
         <<jump Graphing>>
     -> We need to find the y-intercepts
-        Tutor: You're on the right track here! We do need to find an intercept.
-        Tutor: Here's a picture that may help you to better understand it, {$studentName}. [img_intercepts.png][/img_intercepts.png]
-        Tutor: The x-intercepts are where the graph intersects the horizontal (left/right) x-axis. Think of like the function "hitting the ground level!" Doesn't the x-axis look like a floor to you?
-        Tutor: The y-intercepts are where the graph intersects the vertical (up/down) y-axis. The function hasn't moved left or right. It's just in the middle.
-        Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after Antoine threw the ball.
-        Tutor: In this case, are we looking for an x-intercept or a y-intercept?
-        -> x-intercept
-            Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
-        -> y-intercept
-            Tutor: Hmm... that is when x is 0, and the ball crosses the y-axis. But remember, x is time, and we're looking for the height of the ball.
-            Tutor: When does the ball hit the ground? 
-            -> When the height is 0 meters. That makes sense!
-                Tutor: Right! And the height is 0 at our x-intercept... when the ball hits the ground!
-            -> When the height is 0 meters. But... why? 
-                Tutor: I know it's a little weird to describe something at 0 meters tall. But, it's the same thing as saying the ball is on the ground.
-                Tutor: 0 meters is where the "ground" is. If we said 1 meter, that would be 1 meter above the ground. It may start at 5 meters above the ground, but it will eventually reaching 0 meters... the same thing as hitting the ground!
-            Tutor: Let's try one more practice problem to make sure you're all good. 
-            Tutor: Consider the point (5, 0)--is that an x-intercept or a y-intercept?
-            -> x-intercept
-                Tutor: And why is this an x-intercept?
-                -> Because the y-value is 0, it must intersect the x-axis.
-                    Tutor: Exactly! 
-                -> Because the x-value is 0, it must intersect the x-axis.
-                    Tutor: Oh, I forgot to mention one thing!
-                    Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
-                    Tutor: So in (5, 0), y is actually 0, and x is 5.
-                    Tutor: Consider the point (2, 5). What is the x-value?
-                    -> 2
-                        Tutor: Right! And the y-value is 5.
-                    -> 5
-                        Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
-                        -> 5
-                            Tutor: Exactly! The second number. You're learning a lot! 
-                    Tutor: Now let's think about x and y-intercepts. 
-                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-            -> y-intercept
-                Tutor: And why is this a y-intercept?
-                -> Because the y-value is 0, it must intersect the y-axis.
-                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-                -> Because the x-value is 0, it must intersect the y-axis.
-                    Tutor: Oh, I forgot to mention one thing!
-                    Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
-                    Tutor: So in (5, 0), y is actually 0, and x is 5.
-                    Tutor: To make sure you understand that: consider the point (2, 5). What is the x-value?
-                    -> 2
-                        Tutor: Right! And the y-value is 5.
-                    -> 5
-                        Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
-                        -> 5
-                            Tutor: Exactly! The second number. You're learning a lot! 
-                    Tutor: Now let's think about x and y-intercepts. 
-                    Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                    Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                    Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-            Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Failure is an opportunity to learn, you know! Later, I'll share a link to Khan Academy that explains it in more detail. 
-            <<set $learnedIntercepts to "true">>
-        -> Wait, Cauley, what is x and y? I'm confused.
-            Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
-            <<jump Coordinates>>
+        <<jump Intercepts>>
     Tutor: Let's first try drawing a picture of the problem. Maybe it'll give us a clue on what to do.
     <<jump Drawing>>
     <<endif>>
@@ -240,60 +185,7 @@ Tutor: Select a response. Now, there's more than one option you can choose from 
             -> x-intercept
                 Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
             -> y-intercept
-                Tutor: Hmm... that is when x is 0, and the ball crosses the y-axis. But remember, x is time, and we're looking for the height of the ball.
-                Tutor: When does the ball hit the ground? 
-                -> When the height is 0 meters. That makes sense!
-                    Tutor: Right! And the height is 0 at our x-intercept... when the ball hits the ground!
-                -> When the height is 0 meters. But... why? 
-                    Tutor: I know it's a little weird to describe something at 0 meters tall. But, it's the same thing as saying the ball is on the ground.
-                    Tutor: 0 meters is where the "ground" is. If we said 1 meter, that would be 1 meter above the ground. It may start at 5 meters above the ground, but it will eventually reaching 0 meters... the same thing as hitting the ground!
-                Tutor: Let's try one more practice problem to make sure you're all good. 
-                Tutor: Consider the point (5, 0)--is that an x-intercept or a y-intercept?
-                -> x-intercept
-                    Tutor: And why is this an x-intercept?
-                    -> Because the y-value is 0, it must intersect the x-axis.
-                        Tutor: Exactly! 
-                    -> Because the x-value is 0, it must intersect the x-axis.
-                        Tutor: Oh, I forgot to mention one thing!
-                        Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
-                        Tutor: So in (5, 0), y is actually 0, and x is 5.
-                        Tutor: Consider the point (2, 5). What is the x-value?
-                        -> 2
-                            Tutor: Right! And the y-value is 5.
-                        -> 5
-                            Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
-                            -> 5
-                                Tutor: Exactly! The second number. You're learning a lot! 
-                        Tutor: Now let's think about x and y-intercepts. 
-                        Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                        Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                        Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-                -> y-intercept
-                    Tutor: And why is this a y-intercept?
-                    -> Because the y-value is 0, it must intersect the y-axis.
-                        Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                        Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                        Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-                    -> Because the x-value is 0, it must intersect the y-axis.
-                        Tutor: Oh, I forgot to mention one thing!
-                        Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
-                        Tutor: So in (5, 0), y is actually 0, and x is 5.
-                        Tutor: To make sure you understand that: consider the point (2, 5). What is the x-value?
-                        -> 2
-                            Tutor: Right! And the y-value is 5.
-                        -> 5
-                            Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
-                            -> 5
-                                Tutor: Exactly! The second number. You're learning a lot! 
-                        Tutor: Now let's think about x and y-intercepts. 
-                        Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
-                        Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
-                        Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
-                Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Later, I'll share a link to Khan Academy that explains it in more detail. 
-                <<set $learnedIntercepts to "true">>
-            -> Wait, Cauley, what is x and y? I'm confused.
-                Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
-                <<jump Coordinates>>
+                <<jump Intercepts>>
         -> I'm not sure actually.
     -> We want to find the roots.
         Tutor: Finding the roots may be useful to solve this problem! This approach definitely works! Do you know what roots are?
@@ -406,106 +298,6 @@ Tutor: We just drew a picture.... this is a great start! I wonder what we could 
     -> I want to see how the ball is moving.
         Tutor: Yes, the function can help us with that! Let's try graphing.
 <<jump Graphing>>
-===
-
-title: Functions
----
-Tutor: That h(x) thing is called a function. While it seems complicated, it's not as tricky as it looks.
-Tutor: Basically, you give a function an "input," and it gives back an "output." Let's say you're using a vending machine, and you want to buy a drink. What drink would you like to buy?
--> Coke
-    <<set $drink to "Coke">>
--> Pepsi
-    <<set $drink to "Pepsi">>
--> Lemonade
-    <<set $drink to "lemonade">>
-Tutor: Awesome! So imagine you're paying for a delicious {$drink}. But to get the {$drink}, you have to give the vending machine money. You *input* a dollar into the machine, and the machine *outputs* a {$drink}! [img_function.png][/img_function.png]
-Tutor: Functions are similar. Here, you can input a number, and the function machine will output another number. The cool thing is that each function has a "rule." A function will do the same thing for any number you give it.
-Tutor: If I had a rule to "add 3 to any number," and I gave the function 4, it would output 7. If I gave it 10, it would output 13. I can give it ANY number, and it will always add 3 to the number.
-Tutor: Let's say you're talking to a friendly computer, and you give the computer a rule: "multiply any number I give you by 2!" [img_friendlycomputer.png][/img_friendlycomputer.png]
-Tutor: You give the computer 4. What will the computer *output?*
--> 8
-    Tutor: Exactly!
--> 6
-    Tutor: Remember, you're just multiplying the number by 2. So what is 4 * 2?
-    -> 8!
-        Tutor: Exactly!
--> 10
-    Tutor: Remember, you're just multiplying the number by 2. So what is 4 * 2?
-    -> 8!
-        Tutor: Exactly!
--> I don't know.
-    Tutor: That's okay! Remember, you're just multiplying the number by 2. So what is 4 * 2?
-    -> 8!
-        Tutor: Exactly! The computer just multiplies any number we give it by 2.
-Tutor: We can write this in mathy language: f(x) = 2x
-Tutor: This function multiplies any number, which we'll call "x," by 2. 
--> Wait... where did x come in here?
-    Tutor: x is what is called a variable. x can be any number we want it to be. 
-    Tutor: Think of it like a box that holds a number. [img_box.png][/img_box.png]
-    Tutor: That box has a label, like "x" or "y." The box can be filled with any number you want, and the label stays the same, just as you can define a variable as any number (x = 2 or x = 4).
-    <<set $learnedVariables to "true">>
-    Tutor: Remember when we multiplied 4 by 2? x was 4 then. But in other problems, x may be different.
--> But I don't see a multiplication sign...
-    <<set $learnedHiddenMultiplication to "true">>
-    Tutor: It's actually hidden here! 2x is "2 times x." You'll find hiding the sign can make things easier to read when we have really big functions.
--> This makes sense!
-    Tutor: Glad to hear! 
-Tutor: Let's say x is 8 this time. We can use this function to multiply the number by 2 like this. Do you see how we replace x with the number? That is because x is equal to 8! In the end, our answer is 16. [img_plugin8.png][/img_plugin8.png]
-Tutor: One more time. Let's say x = 5. Use the function to multiply x by 2. Follow the example on the whiteboard... show your work! 
-Tutor: Click "I'm done" when you're finished. It's okay if you don't get the answer--we'll go over it together if you're stuck.
--> I'm done, Cauley!
-Tutor: All right, what did you get as your answer?
--> 10
-    Tutor: Awesome! Congratulations, {$studentName}!
--> 7
-   Tutor: Remember, imagine there is a hidden multiplication sign between the 2 and the 5. 2x is "2 times x." So what is 2 * 5?
-   <<set $learnedHiddenMultiplication to "true">>
-   -> 10
-        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
--> 25
-    Remember to separate the 2 and the 5 with parentheses. 2(5). This means we are multiplying 2 * 5. What is that? [img_step2.png][/img_step2.png]
-    -> 10
-        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
--> I'm confused, Cauley
-    Tutor: Let's walk through this step by step. Copy down what I'm writing. We'll start by writing our function... [img_step1.png][/img_step1.png]
-    Tutor: Next, plugging in 5 for x. We'll replace x with 5 because x is equal to 5. [img_step2.png][/img_step2.png]
-    Tutor: What would happen if we did not put parentheses around the 5?
-    -> It would be 25...
-    Tutor: Right! And we need to separate the 2 and the 5 because we are...
-    -> Multiplying!
-        Tutor: Yep! Last line. What is 2 * 5?
-        -> 10!
-            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
-    -> Adding!
-        <<set $learnedHiddenMultiplication to "true">>
-        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
-        -> 10!
-            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
-    -> Subtracting!
-        <<set $learnedHiddenMultiplication to "true">>
-        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
-        -> 10!
-            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
-    -> Dividing!
-        <<set $learnedHiddenMultiplication to "true">>
-        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
-        -> 10!
-            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
-
-Tutor: Now if we go back to the problem.... and that function up above? {$functionString}?
-Tutor: This is a different function. Does it look a little more complicated to you?
--> Yes
-    Tutor: Don't worry! It's definitely more complicated, but it's still just a function that follows a certain rule. It's just this rule may be a little more complicated than just multiplying something by 2!
--> No 
-Tutor: The basic idea is it is still doing the same thing, following the same rule, for any "input" "x" you give it.
-Tutor: Hopefully, this makes sense! Later, I'll share a link to a video that explains functions in more detail.
-Tutor: Now that we know what functions are, let's see how they are used in word problems!
-<<set $learnedFunctions to "true">>
-<<if $currentSection is "Graphing">>
-<<jump Graphing>>
-<<else>>
-<<jump Drawing>>
-<<endif>>
 ===
 
 title: Graphing
@@ -870,6 +662,176 @@ Tutor: Yes! {$answerNum} seconds. Awesome job, {$studentName}!
 <<jump Overview>>
 ===
 
+title: Functions
+---
+Tutor: That h(x) thing is called a function. While it seems complicated, it's not as tricky as it looks.
+Tutor: Basically, you give a function an "input," and it gives back an "output." Let's say you're using a vending machine, and you want to buy a drink. What drink would you like to buy?
+-> Coke
+    <<set $drink to "Coke">>
+-> Pepsi
+    <<set $drink to "Pepsi">>
+-> Lemonade
+    <<set $drink to "lemonade">>
+Tutor: Awesome! So imagine you're paying for a delicious {$drink}. But to get the {$drink}, you have to give the vending machine money. You *input* a dollar into the machine, and the machine *outputs* a {$drink}! [img_function.png][/img_function.png]
+Tutor: Functions are similar. Here, you can input a number, and the function machine will output another number. The cool thing is that each function has a "rule." A function will do the same thing for any number you give it.
+Tutor: If I had a rule to "add 3 to any number," and I gave the function 4, it would output 7. If I gave it 10, it would output 13. I can give it ANY number, and it will always add 3 to the number.
+Tutor: Let's say you're talking to a friendly computer, and you give the computer a rule: "multiply any number I give you by 2!" [img_friendlycomputer.png][/img_friendlycomputer.png]
+Tutor: You give the computer 4. What will the computer *output?*
+-> 8
+    Tutor: Exactly!
+-> 6
+    Tutor: Remember, you're just multiplying the number by 2. So what is 4 * 2?
+    -> 8!
+        Tutor: Exactly!
+-> 10
+    Tutor: Remember, you're just multiplying the number by 2. So what is 4 * 2?
+    -> 8!
+        Tutor: Exactly!
+-> I don't know.
+    Tutor: That's okay! Remember, you're just multiplying the number by 2. So what is 4 * 2?
+    -> 8!
+        Tutor: Exactly! The computer just multiplies any number we give it by 2.
+Tutor: We can write this in mathy language: f(x) = 2x
+Tutor: This function multiplies any number, which we'll call "x," by 2. 
+-> Wait... where did x come in here?
+    Tutor: x is what is called a variable. x can be any number we want it to be. 
+    Tutor: Think of it like a box that holds a number. [img_box.png][/img_box.png]
+    Tutor: That box has a label, like "x" or "y." The box can be filled with any number you want, and the label stays the same, just as you can define a variable as any number (x = 2 or x = 4).
+    <<set $learnedVariables to "true">>
+    Tutor: Remember when we multiplied 4 by 2? x was 4 then. But in other problems, x may be different.
+-> But I don't see a multiplication sign...
+    <<set $learnedHiddenMultiplication to "true">>
+    Tutor: It's actually hidden here! 2x is "2 times x." You'll find hiding the sign can make things easier to read when we have really big functions.
+-> This makes sense!
+    Tutor: Glad to hear! 
+Tutor: Let's say x is 8 this time. We can use this function to multiply the number by 2 like this. Do you see how we replace x with the number? That is because x is equal to 8! In the end, our answer is 16. [img_plugin8.png][/img_plugin8.png]
+Tutor: One more time. Let's say x = 5. Use the function to multiply x by 2. Follow the example on the whiteboard... show your work! 
+Tutor: Click "I'm done" when you're finished. It's okay if you don't get the answer--we'll go over it together if you're stuck.
+-> I'm done, Cauley!
+Tutor: All right, what did you get as your answer?
+-> 10
+    Tutor: Awesome! Congratulations, {$studentName}!
+-> 7
+   Tutor: Remember, imagine there is a hidden multiplication sign between the 2 and the 5. 2x is "2 times x." So what is 2 * 5?
+   <<set $learnedHiddenMultiplication to "true">>
+   -> 10
+        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
+-> 25
+    Remember to separate the 2 and the 5 with parentheses. 2(5). This means we are multiplying 2 * 5. What is that? [img_step2.png][/img_step2.png]
+    -> 10
+        Tutor: Awesome! Congratulations, {$studentName}! Finish up your work on the whiteboard, following the example.
+-> I'm confused, Cauley
+    Tutor: Let's walk through this step by step. Copy down what I'm writing. We'll start by writing our function... [img_step1.png][/img_step1.png]
+    Tutor: Next, plugging in 5 for x. We'll replace x with 5 because x is equal to 5. [img_step2.png][/img_step2.png]
+    Tutor: What would happen if we did not put parentheses around the 5?
+    -> It would be 25...
+    Tutor: Right! And we need to separate the 2 and the 5 because we are...
+    -> Multiplying!
+        Tutor: Yep! Last line. What is 2 * 5?
+        -> 10!
+            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
+    -> Adding!
+        <<set $learnedHiddenMultiplication to "true">>
+        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
+        -> 10!
+            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
+    -> Subtracting!
+        <<set $learnedHiddenMultiplication to "true">>
+        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
+        -> 10!
+            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
+    -> Dividing!
+        <<set $learnedHiddenMultiplication to "true">>
+        Tutor: Remember: Imagine there is a hidden *multiplication* sign between the 2 and the 5! So it would actually be...
+        -> 10!
+            Tutor: Awesome! You got it, {$studentName}! [img_plugin5.png][/img_plugin5.png]
+
+Tutor: Now if we go back to the problem.... and that function up above? {$functionString}?
+Tutor: This is a different function. Does it look a little more complicated to you?
+-> Yes
+    Tutor: Don't worry! It's definitely more complicated, but it's still just a function that follows a certain rule. It's just this rule may be a little more complicated than just multiplying something by 2!
+-> No 
+Tutor: The basic idea is it is still doing the same thing, following the same rule, for any "input" "x" you give it.
+Tutor: Hopefully, this makes sense! Later, I'll share a link to a video that explains functions in more detail.
+Tutor: Now that we know what functions are, let's see how they are used in word problems!
+<<set $learnedFunctions to "true">>
+<<if $currentSection is "Graphing">>
+<<jump Graphing>>
+<<else>>
+<<jump Drawing>>
+<<endif>>
+===
+
+title: Intercepts
+---
+Tutor: You're on the right track here! We do need to find an intercept.
+Tutor: Here's a picture that may help you to better understand it, {$studentName}. [img_intercepts.png][/img_intercepts.png]
+Tutor: The x-intercepts are where the graph intersects the horizontal (left/right) x-axis. Think of like the function "hitting the ground level!" Doesn't the x-axis look like a floor to you?
+Tutor: The y-intercepts are where the graph intersects the vertical (up/down) y-axis. The function hasn't moved left or right. It's just in the middle.
+Tutor: The y-intercept is a starting point... when x = 0. In the ball problem, that means 0 seconds after Antoine threw the ball.
+Tutor: In this case, are we looking for an x-intercept or a y-intercept?
+-> x-intercept
+    Tutor: You're right! We're looking for the x-intercept because that is when the height of the ball is 0.
+-> y-intercept
+    Tutor: Hmm... that is when x is 0, and the ball crosses the y-axis. But remember, x is time, and we're looking for the height of the ball.
+    Tutor: When does the ball hit the ground? 
+    -> When the height is 0 meters. That makes sense!
+        Tutor: Right! And the height is 0 at our x-intercept... when the ball hits the ground!
+    -> When the height is 0 meters. But... why? 
+        Tutor: I know it's a little weird to describe something at 0 meters tall. But, it's the same thing as saying the ball is on the ground.
+        Tutor: 0 meters is where the "ground" is. If we said 1 meter, that would be 1 meter above the ground. It may start at 5 meters above the ground, but it will eventually reaching 0 meters... the same thing as hitting the ground!
+    Tutor: Let's try one more practice problem to make sure you're all good. 
+    Tutor: Consider the point (5, 0)--is that an x-intercept or a y-intercept?
+    -> x-intercept
+        Tutor: And why is this an x-intercept?
+        -> Because the y-value is 0, it must intersect the x-axis.
+            Tutor: Exactly! 
+        -> Because the x-value is 0, it must intersect the x-axis.
+            Tutor: Oh, I forgot to mention one thing!
+            Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
+            Tutor: So in (5, 0), y is actually 0, and x is 5.
+            Tutor: Consider the point (2, 5). What is the x-value?
+            -> 2
+                Tutor: Right! And the y-value is 5.
+            -> 5
+                Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
+                -> 5
+                    Tutor: Exactly! The second number. You're learning a lot! 
+            Tutor: Now let's think about x and y-intercepts. 
+            Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+            Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+            Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+    -> y-intercept
+        Tutor: And why is this a y-intercept?
+        -> Because the y-value is 0, it must intersect the y-axis.
+            Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+            Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+            Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+        -> Because the x-value is 0, it must intersect the y-axis.
+            Tutor: Oh, I forgot to mention one thing!
+            Tutor: The x-value is always the first number. The y-value is always the second number. [img_xylocation.png][/img_xylocation.png]
+            Tutor: So in (5, 0), y is actually 0, and x is 5.
+            Tutor: To make sure you understand that: consider the point (2, 5). What is the x-value?
+            -> 2
+                Tutor: Right! And the y-value is 5.
+            -> 5
+                Tutor: Remember, the x-value is always the first number. This means the x-value is actually 2! And the y-value?
+                -> 5
+                    Tutor: Exactly! The second number. You're learning a lot! 
+            Tutor: Now let's think about x and y-intercepts. 
+            Tutor: Let me share that picture again: [img_intercepts.png][/img_intercepts.png]
+            Tutor: Look at that x-intercept. This is when the y-value is 0. That seems counter-intuitive! Think of it like opposites: the x-intercept is when the y-value is 0. The y-intercept is when the x-value is 0.
+            Tutor: The reason why the y-value is 0 is because the ball isn't moving above the ground, and the ball isn't moving below the ground. It's at ground-level. So y = 0. But the x-value is 5, because that's how many seconds have passed. The number of seconds can change.
+    Tutor: X and Y intercepts were confusing when I first learned about them, but hopefully you understand now about the differences between them. Failure is an opportunity to learn, you know! Later, I'll share a link to Khan Academy that explains it in more detail. 
+    <<set $learnedIntercepts to "true">>
+-> Wait, Cauley, what is x and y? I'm confused.
+    Tutor: Great question, {$studentName}! No need to worry: I'll explain it all to you.
+    <<jump Coordinates>>
+Tutor: Hopefully this makes a little more sense now! Later, I'll share a link to a video that goes over this in more detail.
+Tutor: Back to the main problem now up above! Let's first try drawing a picture of the problem. Maybe it'll give us a clue on what to do.
+<<jump Drawing>>
+===
+
 title: Coordinates
 ---
 Tutor: Points are little dots that move up and down and left and right. How do we know where a point is on our computer screen?
@@ -1000,7 +962,6 @@ Tutor: You've learned about reasonable answers! When you solve a problem, you sh
 Tutor: LINK TO VIDEO
 <<endif>>
 Tutor: It was great working with you today, {$studentName}! Hope to work with you again!
-Narrator: End of example.
 ===
 `
 
