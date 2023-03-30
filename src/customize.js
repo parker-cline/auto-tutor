@@ -138,7 +138,14 @@ function Customize() {
         return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled());
     }
 
-    const setFunctionString = (a, b, c) => {
+    const setFunctionString = () => {
+        if (functionType === 'quadratic') {
+            return setQuadraticFunctionString(a, b, c);
+        }
+        return setLinearFunctionString(a, b);
+    }
+
+    const setQuadraticFunctionString = (a, b, c) => {
         let functionString = '';
 
         if (a === 1) {
@@ -164,7 +171,26 @@ function Customize() {
         } else if (c < 0) {
             functionString += `- ${Math.abs(c)}`;
         }
+        return functionString;
+    }
 
+    const setLinearFunctionString = (a, b) => {
+        let functionString = '';
+        if (a === 1) {
+            functionString = 'x';
+        }
+        else if (a === -1) {
+            functionString = '-x';
+        }
+        else if (a !== 0) {
+            functionString = `${a}x`;
+        }
+        if (b > 0) {
+            functionString += `+ ${b}`;
+        }
+        else if (b < 0) {
+            functionString += `- ${Math.abs(b)}`;
+        }
         return functionString;
     }
 
