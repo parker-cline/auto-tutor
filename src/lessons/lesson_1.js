@@ -1017,6 +1017,8 @@ Tutor: Let's go back to the problem. We'll first draw a picture!
 title: Overview
 ---
 Tutor: Let's recap what you've learned! I know this lesson may have been challenging, but now you know where you can learn in the future. I know when I first learned algebra, there was a lot of strange stuff I didn't fully understand. How could a number be negative? Why is a number a letter like "x?" But over time, you'll see that algebra is not as scary as it seems.
+Tutor: It was challenging for me though. I had to practice a lot before I mastered algebra myself. I did a bunch of practice problems and asked many questions to my teacher. And it all paid off!
+Tutor: I even watched some Khan Academy videos, like I'll link down below. Maybe you should, too? They can help you to learn and grow, and soon you'll have knowledge that you can use later.
 Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
 <<if $learnedCoordinates is "true">>
 Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
