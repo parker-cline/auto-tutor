@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function CanvasEditor({ handleClearCanvas, handleChangeColor, handleUndoStroke }) {
+    // the buttons the user can click to chnage the color, clear the canvas, and undo the last stroke
     return (
         <>
             <button type="button" className="btn btn-success col-sm-2" onClick={handleClearCanvas}><i className="bi bi-trash"></i> Clear</button>
@@ -21,21 +22,19 @@ function DrawingCanvas() {
     const canvasRef = useRef(null);
     const ctxRef = useRef(null);
 
-
-    const [undoSteps, setUndoSteps] = useState({}); // this is a list of points (and the color of the points) that are on this canvas
-    const [numSteps, setNumSteps] = useState(0); // this is the number of steps that have been taken
+    const [undoSteps, setUndoSteps] = useState([]); // object where each key-value pair is a stroke, 
+    // where the key is the stroke number and the value is an array of the stroke's color (the first element) and coordinates (as x and y pairs)
+    const [numSteps, setNumSteps] = useState(-1); // number of strokes that have been drawn on this canvas
 
     const startDraw = ({ nativeEvent }) => {
         const { offsetX, offsetY } = nativeEvent; // x and y coordinates of the mouse
         ctxRef.current.beginPath();
-        // move
+        // start drawing at cursor position
         ctxRef.current.moveTo(offsetX, offsetY);
-        const temp = {
-            ...undoSteps,
-            [numSteps + 1]: []
-        };
-        // store the current point in an array
-        temp[numSteps + 1].push(ctxRef.current.strokeStyle, { offsetX, offsetY });
+        // add a new key-value pair to temp, pushing it on top of the stack
+        const temp = [...undoSteps, [ctxRef.current.strokeStyle, { offsetX, offsetY }]];
+
+        // set state variables
         setUndoSteps(temp);
         setNumSteps(numSteps + 1);
         setDrawing(true);
@@ -44,39 +43,41 @@ function DrawingCanvas() {
     const stopDraw = () => {
         ctxRef.current.closePath();
         setDrawing(false);
-        console.log(undoSteps);
     };
 
     const draw = ({ nativeEvent }) => {
         if (!drawing) return;
         const { offsetX, offsetY } = nativeEvent;
-        // draw a tiny line from the last point to the current point over the mouse cursor
+        // draw a tiny line from the last point to the current point where the mouse cursor is
         ctxRef.current.lineTo(offsetX, offsetY);
         ctxRef.current.stroke();
-        const temp = {
-            ...undoSteps
-        };
-        // store the current point in an array
+        const temp = [...undoSteps];
+        // store the current point in the current stroke
         temp[numSteps].push({ offsetX, offsetY });
         setUndoSteps(temp);
     };
 
     const handleUndoStroke = () => {
-        //https://stackoverflow.com/questions/64611155/canvas-freehand-drawing-undo-and-redo-functionality-in-reactjs
-        if (numSteps > 0) {
+        // note functionality is adapted from
+        // https://stackoverflow.com/questions/64611155/canvas-freehand-drawing-undo-and-redo-functionality-in-reactjs
+        if (numSteps > -1) {
             const currentColor = ctxRef.current.strokeStyle;
 
             // clear canvas
             const canvas = canvasRef.current;
             ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
 
-            // redraw canvas for everything except the last stroke
-            for (let i = 1; i < numSteps; i++) {
-                const temp = undoSteps[i];
-                ctxRef.current.strokeStyle = temp[0];
+            // redraw canvas for everything except the last stroke, drawing each stroke in order
+            for (let i = 0; i < numSteps; i++) {
+                // get the ith step
+                const currStroke = undoSteps[i];
+                // set the color
+                ctxRef.current.strokeStyle = currStroke[0];
+                // start drawing the stroke
                 ctxRef.current.beginPath();
-                ctxRef.current.moveTo(temp[1].offsetX, temp[1].offsetY);
-                temp.forEach((item, index) => {
+                ctxRef.current.moveTo(currStroke[1].offsetX, currStroke[1].offsetY);
+                // move through the remaining points in the stroke, and draw a line to each point
+                currStroke.forEach((item, index) => {
                     if (index !== 1 && index !== 0) {
                         ctxRef.current.lineTo(item.offsetX, item.offsetY);
                         ctxRef.current.stroke();
@@ -85,12 +86,14 @@ function DrawingCanvas() {
                 ctxRef.current.closePath();
             }
 
+            // set the color back to what it was
             ctxRef.current.strokeStyle = currentColor;
 
-            const temp = {
-                ...undoSteps,
-                [numSteps]: []
-            };
+            // remove the last step from the stack (popping it off)
+            const temp = [...undoSteps];
+            temp.pop();
+
+            // set state variables back
             setNumSteps(numSteps - 1);
             setUndoSteps(temp);
         }
@@ -98,8 +101,10 @@ function DrawingCanvas() {
 
     const handleClearCanvas = () => {
         const canvas = canvasRef.current;
-        setUndoSteps({});
-        setNumSteps(0);
+        // clear state variables
+        setUndoSteps([]);
+        setNumSteps(-1);
+        // clear canvas
         ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
     }
 
