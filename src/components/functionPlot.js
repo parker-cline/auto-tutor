@@ -8,7 +8,8 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
         window.innerWidth,
         window.innerHeight,
     ]);
-
+    console.log(functionString);
+    
     // update window size on resize
     useEffect(() => {
         const handleWindowResize = () => {
@@ -39,11 +40,11 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
                 grid: true,
                 width: windowSize[0] / factor,
                 height: windowSize[1] / 1.25,
-                xAxis: { domain: xBounds }, // 
+                xAxis: { domain: xBounds }, 
                 yAxis: { domain: yBounds },
             });
         } catch (e) {
-            console.log("Error plotting function: ", e);
+            console.log("Error plotting function");
         }
     }, [functionString, xBounds, yBounds, windowSize, factor]);
 

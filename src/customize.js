@@ -149,6 +149,12 @@ function Customize() {
 
     const setQuadraticFunctionString = (a, b, c) => {
         // returns a string representation of the quadratic function "ax^2 + bx + c", given coefficients as numbers
+
+        // check if coefficients are defined
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            return '';
+        }
+    
         let functionString = '';
 
         // first term
@@ -183,6 +189,12 @@ function Customize() {
 
     const setLinearFunctionString = (a, b) => {
         // returns a string representation of the linear function "ax + b" given coefficients as numbers
+
+        // check if coefficients are defined
+        if (isNaN(a) || isNaN(b)) {
+            return '';
+        }
+
         let functionString = '';
         // first term
         if (a === 1) {
