@@ -16,6 +16,7 @@ const convertToString = (value) => {
 }
 
 function FunctionTypeSetter({ functionType, setFunctionType, checked }) {
+    // contains a radio button and label for selecting a function type (either linear or quadratic)
     return (
         <>
             <input className="btn-check" type="radio" id={functionType} name="functionType" value={functionType} checked={checked} onChange={(e) => setFunctionType(e.target.value)} />
@@ -137,6 +138,7 @@ function Customize() {
             return getQuadraticXIntercepts()[0] < 0 || getQuadraticXIntercepts()[1] < 0;
         }
     }
+
     const checkNonZeroTerm = () => {
         return (a !== 0);
     }
@@ -145,11 +147,11 @@ function Customize() {
         return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled() && checkXInterceptNegative() && checkNonZeroTerm());
     }
 
-
     const setQuadraticFunctionString = (a, b, c) => {
-        // returns a string representation of the quadratic function, given coefficients as numbers
+        // returns a string representation of the quadratic function "ax^2 + bx + c", given coefficients as numbers
         let functionString = '';
 
+        // first term
         if (a === 1) {
             functionString = 'x^2';
         } else if (a === -1) {
@@ -158,6 +160,7 @@ function Customize() {
             functionString = `${a}x^2`;
         }
 
+        // second term
         if (b === 1) {
             functionString += ' + x';
         } else if (b === -1) {
@@ -168,17 +171,20 @@ function Customize() {
             functionString += ` - ${Math.abs(b)}x`;
         }
 
+        // third term
         if (c > 0) {
             functionString += ` + ${c}`;
         } else if (c < 0) {
             functionString += ` - ${Math.abs(c)}`;
         }
+
         return functionString;
     }
 
     const setLinearFunctionString = (a, b) => {
-        // returns a string representation of the linear function, given coefficients as numbers
+        // returns a string representation of the linear function "ax + b" given coefficients as numbers
         let functionString = '';
+        // first term
         if (a === 1) {
             functionString = 'x';
         }
@@ -188,6 +194,7 @@ function Customize() {
         else if (a !== 0) {
             functionString = `${a}x`;
         }
+        // second term
         if (b > 0) {
             functionString += ` + ${b}`;
         }
