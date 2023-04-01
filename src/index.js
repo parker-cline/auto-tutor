@@ -20,16 +20,18 @@ import "./index.css";
 
 /* Routing */
 
+// this is the error page that will be displayed if the user goes to a page that doesn't exist
 function ErrorBoundary() {
     return (
         <>
-            <h1>Looks like you've encountered an error.</h1>
-            <p>If you see this message, you should contact Parker. Might be an issue. For now...</p>
+            <h1>404</h1>
             <Link to={'/setup'}>Go back to the setup page.</Link>
         </>
     )
 }
 
+// this controls routing: so if a user goes to parkercapstone.vercel.app/lesson, 
+// they will see the lesson page, for example
 const router = createBrowserRouter([
     {
         path: "/lesson",
