@@ -36,7 +36,6 @@ function ChecklistItem({ testFunc, itemDescription }) {
 
 function CoefficientSetter({ coeff, setCoeff, label }) {
     // contains a label and a MathQuill text field for setting a coefficient of a function
-
     return (
         <>
             <StaticMathField>{label}</StaticMathField>
@@ -51,7 +50,6 @@ function CoefficientSetter({ coeff, setCoeff, label }) {
 
 function BoundsSetter({ bounds, setBounds, label }) {
     // contains a label and a MathQuill text field for setting the bounds (either x or y) of a function
-
     return (
         <>
             <EditableMathField
@@ -126,10 +124,10 @@ function Customize() {
     }
 
     const checkAllFieldsFilled = () => {
-        if (functionType === 'quadratic' && c === '') {
+        if (functionType === 'quadratic' && isNaN(c)) {
             return false;
         }
-        return (a !== '' && b !== '' && studentName !== '' && xBounds[0] !== '' && xBounds[1] !== '' && yBounds[0] !== '' && yBounds[1] !== '');
+        return !(isNaN(a) || isNaN(b) || isNaN(c) || isNaN(xBounds[0]) || isNaN(xBounds[1]) || isNaN(yBounds[0]) || isNaN(yBounds[1]) || (studentName === ''));
     }
 
     const checkXInterceptNegative = () => {
