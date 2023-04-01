@@ -6,9 +6,10 @@ import { InlineMath, BlockMath } from 'react-katex';
 import { useLocation } from 'react-router-dom';
 import YarnBound from 'yarn-bound';
 import FunctionPlot from './components/functionPlot.js';
-import DrawingCanvas from './canvas.js';
+import DrawingCanvas from './components/canvas.js';
 import { dialogue as lesson1 } from "./lessons/lesson_1.js";
 
+// speech bubble by the tutor
 function ChatMessageLeft({ index, children }) {
     return (
         <div key={index} className="chat-message p-2">
@@ -17,6 +18,7 @@ function ChatMessageLeft({ index, children }) {
     );
 }
 
+// speech bubble by the user, before they select a dialogue option
 function ChatMessageRight({ index, children }) {
     return (
         <div key={index} className="p-3 chat-message right">
@@ -26,6 +28,7 @@ function ChatMessageRight({ index, children }) {
 }
 
 function LessonImage({ imgString }) {
+    // Returns an image element if the image exists in the assets/images folder.
     if (!imgString) {
         return null;
     }
@@ -41,15 +44,20 @@ function LessonImage({ imgString }) {
 function ChatBox({ dialogueItem, lessonInfo }) {
 
     const fastForward = (runner) => {
+        // display all lines of dialogue up to the next choice the user has to make
         while (!runner.currentResult.options) {
+            // or stop fastforwarding if the lesson is complete
             if (runner.currentResult.isDialogueEnd) {
                 return;
             }
+            // otherwise, move to the next line of dialogue
             runner.advance();
         }
     }
 
     const getImageName = (currPage) => {
+        // finds a tag [img_"imgname"] (imgname can be any string) in the dialogue 
+        // and returns the tag as a string, if it exists.
         if (currPage.markup.length > 1) {
             const tagDetails = currPage.markup[1];
             if (tagDetails.name.startsWith("img", 0)) {
@@ -60,19 +68,22 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     };
 
     const generateTextBox = (currPage, index) => {
+        // generate a text box with the text from the current line of dialogue
         if (!currPage.text) {
             return null;
         }
         const imageName = getImageName(currPage);
         return (
             <ChatMessageLeft index={index}>
-                {imageName && <LessonImage imgString={imageName} />}
+                {imageName && <LessonImage imgString={getImageName(currPage)} />}
                 <h6>{currPage.text}</h6>
             </ChatMessageLeft>
         );
     };
 
     const generateOptionsBox = (currPage, index) => {
+        // generate a chatbox with a list of choices for the user to choose from
+        // listItems is an array of choices as li elements
         const listItems = currPage.options.map((userChoice, index) => (
             <li key={index} className="link-button" onClick={() => selectChoice(index)}>
                 {userChoice.text}
@@ -89,6 +100,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     }
 
     const generateSelectedOptionsBox = (currPage, index) => {
+        // generate a text box with the option that the user selected (from a past list of options) on this page 
         return (
             <ChatMessageRight index={index}>
                 <h2>{currPage.options[currPage.selected].text}</h2>
@@ -97,9 +109,11 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     }
 
     const generateChatMessages = (historyItems) => {
+        // for each history item, generate a chat message that is either a list of options or a text box, depending on the type of history item
         const chatMessageList = historyItems.map((historyItem, index) => (
             historyItem.options ? generateSelectedOptionsBox(historyItem, index) : generateTextBox(historyItem, index)
         ));
+        // specific edge case for the last line of dialogue
         if (runner.currentResult.isDialogueEnd) {
             chatMessageList.push(generateTextBox(runner.currentResult));
         } else {
@@ -109,12 +123,16 @@ function ChatBox({ dialogueItem, lessonInfo }) {
     }
 
     const selectChoice = (idx) => {
+        // select a choice number "idx" from the list of options
         runner.advance(idx);
+        // move the dialogue forward to the next choice the user has to make
         fastForward(runner);
+        // update the chat history to be displayed to the user
         setRunnerHistory(generateChatMessages(runner.history));
     }
 
     const setVariables = (runner) => {
+        // set the variables for the dialogue to use
         const x1Coords = "(" + lessonInfo.xIntercepts[0].toString() + ", 0)"
         const x2Coords = lessonInfo.functionType === 'linear' ? "none" : "(" + lessonInfo.xIntercepts[1].toString() + ", 0)"
         const answerCoords = lessonInfo.functionType === 'linear' ? x1Coords : x2Coords
@@ -123,6 +141,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
         const answerNum = lessonInfo.functionType === 'linear' ? x1Num : x2Num
         const linearity = lessonInfo.functionType === 'linear' ? "true" : "false"
 
+        // put it in an object to make the code more readable...
         const variables = {
             'linearity': linearity,
             'studentName': lessonInfo.studentName,
@@ -135,18 +154,23 @@ function ChatBox({ dialogueItem, lessonInfo }) {
             'functionString': lessonInfo.functionString
         }
 
+        // now it's just one for loop to set all the variables
         for (const key in variables) {
             runner.runner.variables.set(key, variables[key]);
         }
     }
 
     const initializeHistory = (runner) => {
+        // called when the dialogue is first started
         setVariables(runner);
         fastForward(runner);
         return generateChatMessages(runner.history);
     }
 
+    // the runner is the object that runs the dialogue. This is THE key to the whole thing.
+    // it's a YarnBound object, which is a wrapper for YarnSpinner.
     const runner = new YarnBound({ dialogue: dialogueItem });
+    // the chat history is the list of chat messages that are displayed to the user on the webpage, i.e. all the chat messages encountered thus far
     const [runnerHistory, setRunnerHistory] = useState(initializeHistory(runner));
     return (
         <div id="chat-box" className="lesson-column border overflow-y-auto">{runnerHistory}</div>
@@ -156,7 +180,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
 /* The Lesson Page */
 
 function Lesson() {
-    const lessonInfo = useLocation().state;
+    const lessonInfo = useLocation().state; // has a bunch of info about the function that the tutor has inputted on the Customize page
     return (
         <>
             <div className="container p-3">
