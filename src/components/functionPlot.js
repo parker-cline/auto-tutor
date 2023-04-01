@@ -9,6 +9,7 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
         window.innerHeight,
     ]);
 
+    // update window size on resize
     useEffect(() => {
         const handleWindowResize = () => {
             setWindowSize([window.innerWidth, window.innerHeight]);
@@ -21,19 +22,24 @@ function FunctionPlot({ functionString, xBounds, yBounds, factor }) {
         };
     });
 
+    // plot function using function-plot library.
+    // note the use of the factor variable to scale the plot to the window size
+    // depending on the column configuration
+    // also note the use of useEffect: this is the key to
+    // why the function magically changes when the user modifies the coefficients without having to refresh the page. cool!
     useEffect(() => {
         try {
             functionPlot({
                 target: '#plot',
-                disableZoom: true,
+                disableZoom: true, // the user can't drag 
                 data: [{
                     fn: functionString,
-                    skipTip: true
+                    skipTip: true  // the user can't hover over the function to see the value
                 }],
                 grid: true,
                 width: windowSize[0] / factor,
                 height: windowSize[1] / 1.25,
-                xAxis: { domain: xBounds },
+                xAxis: { domain: xBounds }, // 
                 yAxis: { domain: yBounds },
             });
         } catch (e) {

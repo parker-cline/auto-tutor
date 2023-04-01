@@ -6,6 +6,15 @@ import FunctionPlot from './components/functionPlot.js';
 
 addStyles(); // needed for MathQuill
 
+const convertToString = (value) => {
+    // helper function: converts a number to a string, or returns an empty string if the value is NaN
+    const convertedString = value.toString();
+    if (isNaN(convertedString)) {
+        return '';
+    }
+    return convertedString;
+}
+
 function FunctionTypeSetter({ functionType, setFunctionType, checked }) {
     return (
         <>
@@ -16,22 +25,17 @@ function FunctionTypeSetter({ functionType, setFunctionType, checked }) {
 }
 
 function ChecklistItem({ testFunc, itemDescription }) {
+    // contains a list item with a checkmark if the test function returns true 
+    // and itemDescription, a description of the criterion that the test function checks
     return (
         <li className="list-group-item" style={testFunc() ? { 'color': 'black' } : { 'color': 'red' }}>
             {itemDescription} {testFunc() && <span className="badge bg-success">✓</span>}
         </li>
     );
-
 }
-function CoefficientSetter({ coeff, setCoeff, label }) {
 
-    const convertToString = (value) => {
-        const convertedString = value.toString();
-        if (isNaN(convertedString)) {
-            return '';
-        }
-        return convertedString;
-    }
+function CoefficientSetter({ coeff, setCoeff, label }) {
+    // contains a label and a MathQuill text field for setting a coefficient of a function
 
     return (
         <>
@@ -46,13 +50,8 @@ function CoefficientSetter({ coeff, setCoeff, label }) {
 }
 
 function BoundsSetter({ bounds, setBounds, label }) {
-    const convertToString = (value) => {
-        const convertedString = value.toString();
-        if (isNaN(convertedString)) {
-            return '';
-        }
-        return convertedString;
-    }
+    // contains a label and a MathQuill text field for setting the bounds (either x or y) of a function
+
     return (
         <>
             <EditableMathField
@@ -71,10 +70,11 @@ function BoundsSetter({ bounds, setBounds, label }) {
 }
 
 function Customize() {
+    // a, b, and c are coefficients
     const [a, setA] = useState(-1);
     const [b, setB] = useState(1);
     const [c, setC] = useState(1);
-    const [functionType, setFunctionType] = useState('quadratic');
+    const [functionType, setFunctionType] = useState('quadratic'); // either linear or quadratic
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
     const [studentName, setStudentName] = useState('TestName');
@@ -82,6 +82,9 @@ function Customize() {
     const roundToTwoPlaces = (value) => {
         return Math.round(value * 100) / 100;
     }
+
+    // helper functions for checking if criteria for Checklist is met.
+
     const getQuadraticXIntercepts = () => {
         const firstRoot = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
         const secondRoot = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
@@ -144,7 +147,9 @@ function Customize() {
         return (checkXInterceptPositive() && checkXInterceptBounds() && checkHeight() && checkYInterceptBounds() && checkAllFieldsFilled() && checkXInterceptNegative() && checkNonZeroTerm());
     }
 
+
     const setQuadraticFunctionString = (a, b, c) => {
+        // returns a string representation of the quadratic function, given coefficients as numbers
         let functionString = '';
 
         if (a === 1) {
@@ -174,6 +179,7 @@ function Customize() {
     }
 
     const setLinearFunctionString = (a, b) => {
+        // returns a string representation of the linear function, given coefficients as numbers
         let functionString = '';
         if (a === 1) {
             functionString = 'x';
@@ -197,6 +203,7 @@ function Customize() {
     const handleStartLesson = () => {
         const functionString = functionType === 'quadratic' ? setQuadraticFunctionString(a, b, c) : setLinearFunctionString(a, b);
         const xIntercepts = functionType === 'quadratic' ? getQuadraticXIntercepts() : getLinearXIntercepts();
+        // moves to the lesson page, passing details about the function and the student in a state object (accessed as "lessonInfo" later).
         navigate('/lesson', { state: { functionType: functionType, studentName: studentName, functionString: functionString, xBounds: xBounds, yBounds: yBounds, xIntercepts: xIntercepts } });
     }
     const highestFunctionTerm = functionType === 'quadratic' ? 'x^2' : 'x';

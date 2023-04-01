@@ -1,3 +1,5 @@
+// this is the dialogue file itself. Can't really be commented on, but see README.md for more info
+
 const dialogue = `
 title: Start
 ---

@@ -1,4 +1,5 @@
 /* NavBar */
+// this is the green navbar that appears at the top of every page
 function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
