@@ -181,6 +181,7 @@ function ChatBox({ dialogueItem, lessonInfo }) {
 
 function Lesson() {
     const lessonInfo = useLocation().state; // has a bunch of info about the function that the tutor has inputted on the Customize page
+    // Bootstrap containers are used to define two columns: one for the chat box, and one for the function plot
     return (
         <>
             <div className="container p-3">
