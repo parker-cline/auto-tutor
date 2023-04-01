@@ -590,12 +590,12 @@ Tutor: Which one should we choose?
         <<jump Coordinates>>
         <<endif>>
 <<else>>
-Tutor: We have a linear function. In this case, we have one x-intercept. This is where the graph crosses the x-axis. 
-Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifylinearxintercepts.png][/img_identifylinearxintercepts.png]
-Tutor: Look on the graph and see if you can find the x-intercept. Do you see where it is?
+Tutor: We have a linear function. In this case, we have one x-intercept. This is where the graph crosses the x-axis.
+Tutor: Look on the graph and see if you can find it. Do you see it?
 -> Yes
 -> No
-    Tutor: You may have to zoom out with your mouse wheel or pinch to zoom out on your touchpad. You can also drag downwards and upwards until you get to the origin (the middle area.)
+    Tutor: Here is an example. Note this picture is a different function than what we are graphing. [img_identifylinearxintercepts.png][/img_identifyquadraticxintercepts.png]
+    Tutor: You should see one point intersecting a horizontal line. That is the x-intercept.
     Tutor: Do you see it now?
     -> Yes
 Tutor: Awesome! So, on my calculator, I get one point: {$x1}.
