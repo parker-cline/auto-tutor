@@ -19,7 +19,7 @@ Tutor: Hello! I'm PathFinder! You can say hi back by clicking "Hello" down below
 -> Hello!
 -> Hey!
 -> Hi!
-Tutor: Welcome, {$studentName}! So happy you're here! 
+Tutor: Welcome, {$studentName}! So happy you're here!
 Tutor: I'll be helping you learn a little bit about math today. Scroll up: do you see the problem up above?
 -> Yes
 Tutor: We'll be working on this problem together! I'll be guiding you through the steps, but you'll do a lot of the work yourself. Still... don't worry if the problem seems too hard! After all, hard problems are just a challenge to overcome. I'll be here to help you out along the way.
@@ -1035,39 +1035,39 @@ Tutor: It was challenging for me though. I had to practice a lot before I master
 Tutor: I even watched some videos, like I'll link down below. Maybe you should, too? They can help you to learn and grow, and soon you'll have knowledge that you can use later.
 Tutor: You can copy and paste the links to these videos and put them in your web browser to watch them.
 Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
-Tutor: There are other strategies, too: https://www.youtube.com/watch?v=SpDIXJ2I2D4
+Tutor: There are other strategies, too: www.youtube.com/watch?v=SpDIXJ2I2D4
 <<if $learnedCoordinates is "true">>
 Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
-Tutor: https://www.youtube.com/watch?v=9Uc62CuQjc4
+Tutor: www.youtube.com/watch?v=9Uc62CuQjc4
 <<endif>>
 <<if $learnedFunctions is "true">>
 Tutor: You've learned about functions and what inputs and outputs are!
-Tutor: https://www.youtube.com/watch?v=lGfsp2CWjok
+Tutor: www.youtube.com/watch?v=lGfsp2CWjok
 <<endif>>
 <<if $learnedQuadraticDifferentApproaches is "true">>
 Tutor: You've learned about quadratic equations and how you can use different approaches to solve them!
 Tutor: We used graphing today because we had a calculator. Sometimes, other ways are better when you don't have a calculator. The quadratic formula, if you've heard of that, always works and doesn't require a calculator. Sometimes, you can even do factoring, if you've heard of that, which can be much faster!
-Tutor: https://www.youtube.com/watch?v=AoO1gVnJ-Pk
+Tutor: www.youtube.com/watch?v=AoO1gVnJ-Pk
 <<endif>>
 <<if $learnedIntercepts is "true">>
 Tutor: You've learned about the difference between x and y-intercepts! X-intercepts cross a horizontal line, while y-intercepts cross a vertical line.
-Tutor: https://www.youtube.com/watch?v=_-LvA1xlQLs
+Tutor: www.youtube.com/watch?v=_-LvA1xlQLs
 <<endif>>
 <<if $learnedVariables is "true">>
 Tutor: You've learned about what a variable is! It's a letter that represents a number. Think of it like a box that holds a number. 
-Tutor: https://www.youtube.com/watch?v=tHYis-DP0oU
+Tutor: www.youtube.com/watch?v=tHYis-DP0oU
 <<endif>>
 <<if $learnedLinearQuadratic is "true">>
 Tutor: You've learned about linear and quadratic equations! Linear equations (with one x) look like lines, while quadratic equations (with an x^2) look like curves: smiley faces or frowny faces.
-Tutor: https://www.youtube.com/watch?v=BWFkF_Alzwc
+Tutor: www.youtube.com/watch?v=BWFkF_Alzwc
 <<endif>>
 <<if $learnedHiddenMultiplication is "true">>
 Tutor: You've learned about hidden multiplication! When you see a number next to an x, it's actually a number multiplied by x. For example, 3x is the same as 3 * x.
-Tutor: https://www.youtube.com/watch?v=vDaIKB19TvY
+Tutor: www.youtube.com/watch?v=vDaIKB19TvY
 <<endif>>
 <<if $learnedUnits is "true">>
 Tutor: You've learned what units are! Units are how we measure some quantity. If I say, "I have five!" you won't know what I have five of. But if I say, "I have five apples!" you'll know that I have five apples. The word "apples" is the unit.
-Tutor: https://www.youtube.com/watch?v=PdHSs5_kx24
+Tutor: www.youtube.com/watch?v=PdHSs5_kx24
 <<endif>>
 <<if $learnedReasonable is "true">>
 Tutor: You've learned about reasonable answers! When you solve a problem, you should always check your answer to make sure it makes sense. For example, if you're solving a problem about how many apples you have, you should check that your answer is a positive number.
