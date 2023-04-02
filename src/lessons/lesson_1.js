@@ -361,19 +361,33 @@ Tutor: What are we looking for?
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
         -> Got it!
         -> That confuses me still.
+            <<if $learnedCoordinates is "false">>
             Tutor: I'll give you a brief refresher then!
             <<jump Coordinates>>
+            <<else>>
+            Tutor: No worries -- I'll share a link to a video about the coordinate plane you can watch later.
+            <<endif>>
     -> I'm not sure.
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
         -> Got it!
         -> That confuses me still.
             Tutor: I'll give you a brief refresher then!
+            <<if $learnedCoordinates is "false">>
+            Tutor: I'll give you a brief refresher then!
             <<jump Coordinates>>
+            <<else>>
+            Tutor: No worries -- I'll share a link to a video about the coordinate plane you can watch later.
+            <<endif>>
     -> Isn't this where y is 0, not h(x)?
         Tutor: Think of h(x) as our y-value. So the second number in the coordinates is y. 
         -> Got it!
         -> That confuses me still.
+            <<if $learnedCoordinates is "false">>
+            Tutor: I'll give you a brief refresher then!
             <<jump Coordinates>>
+            <<else>>
+            Tutor: No worries -- I'll share a link to a video about the coordinate plane you can watch later.
+            <<endif>>
 -> When x = 0
     <<set $learnedInputOutputDistinguishing to "true">>
     Tutor: And what does x represent here? Read the problem again to be sure.
