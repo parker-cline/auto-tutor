@@ -15,7 +15,7 @@ title: Start
 <<set $learnedUnits to "false">>
 <<set $learnedReasonable to "false">>
 
-Tutor: Hello! I'm Cauley! You can say hi back by clicking "Hello" down below! 
+Tutor: Hello! I'm PathFinder! You can say hi back by clicking "Hello" down below! 
 -> Hello!
 -> Hey!
 -> Hi!
@@ -1018,44 +1018,44 @@ title: Overview
 ---
 Tutor: Let's recap what you've learned! I know this lesson may have been challenging, but now you know where you can learn in the future. I know when I first learned algebra, there was a lot of strange stuff I didn't fully understand. How could a number be negative? Why is a number a letter like "x?" But over time, you'll see that algebra is not as scary as it seems.
 Tutor: It was challenging for me though. I had to practice a lot before I mastered algebra myself. I did a bunch of practice problems and asked many questions to my teacher. And it all paid off!
-Tutor: I even watched some Khan Academy videos, like I'll link down below. Maybe you should, too? They can help you to learn and grow, and soon you'll have knowledge that you can use later.
+Tutor: I even watched some videos, like I'll link down below. Maybe you should, too? They can help you to learn and grow, and soon you'll have knowledge that you can use later.
 Tutor: You've learned how to tackle a word problem: translating words like "ground" into mathematical concepts like "x-intercepts."
+Tutor: There are other strategies, too: https://www.youtube.com/watch?v=SpDIXJ2I2D4
 <<if $learnedCoordinates is "true">>
 Tutor: You've learned about coordinates and plotting coordinates on a coordinate plane.
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=9Uc62CuQjc4
 <<endif>>
 <<if $learnedFunctions is "true">>
 Tutor: You've learned about functions and what inputs and outputs are!
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=lGfsp2CWjok
 <<endif>>
 <<if $learnedQuadraticDifferentApproaches is "true">>
 Tutor: You've learned about quadratic equations and how you can use different approaches to solve them!
 Tutor: We used graphing today because we had a calculator. Sometimes, other ways are better when you don't have a calculator. The quadratic formula, if you've heard of that, always works and doesn't require a calculator. Sometimes, you can even do factoring, if you've heard of that, which can be much faster!
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=AoO1gVnJ-Pk
 <<endif>>
 <<if $learnedIntercepts is "true">>
 Tutor: You've learned about the difference between x and y-intercepts! X-intercepts cross a horizontal line, while y-intercepts cross a vertical line.
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=_-LvA1xlQLs
 <<endif>>
 <<if $learnedVariables is "true">>
 Tutor: You've learned about what a variable is! It's a letter that represents a number. Think of it like a box that holds a number. 
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=tHYis-DP0oU
 <<endif>>
 <<if $learnedLinearQuadratic is "true">>
 Tutor: You've learned about linear and quadratic equations! Linear equations (with one x) look like lines, while quadratic equations (with an x^2) look like curves: smiley faces or frowny faces.
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=BWFkF_Alzwc
 <<endif>>
 <<if $learnedHiddenMultiplication is "true">>
 Tutor: You've learned about hidden multiplication! When you see a number next to an x, it's actually a number multiplied by x. For example, 3x is the same as 3 * x.
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=vDaIKB19TvY
 <<endif>>
 <<if $learnedUnits is "true">>
 Tutor: You've learned what units are! Units are how we measure some quantity. If I say, "I have five!" you won't know what I have five of. But if I say, "I have five apples!" you'll know that I have five apples. The word "apples" is the unit.
-Tutor: LINK TO VIDEO
+Tutor: https://www.youtube.com/watch?v=PdHSs5_kx24
 <<endif>>
 <<if $learnedReasonable is "true">>
 Tutor: You've learned about reasonable answers! When you solve a problem, you should always check your answer to make sure it makes sense. For example, if you're solving a problem about how many apples you have, you should check that your answer is a positive number.
-Tutor: LINK TO VIDEO
 <<endif>>
 Tutor: It was great working with you today, {$studentName}! Hope to work with you again!
 ===
