@@ -50,13 +50,13 @@ function ChatBox({ dialogueItem, lessonInfo }) {
             if (runner.currentResult.isDialogueEnd) {
                 return;
             }
-            // otherwise, move to the next line of dialogue
+            // otherwise, move to the next line of dialogue.
             runner.advance();
         }
     }
 
     const getImageName = (currPage) => {
-        // finds a tag [img_"imgname"] (imgname can be any string) in the dialogue 
+        // finds a tag [img_"imgname"][/img_"imgname"] (imgname can be any string) in the dialogue 
         // and returns the tag as a string, if it exists.
         if (currPage.markup.length > 1) {
             const tagDetails = currPage.markup[1];
