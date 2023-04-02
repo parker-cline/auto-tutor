@@ -70,9 +70,9 @@ function BoundsSetter({ bounds, setBounds, label }) {
 
 function Customize() {
     // a, b, and c are coefficients
-    const [a, setA] = useState(-1);
-    const [b, setB] = useState(1);
-    const [c, setC] = useState(3);
+    const [a, setA] = useState(-2);
+    const [b, setB] = useState(4);
+    const [c, setC] = useState(2);
     const [functionType, setFunctionType] = useState('quadratic'); // either linear or quadratic
     const [xBounds, setXBounds] = useState([-5, 5])
     const [yBounds, setYBounds] = useState([-5, 5])
